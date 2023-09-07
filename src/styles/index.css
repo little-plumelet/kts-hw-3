@@ -3,6 +3,22 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+
+  /* colors */
+  --brand: #B5460F;
+  --brand-hover: #B5460FB2;
+  --brand-active: #872D01;
+
+  /* size */
+  --space-xl: 24px;
+  --space-l: 20px;
+  --space-m: 16px;
+  --space-s: 14px;
+  --space-xs: 12px;
+  --space-xxs: 8px;
+  
+  --border-radius: 10px;
+
 }
 
 * {
