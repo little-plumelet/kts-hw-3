@@ -18,3 +18,10 @@
 body {
   margin: 0;
 }
+
+@font-face {
+  font-family: 'Cookie';
+  src: url('./Cookie/Cookie-Regular.ttf');
+  font-style: normal; 
+  font-weight: normal; 
+}
