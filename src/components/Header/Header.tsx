@@ -1,8 +1,21 @@
-export const Header = () => {
+import * as cn from 'classnames';
+import { NavLink } from 'react-router-dom';
+import AccountIcon from 'components/icons/AccountIcon';
+import FavouriteIcon from 'components/icons/FavouriteIcon';
+import styles from './styles.module.scss';
+
+export const Header: React.FC = () => {
   return (
-    <header>
-      <div>
-        <svg width="50px" height="50px" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+    <header className={cn(styles.header)}>
+      <div className={cn(styles.logoBlock)}>
+        <svg
+          className={cn(styles.logo)}
+          width="60px"
+          height="60px"
+          viewBox="0 0 72 72"
+          id="emoji"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <g id="color">
             <path fill="#FFFFFF" stroke="none" d="M7,36c0,16.0166,12.9834,29,29,29s29-12.9834,29-29H7z" />
             <path fill="#d0cfce" stroke="none" d="M49,36c0,16.0156-4,29-13,29c16.0166,0,29-12.9844,29-29H49z" />
@@ -13,7 +26,7 @@ export const Header = () => {
           <g id="line">
             <path
               fill="none"
-              stroke="#000000"
+              stroke="#B5460F"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeMiterlimit="10"
@@ -34,7 +47,7 @@ export const Header = () => {
             />
             <path
               fill="none"
-              stroke="#000000"
+              stroke="#B5460F"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeMiterlimit="10"
@@ -43,7 +56,7 @@ export const Header = () => {
             />
             <path
               fill="none"
-              stroke="#000000"
+              stroke="#B5460F"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeMiterlimit="10"
@@ -52,7 +65,7 @@ export const Header = () => {
             />
             <path
               fill="none"
-              stroke="#000000"
+              stroke="#B5460F"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeMiterlimit="10"
@@ -61,10 +74,29 @@ export const Header = () => {
             />
           </g>
         </svg>
-        <span style={{ fontFamily: 'Cookie' }}>Stonesoup</span>
+        <h1 className={cn(styles.logoTitle)}>Stonesoup</h1>
       </div>
-      <nav></nav>
-      <div></div>
+      <nav className={cn(styles.block, styles.nav)}>
+        <NavLink to="/" className={({ isActive }) => cn(styles.navLink, isActive ? styles.active : styles.pending)}>
+          Home
+        </NavLink>
+        <NavLink
+          to="/ingredients"
+          className={({ isActive }) => cn(styles.navLink, isActive ? styles.active : styles.pending)}
+        >
+          Ingredients
+        </NavLink>
+        <NavLink
+          to="/products"
+          className={({ isActive }) => cn(styles.navLink, isActive ? styles.active : styles.pending)}
+        >
+          Products
+        </NavLink>
+      </nav>
+      <div className={cn(styles.block, styles.iconBlock)}>
+        <AccountIcon color="accent" />
+        <FavouriteIcon color="accent" />
+      </div>
     </header>
   );
 };
