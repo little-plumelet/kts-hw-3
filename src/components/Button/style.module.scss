@@ -1,0 +1,28 @@
+.button {
+  padding: var(--space-s) var(--space-l);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-xxs);
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  font-size: 18px;
+  border: 0 var(--border-radius);
+}
+
+.loader svg path {
+  fill: var(--button-primary-text);
+}
+
+.button:hover:not([disabled]) {
+  background-color: var(--button-primary-bg-hover);
+  cursor: pointer;
+}
+
+.buttonDisabled {
+  background-color: var(--button-primary-bg-disabled);
+}
+
+.button:active:not([disabled]) {
+  background-color: var(--button-primary-bg-active);
+}
