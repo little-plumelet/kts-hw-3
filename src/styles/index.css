@@ -26,6 +26,11 @@
   --button-primary-bg-hover: var(--brand-hover);
   --button-primary-bg-active: var(--brand-active);
 
+  --card-bg: var(#FFFFFF);
+  --card-text-secondary: var(--secondary);
+  --card-text-primary: var(--primary);
+  --card-image-bg: #D9D9D9;
+
 
   /* size */
   --space-xxl: 64px;
