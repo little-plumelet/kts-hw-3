@@ -8,6 +8,10 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   loading?: boolean;
   /** Текст кнопки */
   children: React.ReactNode;
+  /** Дополнительный класс */
+  className?: string;
+  /** Заблокирована ли кнопка */
+  disabled?: boolean;
 };
 
 const Button: React.FC<ButtonProps> = ({ loading, children, className, disabled, ...rest }) => {
