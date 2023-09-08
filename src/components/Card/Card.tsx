@@ -20,6 +20,8 @@ export type CardProps = {
   onClick?: React.MouseEventHandler;
   /** Слот для действия */
   actionSlot?: React.ReactNode;
+  /** Ключ */
+  key: string;
 };
 
 const Card: React.FC<CardProps> = ({

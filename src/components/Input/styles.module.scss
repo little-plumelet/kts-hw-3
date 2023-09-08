@@ -1,0 +1,35 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: var(--space-s, 14px) var(--space-xs, 12px);
+  align-items: center;
+  gap: var(--space-xxs, 8px);
+  background-color: var(--input-bg);
+}
+
+.input {
+  appearance: none;
+  outline: none;
+  border: none;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+  background-color: var(--input-bg);
+}
+
+.input:disabled {
+  background-color: var(--input-bg);
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.wrapperFocused {
+  border: 1px solid var(--brand);
+}
+
+.input::placeholder {
+  color: var(--secondary, #AFADB5);
+}

@@ -1,0 +1,15 @@
+.form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-l);
+  width: 100%;
+}
+.searchButton {
+  background-color: var(--brand);
+  border-radius: var(--border-radius);
+}
+
+.input {
+  border-radius: var(--border-radius);
+}

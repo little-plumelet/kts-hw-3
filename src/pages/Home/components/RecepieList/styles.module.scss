@@ -1,0 +1,21 @@
+.homeBasicSection {
+  background-color: var(--background);
+  padding:  var(--space-xl) var(--side-padding);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--space-xxl);
+}
+
+@media screen and (max-width: 1439px) {
+  .homeBasicSection {
+    gap: var(--space-xl);
+  }
+}
+
+@media screen and (max-width: 1099px) {
+  .homeBasicSection {
+    padding: 0 var(--side-padding-50);
+  }
+}
