@@ -9,11 +9,16 @@
   --brand-hover: #B5460FB2;
   --brand-active: #872D01;
 
+  --background: rgba(255, 192, 118, 0.23);
+
+
+
   --primary: #000000;
   --secondary: #AFADB5;
   --accent: var(--brand);
 
   /* size */
+  --space-xxl: 64px;
   --space-xl: 24px;
   --space-l: 20px;
   --space-m: 16px;
@@ -24,6 +29,7 @@
   --border-radius: 10px;
 
   --side-padding: 100px;
+  --side-padding-50: 50px;
 
 }
 

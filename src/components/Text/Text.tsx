@@ -21,6 +21,7 @@ export type TextProps = {
 const Text: React.FC<TextProps> = ({ children, tag = 'p', view, weight, className, color, maxLines }) => {
   const Tag = tag;
   const classes = cn(view, className);
+  const minHeight = (maxLines ?? 2) * 24;
 
   return (
     <Tag
@@ -33,6 +34,7 @@ const Text: React.FC<TextProps> = ({ children, tag = 'p', view, weight, classNam
         WebkitBoxOrient: 'vertical',
         WebkitLineClamp: maxLines,
         overflow: 'hidden',
+        minHeight,
       }}
     >
       {children}

@@ -46,3 +46,9 @@
   text-decoration: none;
   // font-family: 'Lato', sans-serif;
 }
+
+@media screen and (max-width: 1099px) {
+  .header {
+    padding: 0 var(--side-padding-50);
+  }
+}
