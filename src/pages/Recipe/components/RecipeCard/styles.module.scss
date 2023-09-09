@@ -1,0 +1,142 @@
+@mixin sectionPadding {
+  padding: 0 var(--side-padding);
+}
+
+@mixin commonSection {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  @include sectionPadding;
+}
+
+.loaderContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+}
+
+.loader path {
+  fill: var(--brand);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xxl);
+  background-color: var(--background);
+}
+
+.recipeTitle {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  @include sectionPadding;
+  padding-top: 50px;
+
+  &Link {
+    display: flex;
+
+    &Icon {
+      rotate: 90deg;
+      width: 38px;
+      height: 38px;
+    }
+  }
+}
+
+.section {
+  @include commonSection;
+  gap: 100px;
+}
+
+.image {
+  width: 100%;
+  border-radius: var(--border-radius);
+}
+
+.basicInfoWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.basicInfoWrapper:first-child {
+  width: 30%;
+}
+
+.basicInfo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: fit-content(100%);
+  gap: 50px 50px;
+
+  &Section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
+
+.compositionSection {
+  @include commonSection;
+  gap: 50px;
+
+  &Part {
+    width: 100%;
+  }
+
+  &Part:first-child {
+    order: -1;
+  }
+}
+
+.compositionSection::before {
+  content: '';
+  border: 1px dashed var(--brand);
+  align-self: stretch;
+}
+
+.ingredientsTitle, .nutrientsTitle, .instructionsTitle {
+  margin-bottom: var(--space-l);
+}
+
+.ingredients, .nutrients {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xxs);
+
+  &Point {
+    list-style: none;
+  }
+}
+
+.instructionSection {
+  @include commonSection;
+  flex-direction: column;
+}
+
+.instructions {
+  &Point {
+    color: var(--brand);
+    margin-bottom: var(--space-m)
+  }
+
+  
+}
+
+
+
+.description {
+  @include sectionPadding;
+  padding-top: var(--space-xxl);
+  padding-bottom: var(--space-xxl);
+  background-color: var(--background-bright);
+}

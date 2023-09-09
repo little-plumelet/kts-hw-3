@@ -1,0 +1,19 @@
+@import '../../styles/index.scss';
+
+.title {
+  @include pageTitle;
+}
+
+.p-20 {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.p-16 {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+}

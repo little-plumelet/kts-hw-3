@@ -1,6 +1,6 @@
 import { Header } from 'components/Header';
 import { Banner } from './components/Banner';
-import { RecipeList } from './components/RecepieList';
+import { RecipeList } from './components/RecipeList';
 
 export const Home = () => {
   return (

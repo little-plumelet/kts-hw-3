@@ -6,7 +6,6 @@ import { CardProps } from 'components/Card';
 import { CardList } from 'components/CardList';
 import { API_KEY, BASE_URL } from 'configs/constants';
 import { SearchInput } from '../SearchInput';
-import data from './mockdata.json';
 import { mapper } from './utils';
 import styles from './styles.module.scss';
 
@@ -17,7 +16,6 @@ export const RecipeList: React.FC = () => {
   const [value, setValue] = useState('');
   const [query, setQuery] = useState(defaultQuery);
   const queryNb = 9;
-  const mockData = data?.results;
 
   function handleClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     event.preventDefault();
@@ -37,8 +35,7 @@ export const RecipeList: React.FC = () => {
             addRecipeNutrition: true,
           },
         });
-        //setCards(mapper(responce?.data?.results));
-        setCards(mapper(mockData));
+        setCards(mapper(responce?.data?.results));
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);

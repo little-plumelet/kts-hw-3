@@ -1,5 +1,6 @@
 import * as cn from 'classnames';
 import * as React from 'react';
+import styles from './styles.module.scss';
 
 export type TextProps = {
   /** Дополнительный класс */
@@ -20,8 +21,8 @@ export type TextProps = {
 
 const Text: React.FC<TextProps> = ({ children, tag = 'p', view, weight, className, color, maxLines }) => {
   const Tag = tag;
-  const classes = cn(view, className);
-  const minHeight = (maxLines ?? 2) * 24;
+  const classes = cn(styles[view ?? ''], className);
+  const minHeight = (maxLines ?? 2) * 20;
 
   return (
     <Tag
