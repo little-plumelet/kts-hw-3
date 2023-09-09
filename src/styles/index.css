@@ -71,8 +71,3 @@ body {
   font-style: normal; 
   font-weight: normal; 
 }
-
-@mixin pageTitle {
-  font-weight: 700;
-  font-size: 44px;
-}
