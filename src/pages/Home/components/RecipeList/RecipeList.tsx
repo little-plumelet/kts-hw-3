@@ -13,11 +13,10 @@ import { mapper } from './utils';
 import styles from './styles.module.scss';
 
 export const RecipeList: React.FC = () => {
-  const defaultQuery = 'shrimp';
   const [cards, setCards] = useState<Array<CardProps>>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [value, setValue] = useState('');
-  const [query, setQuery] = useState(defaultQuery);
+  const [query, setQuery] = useState('');
   const queryNb = 9;
 
   const options = Object.entries(MealTypeMap).map(([key, value]) => ({ key, value }));
