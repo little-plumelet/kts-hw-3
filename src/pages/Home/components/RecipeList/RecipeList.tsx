@@ -4,7 +4,10 @@ import { useState } from 'react';
 import * as React from 'react';
 import { CardProps } from 'components/Card';
 import { CardList } from 'components/CardList';
+import MultiDropdown from 'components/MultiDropdown';
+import { Option } from 'configs/MultiDropdownOptionType';
 import { API_KEY, BASE_URL } from 'configs/constants';
+import { MealTypeMap } from 'configs/mealType';
 import { SearchInput } from '../SearchInput';
 import { mapper } from './utils';
 import styles from './styles.module.scss';
@@ -17,9 +20,21 @@ export const RecipeList: React.FC = () => {
   const [query, setQuery] = useState(defaultQuery);
   const queryNb = 9;
 
+  const options = Object.entries(MealTypeMap).map(([key, value]) => ({ key, value }));
+  const [categoriesValue, setCategoriesValue] = useState<Array<Option>>([]);
+
   function handleClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     event.preventDefault();
     setQuery(value);
+  }
+
+  function getTitle(value: Option[]) {
+    const result = value.map((el: Option) => el.value).join(', ');
+    return result.length ? result : 'Choose categories';
+  }
+
+  function handleChangeCategory(value: Option[]) {
+    setCategoriesValue(value);
   }
 
   React.useEffect(() => {
@@ -33,6 +48,7 @@ export const RecipeList: React.FC = () => {
             number: queryNb,
             addRecipeInformation: true,
             addRecipeNutrition: true,
+            type: getTitle(categoriesValue),
           },
         });
         setCards(mapper(responce?.data?.results));
@@ -46,11 +62,20 @@ export const RecipeList: React.FC = () => {
         }
       }
     })();
-  }, [query]);
+  }, [query, categoriesValue]);
 
   return (
     <section className={cn(styles.homeBasicSection)}>
-      <SearchInput value={value} onChange={setValue} onClick={handleClick} isLoading={isLoading} />
+      <div className={cn(styles.searchBlock)}>
+        <SearchInput value={value} onChange={setValue} onClick={handleClick} isLoading={isLoading} />
+        <MultiDropdown
+          options={options}
+          value={categoriesValue}
+          onChange={handleChangeCategory}
+          getTitle={getTitle}
+          className={styles.multiDropdown}
+        />
+      </div>
       <CardList cards={cards} />
     </section>
   );

@@ -3,10 +3,34 @@
   padding:  var(--space-xl) var(--side-padding);
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: wrap;
   gap: var(--space-xxxl);
 }
+
+.searchBlock {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--space-l)
+}
+
+.multiDropdown {
+  position: relative;
+}
+
+.multiDropdown div {
+  border-radius: var(--border-radius);
+  
+}
+
+.multiDropdown ul {
+  position: absolute;
+  top: 65px;
+}
+
 
 @media screen and (max-width: 1439px) {
   .homeBasicSection {
