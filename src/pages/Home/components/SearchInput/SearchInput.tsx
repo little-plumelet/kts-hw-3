@@ -4,13 +4,14 @@ import Input from 'components/Input';
 import SearchIcon from 'components/icons/SearchIcon';
 import styles from './styles.module.scss';
 
-interface ISearchInputProps {
+type SearchInputProps = {
   value: string;
   isLoading: boolean;
   onChange: (value: string) => void;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
-}
-export const SearchInput: React.FC<ISearchInputProps> = ({ value, onChange, onClick, isLoading }) => {
+};
+
+export const SearchInput: React.FC<SearchInputProps> = ({ value, onChange, onClick, isLoading }) => {
   return (
     <form className={styles.form}>
       <Input
