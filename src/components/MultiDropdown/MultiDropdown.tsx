@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Option } from 'types/MultiDropdownOption';
 import Input from '../Input';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
+import { OptionCp } from './components/OptionCp';
 import styles from './styles.module.scss';
 
 /** Пропсы, которые принимает компонент Dropdown */
@@ -57,9 +58,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
 
   const filteredOptions = options.filter((option) => option.value.toLowerCase().includes(inputValue.toLowerCase()));
 
-  function selectOption(event: React.MouseEvent<HTMLLIElement>) {
-    const currentValue = (event.target as HTMLLIElement).innerHTML;
-    const currentKey = (event.target as HTMLLIElement).id;
+  function selectOption(currentKey: string, currentValue: string) {
     if (value.find((el) => el.key === currentKey)) {
       onChange(value.filter((el) => el.key !== currentKey));
     } else {
@@ -82,16 +81,15 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
       {isOpen && !disabled && (
         <ul className={styles.optionContainer}>
           {filteredOptions.map((option) => (
-            <li
+            <OptionCp
               key={option.key}
               onClick={selectOption}
               id={option.key}
               className={cn(styles.option, {
                 [styles.selected]: value.find((el) => el.key === option.key),
               })}
-            >
-              {option.value}
-            </li>
+              value={option.value}
+            />
           ))}
         </ul>
       )}
