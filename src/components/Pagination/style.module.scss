@@ -1,0 +1,38 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-xxl) 0;
+  margin: 0 auto;
+}
+
+.paginationBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // gap: var(--space-l)
+}
+
+.arrowLeft {
+  rotate: 90deg;
+}
+
+.arrowRight {
+  rotate: -90deg;
+}
+
+.arrowDisabled {
+  cursor: none;
+  pointer-events: none;
+}
+
+.page {
+  padding: 10px 0;
+  min-width: 48px;
+  text-align: center;
+}
+
+.activePage {
+  color: var(--primary-invert);
+  background-color: var(--brand);
+}
