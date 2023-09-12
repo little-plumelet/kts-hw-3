@@ -22,6 +22,6 @@ export function mapper(data: Array<recipeProps>): CardProps[] {
         {recipe?.nutrition?.nutrients?.find((nutrient) => nutrient.name === 'Calories')?.amount + ' kcal'}
       </Text>
     ),
-    key: recipe.id,
+    key: recipe.id.toString(),
   }));
 }
