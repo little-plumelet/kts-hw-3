@@ -1,6 +1,6 @@
 import * as cn from 'classnames';
 import * as React from 'react';
-import { Option } from 'configs/MultiDropdownOptionType';
+import { Option } from 'types/MultiDropdownOption';
 import Input from '../Input';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 import styles from './styles.module.scss';

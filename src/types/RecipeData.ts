@@ -1,4 +1,4 @@
-export interface IRecipeData {
+export type RecipeData = {
   id: number;
   title: string;
   readyInMinutes: number;
@@ -8,8 +8,8 @@ export interface IRecipeData {
   servings: number;
   aggregateLikes: number;
   nutrition: {
-    nutrients: Array<INutrient>;
-    ingredients: Array<IIngerdient>;
+    nutrients: Nutrient[];
+    ingredients: Ingerdient[];
   };
   summary: string;
   analyzedInstructions: [
@@ -21,17 +21,17 @@ export interface IRecipeData {
       }>;
     },
   ];
-}
+};
 
-export interface INutrient {
+export type Nutrient = {
   name: string;
   amount: number;
   unit: string;
-}
+};
 
-export interface IIngerdient {
+export type Ingerdient = {
   id: number;
   name: string;
   amount: number;
   unit: string;
-}
+};

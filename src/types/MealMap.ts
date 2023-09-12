@@ -1,7 +1,6 @@
-export type MealType = 'main course' | 'side dish' | 'dessert' | '';
-export enum MealTypeMap {
-  'main course' = 'main course',
-  'side dish' = 'side dish',
+export enum MealMap {
+  'mainCourse' = 'main course',
+  'sideDish' = 'side dish',
   'dessert' = 'dessert',
   'appetizer' = 'appetizer',
   'salad' = 'salad',

@@ -6,9 +6,9 @@ import { CardProps } from 'components/Card';
 import { CardList } from 'components/CardList';
 import MultiDropdown from 'components/MultiDropdown';
 import Pagination from 'components/Pagination';
-import { Option } from 'configs/MultiDropdownOptionType';
 import { API_KEY, BASE_URL } from 'configs/constants';
-import { MealTypeMap } from 'configs/mealType';
+import { MealMap } from 'types/MealMap';
+import { Option } from 'types/MultiDropdownOption';
 import { SearchInput } from '../SearchInput';
 import { mapper } from './utils';
 import styles from './styles.module.scss';
@@ -22,7 +22,7 @@ export const RecipeList: React.FC = () => {
   const [total, setTotal] = useState<number | null>(null);
   const queryNb = 9;
 
-  const options = Object.entries(MealTypeMap).map(([key, value]) => ({ key, value }));
+  const options = Object.entries(MealMap).map(([key, value]) => ({ key, value }));
   const [categoriesValue, setCategoriesValue] = useState<Array<Option>>([]);
 
   function handleClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -81,7 +81,7 @@ export const RecipeList: React.FC = () => {
         />
       </div>
       <CardList cards={cards} />
-      <Pagination currentPage={currentPage} updateCurrentPage={setCurrentPage} total={total} />
+      <Pagination currentPage={currentPage} updateCurrentPage={setCurrentPage} total={total ?? 0} />
     </section>
   );
 };

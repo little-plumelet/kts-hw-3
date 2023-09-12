@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 import Button from 'components/Button';
 import { CardProps } from 'components/Card';
 import Text from 'components/Text';
-import { IRecipeData } from 'configs/RecipeInterface';
+import { RecipeData } from 'types/RecipeData';
 
-type recipeProps = Pick<IRecipeData, 'id' | 'title' | 'readyInMinutes' | 'image' | 'nutrition'>;
+type RecipeProps = Pick<RecipeData, 'id' | 'title' | 'readyInMinutes' | 'image' | 'nutrition'>;
 
-export function mapper(data: Array<recipeProps>): CardProps[] {
+export function mapper(data: Array<RecipeProps>): CardProps[] {
   return data.map((recipe) => ({
     title: recipe.title,
     image: recipe.image,

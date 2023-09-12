@@ -4,15 +4,15 @@ import { Link, useParams } from 'react-router-dom';
 import Loader from 'components/Loader';
 import Text from 'components/Text';
 import ArrowDownIcon from 'components/icons/ArrowDownIcon';
-import { IRecipeData } from 'configs/RecipeInterface';
 import { BASE_URL, API_KEY } from 'configs/constants';
+import { RecipeData } from 'types/RecipeData';
 import styles from './styles.module.scss';
 
 export const RecipeCard: React.FC = () => {
   const { id: recipeId } = useParams();
 
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<IRecipeData | null>(null);
+  const [data, setData] = useState<RecipeData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
