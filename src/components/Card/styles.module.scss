@@ -17,6 +17,7 @@
   background: var(--card-image-bg, #D9D9D9);
   max-height: 360px;
   overflow: hidden;
+  display: flex;
 }
 
 .aboveTitle {

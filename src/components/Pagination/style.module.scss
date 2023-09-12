@@ -10,15 +10,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  // gap: var(--space-l)
 }
 
 .arrowLeft {
   rotate: 90deg;
+  cursor: pointer;
 }
 
 .arrowRight {
   rotate: -90deg;
+  cursor: pointer;
 }
 
 .arrowDisabled {
@@ -30,6 +31,7 @@
   padding: 10px 0;
   min-width: 48px;
   text-align: center;
+  cursor: pointer;
 }
 
 .activePage {
