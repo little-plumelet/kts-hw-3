@@ -1,0 +1,13 @@
+@import 'styles/sizes';
+
+@mixin section-padding {
+  padding: 0 $side-padding;
+}
+
+@mixin common-section {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  @include section-padding;
+}

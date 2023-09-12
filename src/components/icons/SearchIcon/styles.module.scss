@@ -1,15 +1,17 @@
+@import 'styles/colors';
+
 .primary-invert path {
-  fill: var(--primary-invert);
+  fill: $primary-invert;
 }
 
 .primary path {
-  fill: var(--primary);
+  fill: $primary;
 }
 
 .secondary path {
-  fill: var(--secondary);
+  fill: $secondary;
 }
 
 .accent path {
-  fill: var(--accent);
+  fill: $accent;
 }

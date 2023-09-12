@@ -1,14 +1,8 @@
-@mixin sectionPadding {
-  padding: 0 var(--side-padding);
-}
 
-@mixin commonSection {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-content: center;
-  @include sectionPadding;
-}
+@import 'styles/colors';
+@import 'styles/sizes';
+@import 'styles/mixins';
+
 
 .loaderContainer {
   width: 100%;
@@ -19,7 +13,7 @@
 }
 
 .loader path {
-  fill: var(--brand);
+  fill: $brand;
 }
 
 .wrapper {
@@ -27,8 +21,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--space-xxl);
-  background-color: var(--background);
+  gap: $space-xxl;
+  background-color: $background;
 }
 
 .recipeTitle {
@@ -36,7 +30,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  @include sectionPadding;
+  @include section-padding;
   padding-top: 50px;
 
   &Link {
@@ -51,13 +45,13 @@
 }
 
 .section {
-  @include commonSection;
+  @include common-section;
   gap: 100px;
 }
 
 .image {
   width: 100%;
-  border-radius: var(--border-radius);
+  border-radius: $border-radius;
 }
 
 .basicInfoWrapper {
@@ -86,7 +80,7 @@
 }
 
 .compositionSection {
-  @include commonSection;
+  @include common-section;
   gap: 50px;
 
   &Part {
@@ -100,18 +94,18 @@
 
 .compositionSection::before {
   content: '';
-  border: 1px dashed var(--brand);
+  border: 1px dashed $brand;
   align-self: stretch;
 }
 
 .ingredientsTitle, .nutrientsTitle, .instructionsTitle {
-  margin-bottom: var(--space-l);
+  margin-bottom: $space-l;
 }
 
 .ingredients, .nutrients {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-xxs);
+  gap: $space-xxs;
 
   &Point {
     list-style: none;
@@ -119,24 +113,20 @@
 }
 
 .instructionSection {
-  @include commonSection;
+  @include common-section;
   flex-direction: column;
 }
 
 .instructions {
   &Point {
-    color: var(--brand);
-    margin-bottom: var(--space-m)
+    color: $brand;
+    margin-bottom: $space-m;
   }
-
-  
 }
 
-
-
 .description {
-  @include sectionPadding;
-  padding-top: var(--space-xxl);
-  padding-bottom: var(--space-xxl);
-  background-color: var(--background-bright);
+  @include section-padding;
+  padding-top: $space-xxl;
+  padding-bottom: $space-xxl;
+  background-color: $background-bright;
 }

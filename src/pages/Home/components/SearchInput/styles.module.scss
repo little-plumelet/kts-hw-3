@@ -1,15 +1,18 @@
+@import 'styles/colors';
+@import 'styles/sizes';
+
 .form {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: var(--space-l);
+  gap: $space-l;
   width: 100%;
 }
 .searchButton {
-  background-color: var(--brand);
-  border-radius: var(--border-radius);
+  background-color: $brand;
+  border-radius: $border-radius;
 }
 
 .input {
-  border-radius: var(--border-radius);
+  border-radius: $border-radius;
 }

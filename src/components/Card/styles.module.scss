@@ -1,20 +1,23 @@
+@import 'styles/colors';
+@import 'styles/sizes';
+
 .card {
   display: inline-flex;
-  padding-bottom: var(--space-xl, 0px);
+  padding-bottom: $space-xl;
   flex-direction: column;
-  gap: var(--space-xl, 24px);
-  border-radius: var(--border-radius, 0px);
-  background: var(--card-bg, #FFF);
+  gap: $space-xl;
+  border-radius: $border-radius;
+  background: $card-bg;
   width: 29%;
 }
 
 .card:hover {
-  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: $card-shadow;
 }
 
 .header {
-  border-radius: var(--border-radius, 0px);
-  background: var(--card-image-bg, #D9D9D9);
+  border-radius: $border-radius;
+  background: $card-image-bg;
   max-height: 360px;
   overflow: hidden;
   display: flex;
@@ -22,7 +25,7 @@
 
 .aboveTitle {
   overflow: hidden;
-  color: var(--card-text-secondary, #AFADB5);
+  color: $card-text-secondary;
   text-overflow: ellipsis;
   font-size: 14px;
   font-style: normal;
@@ -32,7 +35,7 @@
 
 .title {
   overflow: hidden;
-  color: var(--card-text-primary, #000);
+  color: $card-text-primary;
   text-overflow: ellipsis;
   font-size: 20px;
   font-style: normal;
@@ -45,8 +48,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0 var(--space-xs, 12px);
-  gap: var(--space-l, 20px);
+  padding: 0 $space-xs;
+  gap: $space-l;
 }
 
 .content {
@@ -54,7 +57,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--space-xxs, 8px);
+  gap: $space-xxs;
 }
 
 .footer {
@@ -62,13 +65,12 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: var(--space-xxs, 8px);
+  gap: $space-xxs;
 }
 
 .contentSlot {
   flex-grow: 1;
-  color: var(--card-text-primary, #000);
-  font-size: 18px;
+  color: $card-text-primary;
   font-style: normal;
   font-weight: 700;
   line-height: 22px;

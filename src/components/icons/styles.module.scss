@@ -1,11 +1,13 @@
+@import 'styles/colors';
+
 .primary g path {
-  stroke: var(--primary);
+  stroke: $primary;
 }
 
 .secondary path {
-  stroke: var(--secondary);
+  stroke: $secondary;
 }
 
 .accent path {
-  stroke: var(--accent);
+  stroke: $accent;
 }

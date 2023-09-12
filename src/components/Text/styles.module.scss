@@ -1,7 +1,8 @@
+@import 'styles/colors';
+
 .title {
   font-weight: 700;
   font-size: 44px;
-
 }
 
 .p-20 {
@@ -16,4 +17,16 @@
   font-style: normal;
   font-weight: 600;
   line-height: 20px;
+}
+
+.primary {
+  color: $primary;
+}
+
+.secondary {
+  color: $secondary;
+}
+
+.accent {
+  color: $accent;
 }

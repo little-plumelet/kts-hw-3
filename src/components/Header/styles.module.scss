@@ -1,8 +1,11 @@
+@import 'styles/sizes';
+@import 'styles/colors';
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 var(--side-padding);
+  padding: 0 $side-padding;
 }
 
 .logoBlock {
@@ -28,27 +31,25 @@
 }
 
 .iconBlock {
-  gap: var(--space-m);
+  gap: $space-m;
 }
 
 .nav {
-  gap: var(--space-m);
+  gap: $space-m;
 }
 
 .active {
-  color: var(--brand);
+  color: $brand;
   text-decoration: none;
-  // font-family: 'Lato', sans-serif;
 }
 
 .pending {
-  color: black;
+  color: $primary;
   text-decoration: none;
-  // font-family: 'Lato', sans-serif;
 }
 
 @media screen and (max-width: 1099px) {
   .header {
-    padding: 0 var(--side-padding-50);
+    padding: 0 $side-padding-50;
   }
 }

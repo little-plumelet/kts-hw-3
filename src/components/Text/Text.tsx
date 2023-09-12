@@ -21,15 +21,13 @@ export type TextProps = {
 
 const Text: React.FC<TextProps> = ({ children, tag = 'p', view, weight, className, color, maxLines }) => {
   const Tag = tag;
-  const classes = cn(styles[view ?? ''], className);
   const minHeight = (maxLines ?? 2) * 20;
 
   return (
     <Tag
-      className={classes}
+      className={cn(styles[view ?? ''], className, styles[color ?? ''])}
       style={{
         fontWeight: weight,
-        color: `var(--${color})`,
         maxLines,
         display: '-webkit-box',
         WebkitBoxOrient: 'vertical',
