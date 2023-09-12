@@ -25,14 +25,11 @@ const Text: React.FC<TextProps> = ({ children, tag = 'p', view, weight, classNam
 
   return (
     <Tag
-      className={cn(styles[view ?? ''], className, styles[color ?? ''])}
+      className={cn(styles[view ?? ''], className, styles[color ?? ''], styles.common)}
       style={{
         fontWeight: weight,
         maxLines,
-        display: '-webkit-box',
-        WebkitBoxOrient: 'vertical',
         WebkitLineClamp: maxLines,
-        overflow: 'hidden',
         minHeight,
       }}
     >

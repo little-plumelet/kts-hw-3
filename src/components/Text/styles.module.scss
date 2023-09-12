@@ -1,5 +1,11 @@
 @import 'styles/colors';
 
+.common {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden
+}
+
 .title {
   font-weight: 700;
   font-size: 44px;
