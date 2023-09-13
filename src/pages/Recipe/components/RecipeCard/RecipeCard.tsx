@@ -7,6 +7,7 @@ import Text from 'components/Text';
 import ArrowDownIcon from 'components/icons/ArrowDownIcon';
 import { BASE_URL, API_KEY } from 'configs/constants';
 import { RecipeData } from 'types/RecipeData';
+import { SizeType } from 'types/common';
 import styles from './styles.module.scss';
 
 export const RecipeCard: React.FC = () => {
@@ -42,7 +43,7 @@ export const RecipeCard: React.FC = () => {
   if (loading) {
     return (
       <div className={styles['loader-container']}>
-        <Loader size="l" className={styles.loader} />
+        <Loader size={SizeType.l} className={styles.loader} />
       </div>
     );
   }

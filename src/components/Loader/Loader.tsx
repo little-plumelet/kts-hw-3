@@ -1,17 +1,16 @@
 import * as cn from 'classnames';
 import * as React from 'react';
+import { SizeType } from 'types/common';
 import styles from './styles.module.scss';
-
-type sizeType = 's' | 'm' | 'l';
 
 export type LoaderProps = {
   /** Размер */
-  size?: sizeType;
+  size?: SizeType;
   /** Дополнительный класс */
   className?: string;
 };
 
-const Loader: React.FC<LoaderProps> = ({ size = 'l', className }) => {
+const Loader: React.FC<LoaderProps> = ({ size = SizeType.l, className }) => {
   return (
     <>
       <div className={cn(styles[size], className)}>
