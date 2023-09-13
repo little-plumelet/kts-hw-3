@@ -1,4 +1,3 @@
-import * as classNames from 'classnames';
 import * as React from 'react';
 
 export type IconProps = React.SVGAttributes<SVGElement> & {
@@ -16,7 +15,7 @@ const Icon: React.FC<React.PropsWithChildren<IconProps>> = ({
   ...props
 }) => {
   return (
-    <svg className={classNames(className)} width={width} height={height} viewBox="0 0 24 24" fill="none" {...props}>
+    <svg className={className} width={width} height={height} viewBox="0 0 24 24" fill="none" {...props}>
       {children}
     </svg>
   );

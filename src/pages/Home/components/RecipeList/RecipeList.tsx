@@ -1,5 +1,4 @@
 import axios, { AxiosError } from 'axios';
-import * as cn from 'classnames';
 import { useState } from 'react';
 import * as React from 'react';
 import { CardList } from 'components/CardList';
@@ -67,8 +66,8 @@ export const RecipeList: React.FC = () => {
   }, [query, categoriesValue, queryNb, currentPage]);
 
   return (
-    <section className={cn(styles.homeBasicSection)}>
-      <div className={cn(styles.searchBlock)}>
+    <section className={styles.homeBasicSection}>
+      <div className={styles.searchBlock}>
         <SearchInput value={value} onChange={setValue} onClick={handleClick} isLoading={isLoading} />
         <MultiDropdown
           options={options}

@@ -2,6 +2,7 @@ import * as cn from 'classnames';
 import { NavLink } from 'react-router-dom';
 import AccountIcon from 'components/icons/AccountIcon';
 import FavouriteIcon from 'components/icons/FavouriteIcon';
+import { URLS } from 'configs/urls';
 import styles from './styles.module.scss';
 
 export const Header: React.FC = () => {
@@ -74,20 +75,23 @@ export const Header: React.FC = () => {
             />
           </g>
         </svg>
-        <h1 className={cn(styles.logoTitle)}>Stonesoup</h1>
+        <h1 className={styles.logoTitle}>Stonesoup</h1>
       </div>
       <nav className={cn(styles.block, styles.nav)}>
-        <NavLink to="/" className={({ isActive }) => cn(styles.navLink, isActive ? styles.active : styles.pending)}>
+        <NavLink
+          to={URLS['/']}
+          className={({ isActive }) => cn(styles.navLink, isActive ? styles.active : styles.pending)}
+        >
           Home
         </NavLink>
         <NavLink
-          to="/ingredients"
+          to={URLS.ingredients}
           className={({ isActive }) => cn(styles.navLink, isActive ? styles.active : styles.pending)}
         >
           Ingredients
         </NavLink>
         <NavLink
-          to="/products"
+          to={URLS.products}
           className={({ isActive }) => cn(styles.navLink, isActive ? styles.active : styles.pending)}
         >
           Products

@@ -29,7 +29,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, total, updateCurre
         color={currentPage === 1 ? 'secondary' : 'accent'}
         id="back"
         onClick={handleClickArrow}
-        className={cn(styles.arrowLeft, `${currentPage === 1 ? styles.arrowDisabled : ''}`)}
+        className={cn(styles.arrowLeft, { [styles.arrowDisabled]: currentPage === 1 })}
       />
       <div onClick={handleClick} className={styles.paginationBlock}>
         {total <= 4 && (
@@ -38,7 +38,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, total, updateCurre
               <div
                 id={index.toString()}
                 key={index + 1}
-                className={cn(styles.page, `${currentPage === index + 1 ? styles.activePage : ''}`)}
+                className={cn(styles.page, { [styles.activePage]: currentPage === index + 1 })}
               >
                 {index + 1}
               </div>
@@ -47,17 +47,17 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, total, updateCurre
         )}
         {total > 4 && currentPage < 4 && (
           <>
-            <div className={cn(styles.page, `${currentPage === 1 ? styles.activePage : ''}`)} id={'1'}>
+            <div className={cn(styles.page, { [styles.activePage]: currentPage === 1 })} id={'1'}>
               1
             </div>
-            <div className={cn(styles.page, `${currentPage === 2 ? styles.activePage : ''}`)} id={'2'}>
+            <div className={cn(styles.page, { [styles.activePage]: currentPage === 2 })} id={'2'}>
               2
             </div>
-            <div className={cn(styles.page, `${currentPage === 3 ? styles.activePage : ''}`)} id={'3'}>
+            <div className={cn(styles.page, { [styles.activePage]: currentPage === 3 })} id={'3'}>
               3
             </div>
             ...
-            <div className={cn(styles.page, `${currentPage === total ? styles.activePage : ''}`)} id={total.toString()}>
+            <div className={cn(styles.page, { [styles.activePage]: currentPage === total })} id={total.toString()}>
               {total}
             </div>
           </>
@@ -65,26 +65,23 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, total, updateCurre
         {total > 4 && currentPage > total - 3 && (
           <>
             <>
-              <div className={cn(styles.page, `${currentPage === 1 ? styles.activePage : ''}`)} id={'1'}>
+              <div className={cn(styles.page, { [styles.activePage]: currentPage === 1 })} id={'1'}>
                 1
               </div>
               ...
               <div
-                className={cn(styles.page, `${currentPage === total - 2 ? styles.activePage : ''}`)}
+                className={cn(styles.page, { [styles.activePage]: currentPage === total - 2 })}
                 id={(total - 2).toString()}
               >
                 {total - 2}
               </div>
               <div
-                className={cn(styles.page, `${currentPage === total - 1 ? styles.activePage : ''}`)}
+                className={cn(styles.page, { [styles.activePage]: currentPage === total - 1 })}
                 id={(total - 1).toString()}
               >
                 {total - 1}
               </div>
-              <div
-                className={cn(styles.page, `${currentPage === total ? styles.activePage : ''}`)}
-                id={total.toString()}
-              >
+              <div className={cn(styles.page, { [styles.activePage]: currentPage === total })} id={total.toString()}>
                 {total}
               </div>
             </>
@@ -92,21 +89,21 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, total, updateCurre
         )}
         {total > 4 && currentPage >= 4 && currentPage <= total - 3 && (
           <>
-            <div className={cn(styles.page, `${currentPage === 1 ? styles.activePage : ''}`)} id={'1'}>
+            <div className={cn(styles.page, { [styles.activePage]: currentPage === 1 })} id={'1'}>
               1
             </div>
             ...
-            <div className={cn(styles.page)} id={(currentPage - 1).toString()}>
+            <div className={styles.page} id={(currentPage - 1).toString()}>
               {currentPage - 1}
             </div>
             <div className={cn(styles.page, styles.activePage)} id={currentPage.toString()}>
               {currentPage}
             </div>
-            <div className={cn(styles.page)} id={(currentPage + 1).toString()}>
+            <div className={styles.page} id={(currentPage + 1).toString()}>
               {currentPage + 1}
             </div>
             ...
-            <div className={cn(styles.page)} id={total.toString()}>
+            <div className={styles.page} id={total.toString()}>
               {total}
             </div>
           </>
@@ -116,7 +113,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, total, updateCurre
         color={currentPage === total ? 'secondary' : 'accent'}
         id="forward"
         onClick={handleClickArrow}
-        className={cn(styles.arrowRight, `${currentPage === total ? styles.arrowDisabled : ''}`)}
+        className={cn(styles.arrowRight, { [styles.arrowDisabled]: currentPage === total })}
       />
     </div>
   );

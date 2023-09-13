@@ -94,7 +94,7 @@ export const RecipeCard: React.FC = () => {
         </div>
       </section>
       <section>
-        <div className={styles.description} dangerouslySetInnerHTML={{ __html: data?.summary }}></div>
+        <div className={styles.description} dangerouslySetInnerHTML={{ __html: data?.summary ?? '' }}></div>
       </section>
 
       <section className={styles.compositionSection}>
