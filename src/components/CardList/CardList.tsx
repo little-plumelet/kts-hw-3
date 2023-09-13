@@ -5,6 +5,7 @@ import Card from 'components/Card';
 import Text from 'components/Text';
 import { URLS } from 'configs/urls';
 import { RecipeData } from 'types/RecipeData';
+import { ColorType } from 'types/common';
 
 type CardListProps = {
   cardsData: RecipeData[];
@@ -25,7 +26,7 @@ export const CardList: React.FC<CardListProps> = ({ cardsData }) => {
             </Link>
           }
           contentSlot={
-            <Text color="accent" maxLines={1}>
+            <Text color={ColorType.accent} maxLines={1}>
               {card?.nutrition?.nutrients?.find((nutrient) => nutrient.name === 'Calories')?.amount + ' kcal'}
             </Text>
           }

@@ -7,7 +7,7 @@ import Text from 'components/Text';
 import ArrowDownIcon from 'components/icons/ArrowDownIcon';
 import { BASE_URL, API_KEY } from 'configs/constants';
 import { RecipeData } from 'types/RecipeData';
-import { SizeType } from 'types/common';
+import { ColorType, SizeType, TextViewType } from 'types/common';
 import styles from './styles.module.scss';
 
 export const RecipeCard: React.FC = () => {
@@ -52,9 +52,9 @@ export const RecipeCard: React.FC = () => {
     <div className={styles.wrapper}>
       <section className={cn(styles['recipe-title'], styles['wrapper-item'])}>
         <Link to={'..'} className={styles['recipe-title-link']}>
-          <ArrowDownIcon className={styles['recipe-title-link-icon']} color="accent" />
+          <ArrowDownIcon className={styles['recipe-title-link-icon']} color={ColorType.accent} />
         </Link>
-        <Text view="title">{data?.title}</Text>
+        <Text view={TextViewType.title}>{data?.title}</Text>
       </section>
       <section className={cn(styles.section, styles['wrapper-item'])}>
         <div className={styles['basic-info-wrapper']}>
@@ -64,31 +64,31 @@ export const RecipeCard: React.FC = () => {
           <div className={styles['basic-info']}>
             <div className={styles['basic-info-section']}>
               <Text maxLines={1}>Preparation</Text>
-              <Text maxLines={1} color="accent">
+              <Text maxLines={1} color={ColorType.accent}>
                 {data?.preparationMinutes === -1 ? data?.readyInMinutes * 0.1 : data?.preparationMinutes} minutes
               </Text>
             </div>
             <div className={styles['basic-info-section']}>
               <Text maxLines={1}>Cooking</Text>
-              <Text maxLines={1} color="accent">
+              <Text maxLines={1} color={ColorType.accent}>
                 {data?.cookingMinutes === -1 ? data?.readyInMinutes * 0.9 : data?.cookingMinutes} minutes
               </Text>
             </div>
             <div className={styles['basic-info-section']}>
               <Text maxLines={1}>Total</Text>
-              <Text maxLines={1} color="accent">
+              <Text maxLines={1} color={ColorType.accent}>
                 {data?.readyInMinutes} minutes
               </Text>
             </div>
             <div className={styles['basic-info-section']}>
               <Text maxLines={1}>Rating</Text>
-              <Text maxLines={1} color="accent">
+              <Text maxLines={1} color={ColorType.accent}>
                 {data?.aggregateLikes} likes
               </Text>
             </div>
             <div className={styles['basic-info-section']}>
               <Text maxLines={1}>Serving</Text>
-              <Text maxLines={1} color="accent">
+              <Text maxLines={1} color={ColorType.accent}>
                 {data?.servings} servings
               </Text>
             </div>
@@ -101,7 +101,7 @@ export const RecipeCard: React.FC = () => {
 
       <section className={cn(styles['composition-section'], styles['wrapper-item'])}>
         <div className={styles['composition-section-part']}>
-          <Text view="p-20" className={styles['ingredients-title']}>
+          <Text view={TextViewType.p20} className={styles['ingredients-title']}>
             Ingredients
           </Text>
           <ul className={styles.ingredients}>
@@ -114,7 +114,7 @@ export const RecipeCard: React.FC = () => {
           </ul>
         </div>
         <div className={styles['composition-section-part']}>
-          <Text view="p-20" className={styles['nutrients-title']}>
+          <Text view={TextViewType.p20} className={styles['nutrients-title']}>
             Nutrients
           </Text>
           <ul className={styles.nutrients}>
@@ -128,13 +128,13 @@ export const RecipeCard: React.FC = () => {
         </div>
       </section>
       <section className={cn(styles['instruction-section'], styles['wrapper-item'])}>
-        <Text view="p-20" className={styles['instructions-title']}>
+        <Text view={TextViewType.p20} className={styles['instructions-title']}>
           Instructions
         </Text>
         <ul className={styles.instructions}>
           {data?.analyzedInstructions?.[0].steps?.map((step) => (
             <li key={step.number} className={styles['instructions-point']}>
-              <Text view="p-16" color="primary">
+              <Text view={TextViewType.p16} color={ColorType.primary}>
                 Step {step.number}
               </Text>
               <p>{step?.step}</p>

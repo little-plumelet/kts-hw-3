@@ -4,7 +4,7 @@ import * as React from 'react';
 import { CardList } from 'components/CardList';
 import MultiDropdown from 'components/MultiDropdown';
 import Pagination from 'components/Pagination';
-import { API_KEY, BASE_URL } from 'configs/constants';
+import { API_KEY, BASE_URL, RECIPES_PER_PAGE } from 'configs/constants';
 import { MealMap } from 'types/MealMap';
 import { Option } from 'types/MultiDropdownOption';
 import { RecipeData } from 'types/RecipeData';
@@ -18,7 +18,6 @@ export const RecipeList: React.FC = () => {
   const [query, setQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [total, setTotal] = useState<number | null>(null);
-  const queryNb = 9;
 
   const options = Object.entries(MealMap).map(([key, value]) => ({ key, value }));
   const [categoriesValue, setCategoriesValue] = useState<Array<Option>>([]);
@@ -44,7 +43,7 @@ export const RecipeList: React.FC = () => {
           params: {
             query,
             apiKey: API_KEY,
-            number: queryNb,
+            number: RECIPES_PER_PAGE,
             addRecipeInformation: true,
             addRecipeNutrition: true,
             type: getTitle(categoriesValue),
@@ -52,7 +51,7 @@ export const RecipeList: React.FC = () => {
           },
         });
         setRecipesData(responce?.data?.results);
-        setTotal(Math.ceil(responce?.data?.totalResults / queryNb));
+        setTotal(Math.ceil(responce?.data?.totalResults / RECIPES_PER_PAGE));
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
@@ -63,7 +62,7 @@ export const RecipeList: React.FC = () => {
         }
       }
     })();
-  }, [query, categoriesValue, queryNb, currentPage]);
+  }, [query, categoriesValue, currentPage]);
 
   return (
     <section className={styles['home-basic-section']}>
