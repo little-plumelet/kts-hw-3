@@ -77,20 +77,26 @@ export const Header: React.FC = () => {
         </svg>
         <h1 className={styles['logo-title']}>Stonesoup</h1>
       </div>
-      <nav className={cn(styles.block, styles.nav)}>
-        <NavLink to={URLS['/']} className={({ isActive }) => cn(isActive ? styles.active : styles.pending)}>
+      <nav className={styles.block}>
+        <NavLink to={URLS['/']} className={({ isActive }) => cn(isActive ? styles.active : styles.pending, styles.nav)}>
           Home
         </NavLink>
-        <NavLink to={URLS.ingredients} className={({ isActive }) => cn(isActive ? styles.active : styles.pending)}>
+        <NavLink
+          to={URLS.ingredients}
+          className={({ isActive }) => cn(isActive ? styles.active : styles.pending, styles.nav)}
+        >
           Ingredients
         </NavLink>
-        <NavLink to={URLS.products} className={({ isActive }) => cn(isActive ? styles.active : styles.pending)}>
+        <NavLink
+          to={URLS.products}
+          className={({ isActive }) => cn(isActive ? styles.active : styles.pending, styles.nav)}
+        >
           Products
         </NavLink>
       </nav>
-      <div className={cn(styles.block, styles['icon-block'])}>
-        <AccountIcon color="accent" />
-        <FavouriteIcon color="accent" />
+      <div className={styles.block}>
+        <AccountIcon color="accent" className={styles['icon-block']} />
+        <FavouriteIcon color="accent" className={styles['icon-block']} />
       </div>
     </header>
   );

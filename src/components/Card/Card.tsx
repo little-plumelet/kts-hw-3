@@ -42,11 +42,11 @@ const Card: React.FC<CardProps> = ({
       </header>
       <div className={styles.body}>
         <div className={styles.content}>
-          {captionSlot && <div className={styles['above-title']}>{captionSlot}</div>}
-          <Text className={styles.title} view="p-20" maxLines={2} color="primary">
+          {captionSlot && <div className={cn(styles['above-title'], styles['content-item'])}>{captionSlot}</div>}
+          <Text className={cn(styles.title, styles['content-item'])} view="p-20" maxLines={2} color="primary">
             {title}
           </Text>
-          <Text view="p-16" maxLines={3} color="secondary">
+          <Text className={styles['content-item']} view="p-16" maxLines={3} color="secondary">
             {subtitle}
           </Text>
         </div>

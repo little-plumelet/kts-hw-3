@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios';
+import * as cn from 'classnames';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Loader from 'components/Loader';
@@ -48,13 +49,13 @@ export const RecipeCard: React.FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      <section className={styles['recipe-title']}>
+      <section className={cn(styles['recipe-title'], styles['wrapper-item'])}>
         <Link to={'..'} className={styles['recipe-title-link']}>
           <ArrowDownIcon className={styles['recipe-title-link-icon']} color="accent" />
         </Link>
         <Text view="title">{data?.title}</Text>
       </section>
-      <section className={styles.section}>
+      <section className={cn(styles.section, styles['wrapper-item'])}>
         <div className={styles['basic-info-wrapper']}>
           <img src={data?.image} className={styles.image} />
         </div>
@@ -93,11 +94,11 @@ export const RecipeCard: React.FC = () => {
           </div>
         </div>
       </section>
-      <section>
+      <section className={styles['wrapper-item']}>
         <div className={styles.description} dangerouslySetInnerHTML={{ __html: data?.summary ?? '' }}></div>
       </section>
 
-      <section className={styles['composition-section']}>
+      <section className={cn(styles['composition-section'], styles['wrapper-item'])}>
         <div className={styles['composition-section-part']}>
           <Text view="p-20" className={styles['ingredients-title']}>
             Ingredients
@@ -125,7 +126,7 @@ export const RecipeCard: React.FC = () => {
           </ul>
         </div>
       </section>
-      <section className={styles['instruction-section']}>
+      <section className={cn(styles['instruction-section'], styles['wrapper-item'])}>
         <Text view="p-20" className={styles['instructions-title']}>
           Instructions
         </Text>

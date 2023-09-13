@@ -9,7 +9,6 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: $space-xxxl;
 }
 
 .search-block {
@@ -18,11 +17,12 @@
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-  gap: $space-l;
+  margin-bottom: $space-l;
 }
 
 .multidropdown {
   position: relative;
+  margin-top: $space-l;;
 }
 
 .multidropdown div {
@@ -35,12 +35,6 @@
   top: 65px;
 }
 
-
-@media screen and (max-width: 1439px) {
-  .home-basic-section {
-    gap: $space-xl;
-  }
-}
 
 @media screen and (max-width: 1099px) {
   .home-basic-section {

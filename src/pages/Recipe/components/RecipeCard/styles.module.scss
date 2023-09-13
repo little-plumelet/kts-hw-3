@@ -21,8 +21,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: $space-xxl;
   background-color: $background;
+
+  &-item {
+    margin-bottom: $space-xxl;
+  }
+
 }
 
 .recipe-title {
@@ -46,7 +50,6 @@
 
 .section {
   @include common-section;
-  gap: 100px;
 }
 
 .image {
@@ -58,9 +61,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 100px;
 
   &:first-child {
     width: 30%;
+  }
+
+  &:last-child {
+    margin-right: 0;
   }
 }
 
@@ -81,7 +89,6 @@
 
 .composition-section {
   @include common-section;
-  gap: 50px;
 
   &::before {
     content: '';
@@ -91,9 +98,15 @@
 
   &-part {
     width: 100%;
+   
 
     &:first-child {
       order: -1;
+      margin-right: 50px;
+    }
+
+    &:nth-child(2) {
+      margin-left: 50px;
     }
   }
 }

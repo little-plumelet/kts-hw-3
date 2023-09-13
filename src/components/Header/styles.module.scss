@@ -12,7 +12,6 @@
   display: flex;
   justify-content: center;
   align-items: baseline;
-  gap: 10px;
 }
 
 .logo-title {
@@ -22,6 +21,7 @@
 
 .logo {
   border-bottom: 1px solid;
+  margin-right: 10px;
 }
 
 .block {
@@ -31,11 +31,19 @@
 }
 
 .icon-block {
-  gap: $space-m;
+  margin-right: $space-m;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
 }
 
 .nav {
-  gap: $space-m;
+  margin-right: $space-m;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
 }
 
 .active {
