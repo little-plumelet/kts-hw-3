@@ -2,6 +2,7 @@ import axios, { AxiosError } from 'axios';
 import * as cn from 'classnames';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { ErrorCp } from 'components/ErrorCp';
 import Loader from 'components/Loader';
 import Text from 'components/Text';
 import ArrowDownIcon from 'components/icons/ArrowDownIcon';
@@ -15,6 +16,7 @@ export const RecipeCard: React.FC = () => {
 
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<RecipeData | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,9 +33,9 @@ export const RecipeCard: React.FC = () => {
       } catch (error) {
         setLoading(false);
         if (error instanceof AxiosError) {
-          throw Error(error.message);
+          setError(error.message);
         } else {
-          throw Error('Unknown error occurred');
+          setError('Unknown error occurred');
         }
       }
     };
@@ -46,6 +48,10 @@ export const RecipeCard: React.FC = () => {
         <Loader size={SizeType.l} className={styles.loader} />
       </div>
     );
+  }
+
+  if (error) {
+    return <ErrorCp errorMessage={error} />;
   }
 
   return (

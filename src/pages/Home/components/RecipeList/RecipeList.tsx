@@ -2,6 +2,7 @@ import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import * as React from 'react';
 import { CardList } from 'components/CardList';
+import { ErrorCp } from 'components/ErrorCp';
 import MultiDropdown from 'components/MultiDropdown';
 import Pagination from 'components/Pagination';
 import { API_KEY, BASE_URL, RECIPES_PER_PAGE } from 'configs/constants';
@@ -18,6 +19,7 @@ export const RecipeList: React.FC = () => {
   const [query, setQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [total, setTotal] = useState<number | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const options = Object.entries(MealMap).map(([key, value]) => ({ key, value }));
   const [categoriesValue, setCategoriesValue] = useState<Array<Option>>([]);
@@ -56,13 +58,17 @@ export const RecipeList: React.FC = () => {
       } catch (error) {
         setIsLoading(false);
         if (error instanceof AxiosError) {
-          throw Error(error.message);
+          setError(error.message);
         } else {
-          throw Error('Unknown error occurred');
+          setError('Unknown error occurred');
         }
       }
     })();
   }, [query, categoriesValue, currentPage]);
+
+  if (error) {
+    return <ErrorCp errorMessage={error} />;
+  }
 
   return (
     <section className={styles['home-basic-section']}>
