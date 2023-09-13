@@ -1,5 +1,6 @@
 import * as cn from 'classnames';
 import * as React from 'react';
+import { ColorType, TextViewType } from 'types/common';
 import Text from '../Text';
 import styles from './styles.module.scss';
 
@@ -43,10 +44,15 @@ const Card: React.FC<CardProps> = ({
       <div className={styles.body}>
         <div className={styles.content}>
           {captionSlot && <div className={cn(styles['above-title'], styles['content-item'])}>{captionSlot}</div>}
-          <Text className={cn(styles.title, styles['content-item'])} view="p-20" maxLines={2} color="primary">
+          <Text
+            className={cn(styles.title, styles['content-item'])}
+            view={TextViewType.p20}
+            maxLines={2}
+            color={ColorType.primary}
+          >
             {title}
           </Text>
-          <Text className={styles['content-item']} view="p-16" maxLines={3} color="secondary">
+          <Text className={styles['content-item']} view={TextViewType.p16} maxLines={3} color={ColorType.secondary}>
             {subtitle}
           </Text>
         </div>

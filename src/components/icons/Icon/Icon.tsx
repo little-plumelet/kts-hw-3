@@ -1,8 +1,9 @@
 import * as React from 'react';
+import { ColorType } from 'types/common';
 
 export type IconProps = React.SVGAttributes<SVGElement> & {
   className?: string;
-  color?: 'primary' | 'secondary' | 'accent' | 'primary-invert';
+  color?: ColorType;
   width?: string;
   height?: string;
 };
