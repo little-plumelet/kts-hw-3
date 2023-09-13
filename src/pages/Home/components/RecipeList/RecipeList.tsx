@@ -2,19 +2,18 @@ import axios, { AxiosError } from 'axios';
 import * as cn from 'classnames';
 import { useState } from 'react';
 import * as React from 'react';
-import { CardProps } from 'components/Card';
 import { CardList } from 'components/CardList';
 import MultiDropdown from 'components/MultiDropdown';
 import Pagination from 'components/Pagination';
 import { API_KEY, BASE_URL } from 'configs/constants';
 import { MealMap } from 'types/MealMap';
 import { Option } from 'types/MultiDropdownOption';
+import { RecipeData } from 'types/RecipeData';
 import { SearchInput } from '../SearchInput';
-import { mapper } from './utils';
 import styles from './styles.module.scss';
 
 export const RecipeList: React.FC = () => {
-  const [cards, setCards] = useState<Array<CardProps>>([]);
+  const [recipesData, setRecipesData] = useState<RecipeData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [value, setValue] = useState('');
   const [query, setQuery] = useState('');
@@ -54,7 +53,7 @@ export const RecipeList: React.FC = () => {
             offset: currentPage - 1,
           },
         });
-        setCards(mapper(responce?.data?.results));
+        setRecipesData(responce?.data?.results);
         setTotal(Math.ceil(responce?.data?.totalResults / queryNb));
         setIsLoading(false);
       } catch (error) {
@@ -80,7 +79,7 @@ export const RecipeList: React.FC = () => {
           className={styles.multiDropdown}
         />
       </div>
-      <CardList cards={cards} />
+      <CardList cardsData={recipesData} />
       <Pagination currentPage={currentPage} updateCurrentPage={setCurrentPage} total={total ?? 0} />
     </section>
   );
