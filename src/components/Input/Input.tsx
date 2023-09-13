@@ -28,7 +28,7 @@ const Input: React.FC<InputProps> = ({ value, onChange, afterSlot, className, ..
     setIsFocused(false);
   }
   return (
-    <div className={cn(styles.wrapper, className, { [styles.wrapperFocused]: isFocused })}>
+    <div className={cn(styles.wrapper, className, { [styles['wrapper-focused']]: isFocused })}>
       <input
         type="text"
         className={styles.input}

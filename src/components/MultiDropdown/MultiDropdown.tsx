@@ -79,7 +79,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
         afterSlot={<ArrowDownIcon color="secondary" onClick={() => setIsOpen((prev) => !prev)} />}
       />
       {isOpen && !disabled && (
-        <ul className={styles.optionContainer}>
+        <ul className={styles['option-container']}>
           {filteredOptions.map((option) => (
             <OptionCp
               key={option.key}

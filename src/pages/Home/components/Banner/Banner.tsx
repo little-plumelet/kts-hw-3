@@ -8,8 +8,8 @@ type BannerProps = {
 
 export const Banner: React.FC<BannerProps> = ({ className }) => {
   return (
-    <section className={cn(styles.homeMainImage, className)}>
-      <p className={cn(styles.homeMainImageTitle)}>Be inspired, find your own recipe</p>
+    <section className={cn(styles['home-main-image'], className)}>
+      <p className={cn(styles['home-main-image__title'])}>Be inspired, find your own recipe</p>
     </section>
   );
 };

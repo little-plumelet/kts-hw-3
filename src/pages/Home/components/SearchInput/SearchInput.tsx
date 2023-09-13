@@ -24,7 +24,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({ value, onChange, onCli
         className={styles.input}
         placeholder="What dish are we going to search"
       />
-      <Button className={styles.searchButton} type="submit" onClick={handleClick} loading={isLoading}>
+      <Button className={styles['search-button']} type="submit" onClick={handleClick} loading={isLoading}>
         <SearchIcon color="primary-invert" />
       </Button>
     </form>

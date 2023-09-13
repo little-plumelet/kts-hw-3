@@ -17,7 +17,7 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 const Button: React.FC<ButtonProps> = ({ loading, children, className, disabled, ...rest }) => {
   return (
     <button
-      className={cn(styles.button, { [styles.buttonDisabled]: disabled }, className)}
+      className={cn(styles.button, { [styles['button-disabled']]: disabled }, className)}
       disabled={disabled ? disabled : loading}
       {...rest}
     >

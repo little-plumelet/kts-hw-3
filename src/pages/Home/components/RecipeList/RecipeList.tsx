@@ -66,15 +66,15 @@ export const RecipeList: React.FC = () => {
   }, [query, categoriesValue, queryNb, currentPage]);
 
   return (
-    <section className={styles.homeBasicSection}>
-      <div className={styles.searchBlock}>
+    <section className={styles['home-basic-section']}>
+      <div className={styles['search-block']}>
         <SearchInput value={value} onChange={setValue} onClick={handleClick} isLoading={isLoading} />
         <MultiDropdown
           options={options}
           value={categoriesValue}
           onChange={handleChangeCategory}
           getTitle={getTitle}
-          className={styles.multiDropdown}
+          className={styles.multidropdown}
         />
       </div>
       <CardList cardsData={recipesData} />

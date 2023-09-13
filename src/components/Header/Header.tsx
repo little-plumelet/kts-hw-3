@@ -7,10 +7,10 @@ import styles from './styles.module.scss';
 
 export const Header: React.FC = () => {
   return (
-    <header className={cn(styles.header)}>
-      <div className={cn(styles.logoBlock)}>
+    <header className={styles.header}>
+      <div className={styles['logo-block']}>
         <svg
-          className={cn(styles.logo)}
+          className={styles.logo}
           width="60px"
           height="60px"
           viewBox="0 0 72 72"
@@ -75,29 +75,20 @@ export const Header: React.FC = () => {
             />
           </g>
         </svg>
-        <h1 className={styles.logoTitle}>Stonesoup</h1>
+        <h1 className={styles['logo-title']}>Stonesoup</h1>
       </div>
       <nav className={cn(styles.block, styles.nav)}>
-        <NavLink
-          to={URLS['/']}
-          className={({ isActive }) => cn(styles.navLink, isActive ? styles.active : styles.pending)}
-        >
+        <NavLink to={URLS['/']} className={({ isActive }) => cn(isActive ? styles.active : styles.pending)}>
           Home
         </NavLink>
-        <NavLink
-          to={URLS.ingredients}
-          className={({ isActive }) => cn(styles.navLink, isActive ? styles.active : styles.pending)}
-        >
+        <NavLink to={URLS.ingredients} className={({ isActive }) => cn(isActive ? styles.active : styles.pending)}>
           Ingredients
         </NavLink>
-        <NavLink
-          to={URLS.products}
-          className={({ isActive }) => cn(styles.navLink, isActive ? styles.active : styles.pending)}
-        >
+        <NavLink to={URLS.products} className={({ isActive }) => cn(isActive ? styles.active : styles.pending)}>
           Products
         </NavLink>
       </nav>
-      <div className={cn(styles.block, styles.iconBlock)}>
+      <div className={cn(styles.block, styles['icon-block'])}>
         <AccountIcon color="accent" />
         <FavouriteIcon color="accent" />
       </div>

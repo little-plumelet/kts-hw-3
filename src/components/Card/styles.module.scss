@@ -23,7 +23,7 @@
   display: flex;
 }
 
-.aboveTitle {
+.above-title {
   overflow: hidden;
   color: $card-text-secondary;
   text-overflow: ellipsis;
@@ -68,7 +68,7 @@
   gap: $space-xxs;
 }
 
-.contentSlot {
+.content-slot {
   flex-grow: 1;
   color: $card-text-primary;
   font-style: normal;

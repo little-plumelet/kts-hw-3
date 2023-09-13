@@ -40,7 +40,7 @@ export const RecipeCard: React.FC = () => {
 
   if (loading) {
     return (
-      <div className={styles.loaderContainer}>
+      <div className={styles['loader-container']}>
         <Loader size="l" className={styles.loader} />
       </div>
     );
@@ -48,43 +48,43 @@ export const RecipeCard: React.FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      <section className={styles.recipeTitle}>
-        <Link to={'..'} className={styles.recipeTitleLink}>
-          <ArrowDownIcon className={styles.recipeTitleLinkIcon} color="accent" />
+      <section className={styles['recipe-title']}>
+        <Link to={'..'} className={styles['recipe-title-link']}>
+          <ArrowDownIcon className={styles['recipe-title-link-icon']} color="accent" />
         </Link>
         <Text view="title">{data?.title}</Text>
       </section>
       <section className={styles.section}>
-        <div className={styles.basicInfoWrapper}>
+        <div className={styles['basic-info-wrapper']}>
           <img src={data?.image} className={styles.image} />
         </div>
-        <div className={styles.basicInfoWrapper}>
-          <div className={styles.basicInfo}>
-            <div className={styles.basicInfoSection}>
+        <div className={styles['basic-info-wrapper']}>
+          <div className={styles['basic-info']}>
+            <div className={styles['basic-info-section']}>
               <Text maxLines={1}>Preparation</Text>
               <Text maxLines={1} color="accent">
                 {data?.preparationMinutes === -1 ? data?.readyInMinutes * 0.1 : data?.preparationMinutes} minutes
               </Text>
             </div>
-            <div className={styles.basicInfoSection}>
+            <div className={styles['basic-info-section']}>
               <Text maxLines={1}>Cooking</Text>
               <Text maxLines={1} color="accent">
                 {data?.cookingMinutes === -1 ? data?.readyInMinutes * 0.9 : data?.cookingMinutes} minutes
               </Text>
             </div>
-            <div className={styles.basicInfoSection}>
+            <div className={styles['basic-info-section']}>
               <Text maxLines={1}>Total</Text>
               <Text maxLines={1} color="accent">
                 {data?.readyInMinutes} minutes
               </Text>
             </div>
-            <div className={styles.basicInfoSection}>
+            <div className={styles['basic-info-section']}>
               <Text maxLines={1}>Rating</Text>
               <Text maxLines={1} color="accent">
                 {data?.aggregateLikes} likes
               </Text>
             </div>
-            <div className={styles.basicInfoSection}>
+            <div className={styles['basic-info-section']}>
               <Text maxLines={1}>Serving</Text>
               <Text maxLines={1} color="accent">
                 {data?.servings} servings
@@ -97,41 +97,41 @@ export const RecipeCard: React.FC = () => {
         <div className={styles.description} dangerouslySetInnerHTML={{ __html: data?.summary ?? '' }}></div>
       </section>
 
-      <section className={styles.compositionSection}>
-        <div className={styles.compositionSectionPart}>
-          <Text view="p-20" className={styles.ingredientsTitle}>
+      <section className={styles['composition-section']}>
+        <div className={styles['composition-section-part']}>
+          <Text view="p-20" className={styles['ingredients-title']}>
             Ingredients
           </Text>
           <ul className={styles.ingredients}>
             {data?.nutrition?.ingredients?.map((ingredient) => (
               <li
                 key={ingredient?.id}
-                className={styles.ingredientsPoint}
+                className={styles['ingredients-point']}
               >{`${ingredient?.name} - ${ingredient?.amount} ${ingredient?.unit}`}</li>
             ))}
           </ul>
         </div>
-        <div className={styles.compositionSectionPart}>
-          <Text view="p-20" className={styles.nutrientsTitle}>
+        <div className={styles['composition-section-part']}>
+          <Text view="p-20" className={styles['nutrients-title']}>
             Nutrients
           </Text>
           <ul className={styles.nutrients}>
             {data?.nutrition?.nutrients?.map((nutrient) => (
               <li
                 key={nutrient?.name}
-                className={styles.nutrientsPoint}
+                className={styles['nutrients-point']}
               >{`${nutrient?.name} - ${nutrient?.amount} ${nutrient?.unit}`}</li>
             ))}
           </ul>
         </div>
       </section>
-      <section className={styles.instructionSection}>
-        <Text view="p-20" className={styles.instructionsTitle}>
+      <section className={styles['instruction-section']}>
+        <Text view="p-20" className={styles['instructions-title']}>
           Instructions
         </Text>
         <ul className={styles.instructions}>
           {data?.analyzedInstructions?.[0].steps?.map((step) => (
-            <li key={step.number} className={styles.instructionsPoint}>
+            <li key={step.number} className={styles['instructions-point']}>
               <Text view="p-16" color="primary">
                 Step {step.number}
               </Text>

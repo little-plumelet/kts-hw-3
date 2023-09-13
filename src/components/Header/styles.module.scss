@@ -8,14 +8,14 @@
   padding: 0 $side-padding;
 }
 
-.logoBlock {
+.logo-block {
   display: flex;
   justify-content: center;
   align-items: baseline;
   gap: 10px;
 }
 
-.logoTitle {
+.logo-title {
   font-family: 'Cookie';
   font-size: 48px;
 }
@@ -30,7 +30,7 @@
   align-items: center;
 }
 
-.iconBlock {
+.icon-block {
   gap: $space-m;
 }
 

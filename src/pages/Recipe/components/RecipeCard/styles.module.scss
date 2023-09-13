@@ -4,7 +4,7 @@
 @import 'styles/mixins';
 
 
-.loaderContainer {
+.loader-container {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -25,7 +25,7 @@
   background-color: $background;
 }
 
-.recipeTitle {
+.recipe-title {
   width: 100%;
   display: flex;
   justify-content: flex-start;
@@ -33,10 +33,10 @@
   @include section-padding;
   padding-top: 50px;
 
-  &Link {
+  &-link {
     display: flex;
 
-    &Icon {
+    &-icon {
       rotate: 90deg;
       width: 38px;
       height: 38px;
@@ -54,23 +54,23 @@
   border-radius: $border-radius;
 }
 
-.basicInfoWrapper {
+.basic-info-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &:first-child {
+    width: 30%;
+  }
 }
 
-.basicInfoWrapper:first-child {
-  width: 30%;
-}
-
-.basicInfo {
+.basic-info {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: fit-content(100%);
   gap: 50px 50px;
 
-  &Section {
+  &-section {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -79,26 +79,26 @@
   }
 }
 
-.compositionSection {
+.composition-section {
   @include common-section;
   gap: 50px;
 
-  &Part {
+  &::before {
+    content: '';
+    border: 1px dashed $brand;
+    align-self: stretch;
+  }
+
+  &-part {
     width: 100%;
-  }
 
-  &Part:first-child {
-    order: -1;
+    &:first-child {
+      order: -1;
+    }
   }
 }
 
-.compositionSection::before {
-  content: '';
-  border: 1px dashed $brand;
-  align-self: stretch;
-}
-
-.ingredientsTitle, .nutrientsTitle, .instructionsTitle {
+.ingredients-title, .nutrients-title, .instructions-title {
   margin-bottom: $space-l;
 }
 
@@ -107,18 +107,18 @@
   grid-template-columns: repeat(2, 1fr);
   gap: $space-xxs;
 
-  &Point {
+  &-point {
     list-style: none;
   }
 }
 
-.instructionSection {
+.instruction-section {
   @include common-section;
   flex-direction: column;
 }
 
 .instructions {
-  &Point {
+  &-point {
     color: $brand;
     margin-bottom: $space-m;
   }

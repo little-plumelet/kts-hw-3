@@ -2,7 +2,7 @@
 @import 'styles/colors';
 @import 'styles/sizes';
 
-.homeBasicSection {
+.home-basic-section {
   background-color: $background;
   padding:  $space-xl $side-padding;
   display: flex;
@@ -12,7 +12,7 @@
   gap: $space-xxxl;
 }
 
-.searchBlock {
+.search-block {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -21,29 +21,29 @@
   gap: $space-l;
 }
 
-.multiDropdown {
+.multidropdown {
   position: relative;
 }
 
-.multiDropdown div {
+.multidropdown div {
   border-radius: $border-radius;
   
 }
 
-.multiDropdown ul {
+.multidropdown ul {
   position: absolute;
   top: 65px;
 }
 
 
 @media screen and (max-width: 1439px) {
-  .homeBasicSection {
+  .home-basic-section {
     gap: $space-xl;
   }
 }
 
 @media screen and (max-width: 1099px) {
-  .homeBasicSection {
+  .home-basic-section {
     padding: 0 $side-padding-50;
   }
 }

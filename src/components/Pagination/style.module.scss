@@ -9,23 +9,23 @@
   margin: 0 auto;
 }
 
-.paginationBlock {
+.pagination-block {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.arrowLeft {
+.arrow-left {
   rotate: 90deg;
   cursor: pointer;
 }
 
-.arrowRight {
+.arrow-right {
   rotate: -90deg;
   cursor: pointer;
 }
 
-.arrowDisabled {
+.arrow-disabled {
   cursor: none;
   pointer-events: none;
 }
@@ -37,7 +37,7 @@
   cursor: pointer;
 }
 
-.activePage {
+.page-active {
   color: $primary-invert;
   background-color: $brand;
 }
