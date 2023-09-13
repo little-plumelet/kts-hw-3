@@ -1,5 +1,6 @@
 import * as cn from 'classnames';
 import * as React from 'react';
+import { useOpen } from 'customHooks/useOpen';
 import { Option } from 'types/MultiDropdownOption';
 import Input from '../Input';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
@@ -32,12 +33,12 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
 }) => {
   const multyDropDownRef = React.useRef<null | HTMLDivElement>(null);
   const [inputValue, setInputValue] = React.useState('');
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, open, close] = useOpen();
 
   React.useEffect(() => {
     function handleOutsideClick(event: MouseEvent) {
       if (multyDropDownRef.current && !multyDropDownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
+        close();
       }
     }
 
@@ -47,13 +48,13 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
     return () => {
       window.removeEventListener('mousedown', handleOutsideClick);
     };
-  }, [isOpen]);
+  }, [isOpen, close]);
 
   function handleChangeInput(value: string) {
     const index = value.lastIndexOf(' ');
     const newValue = value.slice(index + 1);
     setInputValue(newValue ?? '');
-    setIsOpen(true);
+    open();
   }
 
   const filteredOptions = options.filter((option) => option.value.toLowerCase().includes(inputValue.toLowerCase()));
@@ -74,9 +75,9 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
         disabled={disabled}
         placeholder={getTitle(value)}
         onChange={handleChangeInput}
-        onFocus={() => setIsOpen(true)}
+        onFocus={() => open()}
         className={cn({ [styles.input]: isOpen })}
-        afterSlot={<ArrowDownIcon color="secondary" onClick={() => setIsOpen((prev) => !prev)} />}
+        afterSlot={<ArrowDownIcon color="secondary" onClick={() => (isOpen ? close() : open())} />}
       />
       {isOpen && !disabled && (
         <ul className={styles['option-container']}>
