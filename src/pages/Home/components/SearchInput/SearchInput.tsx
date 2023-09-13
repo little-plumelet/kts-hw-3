@@ -8,10 +8,14 @@ type SearchInputProps = {
   value: string;
   isLoading: boolean;
   onChange: (value: string) => void;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  onClick: () => void;
 };
 
 export const SearchInput: React.FC<SearchInputProps> = ({ value, onChange, onClick, isLoading }) => {
+  function handleClick(event: React.SyntheticEvent) {
+    event.preventDefault();
+    onClick();
+  }
   return (
     <form className={styles.form}>
       <Input
@@ -20,7 +24,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({ value, onChange, onCli
         className={styles.input}
         placeholder="What dish are we going to search"
       />
-      <Button className={styles.searchButton} type="submit" onClick={onClick} loading={isLoading}>
+      <Button className={styles.searchButton} type="submit" onClick={handleClick} loading={isLoading}>
         <SearchIcon color="primary-invert" />
       </Button>
     </form>

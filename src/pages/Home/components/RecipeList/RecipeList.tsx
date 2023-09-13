@@ -24,8 +24,7 @@ export const RecipeList: React.FC = () => {
   const options = Object.entries(MealMap).map(([key, value]) => ({ key, value }));
   const [categoriesValue, setCategoriesValue] = useState<Array<Option>>([]);
 
-  function handleClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    event.preventDefault();
+  function handleClick() {
     setQuery(value);
   }
 
