@@ -12,15 +12,17 @@ export type RecipeData = {
     ingredients: Ingerdient[];
   };
   summary: string;
-  analyzedInstructions: [
-    {
-      name: string;
-      steps: Array<{
-        number: number;
-        step: string;
-      }>;
-    },
-  ];
+  analyzedInstructions: Instruction[];
+};
+
+export type Instruction = {
+  name: string;
+  steps: InstructionStep[];
+};
+
+export type InstructionStep = {
+  number: number;
+  step: string;
 };
 
 export type Nutrient = {

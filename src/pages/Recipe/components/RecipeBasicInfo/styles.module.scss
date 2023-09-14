@@ -1,0 +1,32 @@
+@import 'styles/sizes';
+
+.basic-info-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 100px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.basic-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: fit-content(100%);
+  gap: 50px 50px;
+
+  &-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
+
+.image {
+  width: 100%;
+  border-radius: $border-radius;
+}

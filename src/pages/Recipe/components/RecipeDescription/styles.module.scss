@@ -1,0 +1,10 @@
+@import 'styles/mixins';
+@import 'styles/colors';
+@import 'styles/sizes';
+
+.description {
+  @include section-padding;
+  padding-top: $space-xxl;
+  padding-bottom: $space-xxl;
+  background-color: $background-bright;
+}

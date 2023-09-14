@@ -29,62 +29,8 @@
 
 }
 
-.recipe-title {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  @include section-padding;
-  padding-top: 50px;
-
-  &-link {
-    display: flex;
-
-    &-icon {
-      rotate: 90deg;
-      width: 38px;
-      height: 38px;
-    }
-  }
-}
-
 .section {
   @include common-section;
-}
-
-.image {
-  width: 100%;
-  border-radius: $border-radius;
-}
-
-.basic-info-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 100px;
-
-  &:first-child {
-    width: 30%;
-  }
-
-  &:last-child {
-    margin-right: 0;
-  }
-}
-
-.basic-info {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: fit-content(100%);
-  gap: 50px 50px;
-
-  &-section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-  }
 }
 
 .composition-section {
@@ -109,37 +55,4 @@
       margin-left: 50px;
     }
   }
-}
-
-.ingredients-title, .nutrients-title, .instructions-title {
-  margin-bottom: $space-l;
-}
-
-.ingredients, .nutrients {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: $space-xxs;
-
-  &-point {
-    list-style: none;
-  }
-}
-
-.instruction-section {
-  @include common-section;
-  flex-direction: column;
-}
-
-.instructions {
-  &-point {
-    color: $brand;
-    margin-bottom: $space-m;
-  }
-}
-
-.description {
-  @include section-padding;
-  padding-top: $space-xxl;
-  padding-bottom: $space-xxl;
-  background-color: $background-bright;
 }

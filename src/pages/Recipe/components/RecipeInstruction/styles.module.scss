@@ -1,0 +1,19 @@
+@import 'styles/mixins';
+@import 'styles/colors';
+@import 'styles/sizes';
+
+.title {
+  margin-bottom: $space-l;
+}
+
+.instruction-section {
+  @include common-section;
+  flex-direction: column;
+}
+
+.instructions {
+  &-point {
+    color: $brand;
+    margin-bottom: $space-m;
+  }
+}
