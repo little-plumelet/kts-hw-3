@@ -6,6 +6,7 @@ import Text from 'components/Text';
 import { URLS } from 'configs/urls';
 import { RecipeData } from 'types/RecipeData';
 import { ColorType } from 'types/common';
+import styles from './styles.module.scss';
 
 type CardListProps = {
   cardsData: RecipeData[];
@@ -31,6 +32,7 @@ export const CardList: React.FC<CardListProps> = ({ cardsData }) => {
             </Text>
           }
           key={card.id.toString()}
+          className={styles.card}
         />
       ))}
     </>
