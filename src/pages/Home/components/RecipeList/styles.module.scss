@@ -1,13 +1,12 @@
 
 @import 'styles/colors';
 @import 'styles/sizes';
+@import 'styles/mixins';
 
 .home-basic-section {
   background-color: $background;
   padding:  $space-xl $side-padding;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include flex-horizontal-spacebetween-center;
   flex-wrap: wrap;
 }
 

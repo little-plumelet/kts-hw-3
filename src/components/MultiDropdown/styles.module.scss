@@ -1,5 +1,6 @@
 @import 'styles/colors';
 @import 'styles/sizes';
+@import 'styles/fonts';
 
 .container {
   display: flex;
@@ -20,7 +21,7 @@
   list-style-type: none;
   padding: $space-s $space-xs;
   color: $primary;
-  font-size: 16px;
+  font-size: $font-size-xs;
   font-style: normal;
   font-weight: 400;
   line-height: 20px;

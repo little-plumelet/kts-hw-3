@@ -1,21 +1,17 @@
 @import 'styles/colors';
 @import 'styles/sizes';
+@import 'styles/mixins';
 
 .container {
   width: 100%;
   margin: 0 auto;
   border-top: 1px solid $brand;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-horizontal-center;
   padding: $side-padding-50 $side-padding;
 }
 
 .error {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include flex-column-center;
   width: 100%;
   min-height: 20vh;
   background-color: $background;

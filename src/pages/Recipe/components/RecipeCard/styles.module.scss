@@ -6,9 +6,7 @@
 
 .loader-container {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-horizontal-center;
   padding-top: 100px;
 }
 
@@ -18,9 +16,7 @@
 
 .wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  @include flex-column-center;
   background-color: $background;
 
   &-item {

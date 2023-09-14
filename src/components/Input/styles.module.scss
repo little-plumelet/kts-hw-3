@@ -1,12 +1,12 @@
 @import 'styles/colors';
 @import 'styles/sizes';
+@import 'styles/mixins';
+@import 'styles/fonts';
 
 .wrapper {
-  display: flex;
+  @include flex-horizontal-spacebetween-center;
   width: 100%;
-  justify-content: space-between;
   padding: $space-s $space-xs;
-  align-items: center; 
   background-color: $input-bg;
 }
 
@@ -17,7 +17,7 @@
   padding: 0;
   overflow: hidden;
   width: 100%;
-  font-size: 16px;
+  font-size: $font-size-xs;
   line-height: 20px;
   font-weight: 400;
   background-color: $input-bg;

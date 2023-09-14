@@ -1,14 +1,14 @@
 @import 'styles/colors';
 @import 'styles/sizes';
+@import 'styles/mixins';
+@import 'styles/fonts';
 
 .button {
   padding: $space-s $space-l;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include flex-horizontal-spacebetween-center;
   background-color: $button-primary-bg;
   color: $button-primary-text;
-  font-size: 18px;
+  font-size: $font-size-s;
   border: solid 0;
   border-radius: $border-radius;
 }

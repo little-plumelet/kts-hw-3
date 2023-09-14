@@ -1,5 +1,6 @@
 @import 'styles/colors';
 @import 'styles/sizes';
+@import 'styles/fonts';
 
 .card {
   display: inline-flex;
@@ -27,7 +28,7 @@
   overflow: hidden;
   color: $card-text-secondary;
   text-overflow: ellipsis;
-  font-size: 14px;
+  font-size: $font-size-xxs;
   font-style: normal;
   font-weight: 500;
   line-height: 18px;
@@ -37,7 +38,7 @@
   overflow: hidden;
   color: $card-text-primary;
   text-overflow: ellipsis;
-  font-size: 20px;
+  font-size: $font-size-m;
   font-style: normal;
   font-weight: 500;
   line-height: 24px;

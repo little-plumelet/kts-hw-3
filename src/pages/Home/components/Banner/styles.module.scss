@@ -1,11 +1,12 @@
 
 @import 'styles/colors';
 @import 'styles/sizes';
+@import 'styles/fonts';
 
 .home-main-image {
   width: 100vw;
   height: 25rem;
-  background: $banner-bg,url('./src/assets/home-food-bg.jpg') ;
+  background: $banner-bg, url('./src/assets/home-food-bg.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 
@@ -14,7 +15,7 @@
     color: white;
     padding: 0 $side-padding $space-m 0;
     position: relative;
-    font-size: 48px;
+    font-size: $font-size-xl;
     height: 100%;
     display: flex;
     justify-content: flex-end;

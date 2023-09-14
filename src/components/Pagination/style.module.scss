@@ -1,18 +1,15 @@
 @import 'styles/colors';
 @import 'styles/sizes';
+@import 'styles/mixins';
 
 .pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-horizontal-center;
   padding: 0 0 $space-xxl 0;
   margin: 0 auto;
 }
 
 .pagination-block {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-horizontal-center;
 }
 
 .arrow-left {

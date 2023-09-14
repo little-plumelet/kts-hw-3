@@ -1,9 +1,8 @@
 @import 'styles/sizes';
+@import 'styles/mixins';
 
 .basic-info-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-horizontal-center;
   margin-right: 100px;
 
   &:last-child {

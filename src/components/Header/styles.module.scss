@@ -1,10 +1,10 @@
 @import 'styles/sizes';
 @import 'styles/colors';
+@import 'styles/mixins';
+@import 'styles/fonts';
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include flex-horizontal-spacebetween-center;
   padding: 0 $side-padding;
 }
 
@@ -16,7 +16,7 @@
 
 .logo-title {
   font-family: 'Cookie';
-  font-size: 48px;
+  font-size: $font-size-xl;
 }
 
 .logo {
@@ -25,9 +25,7 @@
 }
 
 .block {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include flex-horizontal-spacebetween-center;
 }
 
 .icon-block {
