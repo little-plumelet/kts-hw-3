@@ -1,0 +1,17 @@
+@import 'styles/fonts';
+
+.logo-block {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.logo-title {
+  font-family: 'Cookie';
+  font-size: $font-size-xl;
+}
+
+.logo {
+  border-bottom: 1px solid;
+  margin-right: 10px;
+}
