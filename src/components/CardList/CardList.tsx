@@ -31,7 +31,7 @@ export const CardList: React.FC<CardListProps> = ({ cardsData }) => {
               {card?.nutrition?.nutrients?.find((nutrient) => nutrient.name === 'Calories')?.amount + ' kcal'}
             </Text>
           }
-          key={card.id.toString()}
+          key={card.id}
           className={styles.card}
         />
       ))}
