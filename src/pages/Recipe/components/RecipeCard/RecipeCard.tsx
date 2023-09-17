@@ -1,11 +1,10 @@
-import axios, { AxiosError } from 'axios';
 import * as cn from 'classnames';
-import { useEffect, useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ErrorCp } from 'components/ErrorCp';
 import Loader from 'components/Loader';
-import { BASE_URL, API_KEY } from 'configs/constants';
-import { RecipeData } from 'types/RecipeData';
+import recipeStore from 'store/RecipeStore';
 import { SizeType } from 'types/common';
 import { RecipeBasicInfo } from '../RecipeBasicInfo';
 import { RecipeDescription } from '../RecipeDescription';
@@ -14,38 +13,16 @@ import { RecipeInstruction } from '../RecipeInstruction';
 import { RecipePropertyList } from '../RecipePropertyList';
 import styles from './styles.module.scss';
 
-export const RecipeCard: React.FC = () => {
+export const RecipeCard: React.FC = observer(() => {
   const { id: recipeId } = useParams();
-
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<RecipeData | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const { meta, recipeData: data } = recipeStore;
+  const { isLoading, error } = meta;
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(`${BASE_URL}/recipes/${recipeId}/information`, {
-          params: {
-            apiKey: API_KEY,
-            includeNutrition: true,
-          },
-        });
-        setData(response?.data);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        if (error instanceof AxiosError) {
-          setError(error.message);
-        } else {
-          setError('Unknown error occurred');
-        }
-      }
-    };
-    fetchData();
+    recipeStore.fetchRecipeData(recipeId ?? '');
   }, [recipeId]);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className={styles['loader-container']}>
         <Loader size={SizeType.l} className={styles.loader} />
@@ -59,7 +36,7 @@ export const RecipeCard: React.FC = () => {
 
   return (
     <>
-      {data && !loading && (
+      {data && !isLoading && (
         <div className={styles.wrapper}>
           <RecipeHeader title={data.title} className={styles['wrapper-item']} />
           <RecipeBasicInfo
@@ -88,7 +65,7 @@ export const RecipeCard: React.FC = () => {
           <RecipeInstruction steps={data.analyzedInstructions?.[0]?.steps} className={styles['wrapper-item']} />
         </div>
       )}
-      {!data && !loading && <>NO data</>}
+      {!data && isLoading && <>NO data</>}
     </>
   );
-};
+});

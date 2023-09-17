@@ -59,7 +59,7 @@ class SearchRecipesStore {
   }
 
   setQuery(query: string) {
-    return (this._query = query);
+    this._query = query;
   }
 
   setCategoriesValue(categoriesValue: Option[]) {
@@ -87,8 +87,8 @@ class SearchRecipesStore {
   }
 
   async fetchRecipes() {
+    this.setMetaFetch({ error: null, isLoading: true } as MetaFetchModel);
     try {
-      this.setMetaFetch({ error: null, isLoading: true } as MetaFetchModel);
       const response = await axios.get(`${BASE_URL}/recipes/complexSearch`, {
         params: {
           query: this.query,
