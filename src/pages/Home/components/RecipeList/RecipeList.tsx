@@ -12,7 +12,6 @@ import { SearchInput } from '../SearchInput';
 import styles from './styles.module.scss';
 
 export const RecipeList: React.FC = observer(() => {
-  console.log('RecipeList is rendered', searchRecipeStore.recipesData);
   const [value, setValue] = useState('');
   const options = Object.entries(MealMap).map(([key, value]) => ({ key, value }));
   const { categoriesValue, meta, recipesData, pagination, query, setCategoriesValue, setQuery, setCurrentPage } =
@@ -21,7 +20,6 @@ export const RecipeList: React.FC = observer(() => {
   const { isLoading, error } = meta;
 
   function handleClick() {
-    console.log('searchValue =', value);
     setQuery(value);
   }
 
@@ -31,7 +29,6 @@ export const RecipeList: React.FC = observer(() => {
   }
 
   function handleChangeCategory(value: Option[]) {
-    console.log('values in ON CHANGE = ', value);
     setCategoriesValue(value);
   }
 
@@ -43,8 +40,6 @@ export const RecipeList: React.FC = observer(() => {
     return <ErrorCp errorMessage={error} />;
   }
 
-  console.log('categoriesValye = ', categoriesValue);
-  console.log('recipesData = ', recipesData);
   return (
     <section className={styles['home-basic-section']}>
       <div className={styles['search-block']}>

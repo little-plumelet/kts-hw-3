@@ -17,7 +17,7 @@ class SearchRecipesStore {
 
   constructor() {
     makeObservable<SearchRecipesStore, PrivateFields>(this, {
-      _recipesData: observable,
+      _recipesData: observable.ref,
       recipesData: computed,
       _pagination: observable,
       pagination: computed,
@@ -35,7 +35,6 @@ class SearchRecipesStore {
       setTotal: action.bound,
       setQuery: action.bound,
       setRecipesData: action,
-      // getTitle: action,
     });
   }
 
@@ -64,8 +63,6 @@ class SearchRecipesStore {
   }
 
   setCategoriesValue(categoriesValue: Option[]) {
-    console.log('this.categoriesValue in SET = ', this._categoriesValue);
-    console.log('categoriesValue in SET = ', categoriesValue);
     this._categoriesValue = categoriesValue;
   }
 
@@ -103,12 +100,10 @@ class SearchRecipesStore {
           offset: this._pagination.currentPage - 1,
         },
       });
-
       this.setRecipesData(response?.data?.results);
       this.setTotal(Math.ceil(response?.data?.totalResults / RECIPES_PER_PAGE));
       this.setMetaFetch({ error: null, isLoading: false } as MetaFetchModel);
     } catch (error) {
-      this.setMetaFetch({ error: null, isLoading: false });
       if (error instanceof AxiosError) {
         this.setMetaFetch({ isLoading: false, error: error.message } as MetaFetchModel);
       } else {

@@ -32,8 +32,6 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
   disabled,
   ...rest
 }) => {
-  console.log('options = ', options);
-  console.log('value = ', value);
   const multyDropDownRef = React.useRef<null | HTMLDivElement>(null);
   const [inputValue, setInputValue] = React.useState('');
   const [isOpen, open, close] = useOpen();
@@ -63,8 +61,6 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
   const filteredOptions = options.filter((option) => option.value.toLowerCase().includes(inputValue.toLowerCase()));
 
   function selectOption(currentKey: string, currentValue: string) {
-    console.log('currentValue = ', currentValue);
-    console.log('value in Selection = ', value);
     if (value.find((el) => el.key === currentKey)) {
       onChange(value.filter((el) => el.key !== currentKey));
     } else {
