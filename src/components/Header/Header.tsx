@@ -2,7 +2,7 @@ import * as cn from 'classnames';
 import { NavLink } from 'react-router-dom';
 import AccountIcon from 'components/icons/AccountIcon';
 import FavouriteIcon from 'components/icons/FavouriteIcon';
-import { URLS } from 'configs/urls';
+import { urls } from 'configs/urls';
 import { ColorType } from 'types/common';
 import styles from './styles.module.scss';
 
@@ -79,17 +79,17 @@ export const Header: React.FC = () => {
         <h1 className={styles['logo-title']}>Stonesoup</h1>
       </div>
       <nav className={styles.block}>
-        <NavLink to={URLS['/']} className={({ isActive }) => cn(isActive ? styles.active : styles.pending, styles.nav)}>
+        <NavLink to={urls.root} className={({ isActive }) => cn(isActive ? styles.active : styles.pending, styles.nav)}>
           Home
         </NavLink>
         <NavLink
-          to={URLS.ingredients}
+          to={urls.ingredients}
           className={({ isActive }) => cn(isActive ? styles.active : styles.pending, styles.nav)}
         >
           Ingredients
         </NavLink>
         <NavLink
-          to={URLS.products}
+          to={urls.products}
           className={({ isActive }) => cn(isActive ? styles.active : styles.pending, styles.nav)}
         >
           Products
