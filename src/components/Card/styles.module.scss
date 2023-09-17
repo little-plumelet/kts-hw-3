@@ -1,0 +1,97 @@
+@import 'styles/colors';
+@import 'styles/sizes';
+@import 'styles/fonts';
+
+.card {
+  display: inline-flex;
+  padding-bottom: $space-xl;
+  flex-direction: column;
+  border-radius: $border-radius;
+  background: $card-bg;
+  width: 29%;
+}
+
+.card:hover {
+  box-shadow: $card-shadow;
+}
+
+.header {
+  border-radius: $border-radius;
+  background: $card-image-bg;
+  max-height: 360px;
+  overflow: hidden;
+  display: flex;
+  margin-bottom: $space-xl;
+}
+
+.above-title {
+  overflow: hidden;
+  color: $card-text-secondary;
+  text-overflow: ellipsis;
+  font-size: $font-size-xxs;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.title {
+  overflow: hidden;
+  color: $card-text-primary;
+  text-overflow: ellipsis;
+  font-size: $font-size-m;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 $space-xs;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: $space-l;
+
+  &-item {
+    margin-bottom: $space-xxs;;
+  }
+
+  &-item:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.content-slot {
+  flex-grow: 1;
+  color: $card-text-primary;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px;
+  margin-right: $space-xxs;
+}
+
+@media screen and (max-width: 1099px) {
+  .card {
+    width: 48%;
+  }
+}
+
+@media screen and (max-width: 799px) {
+  .card {
+    width: 100%;
+  }
+}

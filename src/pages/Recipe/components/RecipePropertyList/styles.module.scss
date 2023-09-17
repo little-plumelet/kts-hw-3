@@ -1,0 +1,15 @@
+@import 'styles/sizes';
+
+.title {
+  margin-bottom: $space-l;
+}
+
+.properties {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-xxs;
+
+  &-point {
+    list-style: none;
+  }
+}

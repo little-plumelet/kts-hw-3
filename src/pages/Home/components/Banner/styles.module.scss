@@ -1,0 +1,26 @@
+
+@import 'styles/colors';
+@import 'styles/sizes';
+@import 'styles/fonts';
+
+.home-main-image {
+  width: 100vw;
+  height: 25rem;
+  background: $banner-bg, url('./src/assets/home-food-bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  &__title {
+    font-family: 'Cookie';
+    color: white;
+    padding: 0 $side-padding $space-m 0;
+    position: relative;
+    font-size: $font-size-xl;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+}
+
+

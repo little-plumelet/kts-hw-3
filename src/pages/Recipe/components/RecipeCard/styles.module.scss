@@ -1,0 +1,54 @@
+
+@import 'styles/colors';
+@import 'styles/sizes';
+@import 'styles/mixins';
+
+
+.loader-container {
+  width: 100%;
+  @include flex-horizontal-center;
+  padding-top: 100px;
+}
+
+.loader path {
+  fill: $brand;
+}
+
+.wrapper {
+  display: flex;
+  @include flex-column-center;
+  background-color: $background;
+
+  &-item {
+    margin-bottom: $space-xxl;
+  }
+
+}
+
+.section {
+  @include common-section;
+}
+
+.composition-section {
+  @include common-section;
+
+  &::before {
+    content: '';
+    border: 1px dashed $brand;
+    align-self: stretch;
+  }
+
+  &-part {
+    width: 100%;
+   
+
+    &:first-child {
+      order: -1;
+      margin-right: 50px;
+    }
+
+    &:nth-child(2) {
+      margin-left: 50px;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+
+@import 'styles/colors';
+@import 'styles/sizes';
+@import 'styles/mixins';
+
+.home-basic-section {
+  background-color: $background;
+  padding:  $space-xl $side-padding;
+  @include flex-horizontal-spacebetween-center;
+  flex-wrap: wrap;
+}
+
+.search-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: $space-l;
+}
+
+.multidropdown {
+  position: relative;
+  margin-top: $space-l;;
+}
+
+.multidropdown div {
+  border-radius: $border-radius;
+  
+}
+
+.multidropdown ul {
+  position: absolute;
+  top: 65px;
+}
+
+
+@media screen and (max-width: 1099px) {
+  .home-basic-section {
+    padding: 0 $side-padding-50;
+  }
+}

@@ -1,0 +1,1 @@
+export { RecipePropertyList } from './RecipePropertyList';

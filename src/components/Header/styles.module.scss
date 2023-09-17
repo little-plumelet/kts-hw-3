@@ -1,0 +1,45 @@
+@import 'styles/sizes';
+@import 'styles/colors';
+@import 'styles/mixins';
+@import 'styles/fonts';
+
+.header {
+  @include flex-horizontal-spacebetween-center;
+  padding: 0 $side-padding;
+}
+
+.block {
+  @include flex-horizontal-spacebetween-center;
+}
+
+.icon-block {
+  margin-right: $space-m;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.nav {
+  margin-right: $space-m;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.active {
+  color: $brand;
+  text-decoration: none;
+}
+
+.pending {
+  color: $primary;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 1099px) {
+  .header {
+    padding: 0 $side-padding-50;
+  }
+}

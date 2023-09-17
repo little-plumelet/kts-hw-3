@@ -1,0 +1,13 @@
+@import 'styles/colors';
+
+.primary g path {
+  stroke: $primary;
+}
+
+.secondary path {
+  stroke: $secondary;
+}
+
+.accent path {
+  stroke: $accent;
+}

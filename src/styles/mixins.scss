@@ -1,0 +1,32 @@
+@import 'styles/sizes';
+
+@mixin section-padding {
+  padding: 0 $side-padding;
+}
+
+@mixin common-section {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  @include section-padding;
+}
+
+@mixin flex-horizontal-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-horizontal-spacebetween-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

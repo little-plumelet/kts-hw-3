@@ -1,0 +1,17 @@
+@import 'styles/colors';
+@import 'styles/sizes';
+@import 'styles/mixins';
+
+.form {
+  @include flex-horizontal-spacebetween-center;
+  width: 100%;
+}
+.search-button {
+  background-color: $brand;
+  border-radius: $border-radius;
+}
+
+.input {
+  border-radius: $border-radius;
+  margin-right: $space-l;
+}

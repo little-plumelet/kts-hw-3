@@ -1,0 +1,13 @@
+@import 'styles/colors';
+
+.primary path {
+  fill: $primary;
+}
+
+.secondary path {
+  fill: $secondary;
+}
+
+.accent path {
+  fill: $accent;
+}

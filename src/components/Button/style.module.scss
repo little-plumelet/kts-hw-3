@@ -1,0 +1,31 @@
+@import 'styles/colors';
+@import 'styles/sizes';
+@import 'styles/mixins';
+@import 'styles/fonts';
+
+.button {
+  padding: $space-s $space-l;
+  @include flex-horizontal-spacebetween-center;
+  background-color: $button-primary-bg;
+  color: $button-primary-text;
+  font-size: $font-size-s;
+  border: solid 0;
+  border-radius: $border-radius;
+}
+
+.loader svg path {
+  fill: $button-primary-text;
+}
+
+.button:hover:not([disabled]) {
+  background-color: $button-primary-bg-hover;
+  cursor: pointer;
+}
+
+.button-disabled {
+  background-color: $button-primary-bg-disabled;
+}
+
+.button:active:not([disabled]) {
+  background-color: $button-primary-bg-active;
+}

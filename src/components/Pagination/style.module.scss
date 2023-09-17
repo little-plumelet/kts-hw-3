@@ -1,0 +1,28 @@
+@import 'styles/colors';
+@import 'styles/sizes';
+@import 'styles/mixins';
+
+.pagination {
+  @include flex-horizontal-center;
+  padding: 0 0 $space-xxl 0;
+  margin: 0 auto;
+}
+
+.pagination-block {
+  @include flex-horizontal-center;
+}
+
+.arrow-left {
+  rotate: 90deg;
+  cursor: pointer;
+}
+
+.arrow-right {
+  rotate: -90deg;
+  cursor: pointer;
+}
+
+.arrow-disabled {
+  cursor: none;
+  pointer-events: none;
+}

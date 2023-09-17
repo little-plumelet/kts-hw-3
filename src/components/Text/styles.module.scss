@@ -1,0 +1,39 @@
+@import 'styles/colors';
+@import 'styles/fonts';
+
+.common {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.title {
+  font-weight: 700;
+  font-size: $font-size-l;
+}
+
+.p-20 {
+  font-size: $font-size-m;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.p-16 {
+  font-size: $font-size-xs;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.primary {
+  color: $primary;
+}
+
+.secondary {
+  color: $secondary;
+}
+
+.accent {
+  color: $accent;
+}

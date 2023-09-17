@@ -1,0 +1,16 @@
+export enum MealMap {
+  mainCourse = 'main course',
+  sideDish = 'side dish',
+  dessert = 'dessert',
+  appetizer = 'appetizer',
+  salad = 'salad',
+  bread = 'bread',
+  breakfast = 'breakfast',
+  soup = 'soup',
+  beverage = 'beverage',
+  sauce = 'sauce',
+  marinade = 'marinade',
+  fingerfood = 'fingerfood',
+  snack = 'snack',
+  drink = 'drink',
+}
