@@ -2,6 +2,7 @@ import * as cn from 'classnames';
 import * as React from 'react';
 import { useOpen } from 'customHooks/useOpen';
 import { Option } from 'types/MultiDropdownOption';
+import { ColorType } from 'types/common';
 import Input from '../Input';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 import { OptionCp } from './components/OptionCp';
@@ -31,6 +32,8 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
   disabled,
   ...rest
 }) => {
+  console.log('options = ', options);
+  console.log('value = ', value);
   const multyDropDownRef = React.useRef<null | HTMLDivElement>(null);
   const [inputValue, setInputValue] = React.useState('');
   const [isOpen, open, close] = useOpen();
@@ -60,6 +63,8 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
   const filteredOptions = options.filter((option) => option.value.toLowerCase().includes(inputValue.toLowerCase()));
 
   function selectOption(currentKey: string, currentValue: string) {
+    console.log('currentValue = ', currentValue);
+    console.log('value in Selection = ', value);
     if (value.find((el) => el.key === currentKey)) {
       onChange(value.filter((el) => el.key !== currentKey));
     } else {
@@ -77,7 +82,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
         onChange={handleChangeInput}
         onFocus={() => open()}
         className={cn({ [styles.input]: isOpen })}
-        afterSlot={<ArrowDownIcon color="secondary" onClick={() => (isOpen ? close() : open())} />}
+        afterSlot={<ArrowDownIcon color={ColorType.secondary} onClick={() => (isOpen ? close() : open())} />}
       />
       {isOpen && !disabled && (
         <ul className={styles['option-container']}>

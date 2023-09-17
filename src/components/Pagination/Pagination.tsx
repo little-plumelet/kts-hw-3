@@ -1,12 +1,13 @@
 import * as cn from 'classnames';
 import * as React from 'react';
 import ArrowDownIcon from 'components/icons/ArrowDownIcon';
+import { ColorType } from 'types/common';
 import styles from './style.module.scss';
 
 export type PaginationProps = {
   currentPage: number;
   total: number;
-  updateCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  updateCurrentPage: (currentPage: number) => void;
 };
 
 const Pagination: React.FC<PaginationProps> = ({ currentPage, total, updateCurrentPage }) => {
@@ -16,17 +17,17 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, total, updateCurre
 
   function handleClickArrow(event: React.SyntheticEvent) {
     if ((event.target as HTMLElement).id === 'back') {
-      updateCurrentPage((prev) => prev - 1);
+      updateCurrentPage(currentPage - 1);
     }
 
     if ((event.target as HTMLElement).id === 'forward') {
-      updateCurrentPage((prev) => prev + 1);
+      updateCurrentPage(currentPage + 1);
     }
   }
   return (
     <div className={styles.pagination}>
       <ArrowDownIcon
-        color={currentPage === 1 ? 'secondary' : 'accent'}
+        color={currentPage === 1 ? ColorType.secondary : ColorType.accent}
         id="back"
         onClick={handleClickArrow}
         className={cn(styles['arrow-left'], { [styles['arrow-disabled']]: currentPage === 1 })}

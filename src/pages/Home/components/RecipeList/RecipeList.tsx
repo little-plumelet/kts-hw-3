@@ -1,30 +1,27 @@
-import axios, { AxiosError } from 'axios';
+import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import * as React from 'react';
 import { CardList } from 'components/CardList';
 import { ErrorCp } from 'components/ErrorCp';
 import MultiDropdown from 'components/MultiDropdown';
 import Pagination from 'components/Pagination';
-import { API_KEY, BASE_URL, RECIPES_PER_PAGE } from 'configs/constants';
+import searchRecipeStore from 'store/SearchRecipesStore';
 import { MealMap } from 'types/MealMap';
 import { Option } from 'types/MultiDropdownOption';
-import { RecipeData } from 'types/RecipeData';
 import { SearchInput } from '../SearchInput';
 import styles from './styles.module.scss';
 
-export const RecipeList: React.FC = () => {
-  const [recipesData, setRecipesData] = useState<RecipeData[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+export const RecipeList: React.FC = observer(() => {
+  console.log('RecipeList is rendered', searchRecipeStore.recipesData);
   const [value, setValue] = useState('');
-  const [query, setQuery] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [total, setTotal] = useState<number | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
   const options = Object.entries(MealMap).map(([key, value]) => ({ key, value }));
-  const [categoriesValue, setCategoriesValue] = useState<Array<Option>>([]);
+  const { categoriesValue, meta, recipesData, pagination, query, setCategoriesValue, setQuery, setCurrentPage } =
+    searchRecipeStore;
+  const { currentPage, total } = pagination;
+  const { isLoading, error } = meta;
 
   function handleClick() {
+    console.log('searchValue =', value);
     setQuery(value);
   }
 
@@ -34,42 +31,20 @@ export const RecipeList: React.FC = () => {
   }
 
   function handleChangeCategory(value: Option[]) {
+    console.log('values in ON CHANGE = ', value);
     setCategoriesValue(value);
   }
 
   React.useEffect(() => {
-    (async function getRecipeces() {
-      try {
-        setIsLoading(true);
-        const responce = await axios.get(`${BASE_URL}/recipes/complexSearch`, {
-          params: {
-            query,
-            apiKey: API_KEY,
-            number: RECIPES_PER_PAGE,
-            addRecipeInformation: true,
-            addRecipeNutrition: true,
-            type: getTitle(categoriesValue),
-            offset: currentPage - 1,
-          },
-        });
-        setRecipesData(responce?.data?.results);
-        setTotal(Math.ceil(responce?.data?.totalResults / RECIPES_PER_PAGE));
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-        if (error instanceof AxiosError) {
-          setError(error.message);
-        } else {
-          setError('Unknown error occurred');
-        }
-      }
-    })();
+    searchRecipeStore.fetchRecipes();
   }, [query, categoriesValue, currentPage]);
 
   if (error) {
     return <ErrorCp errorMessage={error} />;
   }
 
+  console.log('categoriesValye = ', categoriesValue);
+  console.log('recipesData = ', recipesData);
   return (
     <section className={styles['home-basic-section']}>
       <div className={styles['search-block']}>
@@ -86,4 +61,4 @@ export const RecipeList: React.FC = () => {
       <Pagination currentPage={currentPage} updateCurrentPage={setCurrentPage} total={total ?? 0} />
     </section>
   );
-};
+});
