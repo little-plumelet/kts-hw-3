@@ -8,7 +8,7 @@ type RecipeDescriptionProps = {
 export const RecipeDescription: React.FC<RecipeDescriptionProps> = ({ description, className }) => {
   return (
     <section className={className}>
-      <div className={styles.description} dangerouslySetInnerHTML={{ __html: description ?? '' }}></div>
+      <div className={styles.description} dangerouslySetInnerHTML={{ __html: description ?? '' }} />
     </section>
   );
 };
