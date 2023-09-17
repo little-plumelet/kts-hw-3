@@ -20,13 +20,21 @@ export type TextProps = {
   maxLines?: number;
 };
 
-const Text: React.FC<TextProps> = ({ children, tag = TextTagType.p, view, weight, className, color, maxLines }) => {
+const Text: React.FC<TextProps> = ({
+  children,
+  tag = TextTagType.p,
+  view = TextViewType.p16,
+  weight,
+  className,
+  color = ColorType.primary,
+  maxLines,
+}) => {
   const Tag = tag;
   const minHeight = (maxLines ?? 2) * 20 + 'px';
 
   return (
     <Tag
-      className={cn(styles[view ?? ''], className, styles[color ?? ''], styles.common)}
+      className={cn(styles[view], className, styles[color], styles.common)}
       style={{
         fontWeight: weight,
         maxLines,

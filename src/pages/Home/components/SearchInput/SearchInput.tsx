@@ -2,6 +2,7 @@ import * as React from 'react';
 import Button from 'components/Button';
 import Input from 'components/Input';
 import SearchIcon from 'components/icons/SearchIcon';
+import { ColorType } from 'types/common';
 import styles from './styles.module.scss';
 
 type SearchInputProps = {
@@ -25,7 +26,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({ value, onChange, onCli
         placeholder="What dish are we going to search"
       />
       <Button className={styles['search-button']} type="submit" onClick={handleClick} loading={isLoading}>
-        <SearchIcon color="primary-invert" />
+        <SearchIcon color={ColorType.primaryInvert} />
       </Button>
     </form>
   );

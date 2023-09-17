@@ -2,6 +2,7 @@ import * as cn from 'classnames';
 import * as React from 'react';
 import ArrowDownIcon from 'components/icons/ArrowDownIcon';
 import { ColorType } from 'types/common';
+import { PaginationPage } from './components/PaginationPage';
 import styles from './style.module.scss';
 
 export type PaginationProps = {
@@ -36,85 +37,44 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, total, updateCurre
         {total <= 4 && (
           <>
             {new Array(total).map((_, index) => (
-              <div
-                id={index.toString()}
-                key={index + 1}
-                className={cn(styles.page, { [styles['page-active']]: currentPage === index + 1 })}
-              >
-                {index + 1}
-              </div>
+              <PaginationPage index={index + 1} currentPage={currentPage} key={index + 1} />
             ))}
           </>
         )}
         {total > 4 && currentPage < 4 && (
           <>
-            <div className={cn(styles.page, { [styles['page-active']]: currentPage === 1 })} id={'1'}>
-              1
-            </div>
-            <div className={cn(styles.page, { [styles['page-active']]: currentPage === 2 })} id={'2'}>
-              2
-            </div>
-            <div className={cn(styles.page, { [styles['page-active']]: currentPage === 3 })} id={'3'}>
-              3
-            </div>
+            <PaginationPage index={1} currentPage={currentPage} />
+            <PaginationPage index={2} currentPage={currentPage} />
+            <PaginationPage index={3} currentPage={currentPage} />
             ...
-            <div className={cn(styles.page, { [styles['page-active']]: currentPage === total })} id={total.toString()}>
-              {total}
-            </div>
+            <PaginationPage index={total} currentPage={currentPage} />
           </>
         )}
         {total > 4 && currentPage > total - 3 && (
           <>
             <>
-              <div className={cn(styles.page, { [styles['page-active']]: currentPage === 1 })} id={'1'}>
-                1
-              </div>
+              <PaginationPage index={1} currentPage={currentPage} />
               ...
-              <div
-                className={cn(styles.page, { [styles['page-active']]: currentPage === total - 2 })}
-                id={(total - 2).toString()}
-              >
-                {total - 2}
-              </div>
-              <div
-                className={cn(styles.page, { [styles['page-active']]: currentPage === total - 1 })}
-                id={(total - 1).toString()}
-              >
-                {total - 1}
-              </div>
-              <div
-                className={cn(styles.page, { [styles['page-active']]: currentPage === total })}
-                id={total.toString()}
-              >
-                {total}
-              </div>
+              <PaginationPage index={total - 2} currentPage={currentPage} />
+              <PaginationPage index={total - 1} currentPage={currentPage} />
+              <PaginationPage index={total} currentPage={currentPage} />
             </>
           </>
         )}
         {total > 4 && currentPage >= 4 && currentPage <= total - 3 && (
           <>
-            <div className={cn(styles.page, { [styles['page-active']]: currentPage === 1 })} id={'1'}>
-              1
-            </div>
+            <PaginationPage index={1} currentPage={currentPage} />
             ...
-            <div className={styles.page} id={(currentPage - 1).toString()}>
-              {currentPage - 1}
-            </div>
-            <div className={cn(styles.page, styles['page-active'])} id={currentPage.toString()}>
-              {currentPage}
-            </div>
-            <div className={styles.page} id={(currentPage + 1).toString()}>
-              {currentPage + 1}
-            </div>
+            <PaginationPage index={currentPage - 1} currentPage={currentPage} />
+            <PaginationPage index={currentPage} currentPage={currentPage} />
+            <PaginationPage index={currentPage + 1} currentPage={currentPage} />
             ...
-            <div className={styles.page} id={total.toString()}>
-              {total}
-            </div>
+            <PaginationPage index={total} currentPage={currentPage} />
           </>
         )}
       </div>
       <ArrowDownIcon
-        color={currentPage === total ? 'secondary' : 'accent'}
+        color={currentPage === total ? ColorType.secondary : ColorType.accent}
         id="forward"
         onClick={handleClickArrow}
         className={cn(styles['arrow-right'], { [styles['arrow-disabled']]: currentPage === total })}

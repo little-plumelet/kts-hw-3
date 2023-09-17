@@ -1,5 +1,6 @@
 import * as cn from 'classnames';
 import * as React from 'react';
+import { SizeType } from 'types/common';
 import Loader from '../Loader';
 import styles from './style.module.scss';
 
@@ -21,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({ loading, children, className, disabled,
       disabled={disabled ? disabled : loading}
       {...rest}
     >
-      {loading && <Loader size="s" className={styles.loader} />}
+      {loading && <Loader size={SizeType.s} className={styles.loader} />}
       {!loading && children}
     </button>
   );
