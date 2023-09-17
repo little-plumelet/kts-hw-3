@@ -12,8 +12,8 @@ export const Header: React.FC = () => {
       <div className={styles['logo-block']}>
         <svg
           className={styles.logo}
-          width="60px"
-          height="60px"
+          width="60"
+          height="60"
           viewBox="0 0 72 72"
           id="emoji"
           xmlns="http://www.w3.org/2000/svg"
