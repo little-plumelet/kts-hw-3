@@ -1,10 +1,10 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
 import Icon, { IconProps } from 'components/icons/Icon';
-
+import { ColorType } from 'types/common';
 import styles from './styles.module.scss';
 
-const AccountIcon: React.FC<IconProps> = ({ color = 'primary', className, ...props }) => {
+const AccountIcon: React.FC<IconProps> = ({ color = ColorType.primary, className, ...props }) => {
   return (
     <Icon {...props} className={classNames(styles[color], className)}>
       <g clipPath="url(#clip0_505_651)">

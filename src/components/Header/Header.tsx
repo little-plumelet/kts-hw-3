@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import AccountIcon from 'components/icons/AccountIcon';
 import FavouriteIcon from 'components/icons/FavouriteIcon';
 import { URLS } from 'configs/urls';
+import { ColorType } from 'types/common';
 import styles from './styles.module.scss';
 
 export const Header: React.FC = () => {
@@ -95,8 +96,8 @@ export const Header: React.FC = () => {
         </NavLink>
       </nav>
       <div className={styles.block}>
-        <AccountIcon color="accent" className={styles['icon-block']} />
-        <FavouriteIcon color="accent" className={styles['icon-block']} />
+        <AccountIcon color={ColorType.accent} className={styles['icon-block']} />
+        <FavouriteIcon color={ColorType.accent} className={styles['icon-block']} />
       </div>
     </header>
   );

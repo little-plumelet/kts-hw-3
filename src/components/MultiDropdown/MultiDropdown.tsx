@@ -2,6 +2,7 @@ import * as cn from 'classnames';
 import * as React from 'react';
 import { useOpen } from 'customHooks/useOpen';
 import { Option } from 'types/MultiDropdownOption';
+import { ColorType } from 'types/common';
 import Input from '../Input';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 import { OptionCp } from './components/OptionCp';
@@ -77,7 +78,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
         onChange={handleChangeInput}
         onFocus={() => open()}
         className={cn({ [styles.input]: isOpen })}
-        afterSlot={<ArrowDownIcon color="secondary" onClick={() => (isOpen ? close() : open())} />}
+        afterSlot={<ArrowDownIcon color={ColorType.secondary} onClick={() => (isOpen ? close() : open())} />}
       />
       {isOpen && !disabled && (
         <ul className={styles['option-container']}>
