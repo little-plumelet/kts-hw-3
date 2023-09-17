@@ -26,15 +26,3 @@
   cursor: none;
   pointer-events: none;
 }
-
-.page {
-  padding: 10px 0;
-  min-width: 48px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.page-active {
-  color: $primary-invert;
-  background-color: $brand;
-}
