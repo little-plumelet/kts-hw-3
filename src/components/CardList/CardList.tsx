@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Button from 'components/Button';
 import Card from 'components/Card';
 import Text from 'components/Text';
-import { URLS } from 'configs/urls';
+import { urls } from 'configs/urls';
 import { RecipeData } from 'types/RecipeData';
 import { ColorType } from 'types/common';
 import styles from './styles.module.scss';
@@ -22,7 +22,7 @@ export const CardList: React.FC<CardListProps> = ({ cardsData }) => {
           subtitle={card?.nutrition?.ingredients.map((ingredient) => ingredient.name).join(' + ')}
           captionSlot={card?.readyInMinutes ? card?.readyInMinutes + ' minutes' : 'unknown'}
           actionSlot={
-            <Link to={`${URLS.recipe + '/' + card.id}`} style={{ textDecoration: 'none' }}>
+            <Link to={urls.recipe.create(card.id)} style={{ textDecoration: 'none' }}>
               <Button>Details</Button>
             </Link>
           }
