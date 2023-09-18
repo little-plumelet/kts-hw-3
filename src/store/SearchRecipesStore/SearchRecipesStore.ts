@@ -1,6 +1,12 @@
 import axios, { AxiosError } from 'axios';
 import { IReactionDisposer, action, computed, makeObservable, observable, reaction } from 'mobx';
-import { API_KEY, RECIPES_PER_PAGE, BASE_URL } from 'configs/constants';
+import {
+  API_KEY,
+  RECIPES_PER_PAGE,
+  BASE_URL,
+  L_KEY_PAGINATION_CURRENT,
+  L_KEY_PAGINATION_TOTAL,
+} from 'configs/constants';
 import SearchQueryParamsStore from 'store/SearchQueryParamsStore';
 import { MetaFetchModel } from 'store/models/MetaFetchModel';
 import { PaginationModel } from 'store/models/PaginationModel';
@@ -10,7 +16,10 @@ type PrivateFields = '_recipesData' | '_pagination' | '_metaFetch' | '_setPagina
 
 class SearchRecipesStore {
   private _recipesData: RecipeData[] = [];
-  private _pagination: PaginationModel = { currentPage: 1, total: null };
+  private _pagination: PaginationModel = {
+    currentPage: localStorage.getItem(L_KEY_PAGINATION_CURRENT) ?? '1',
+    total: localStorage.getItem(L_KEY_PAGINATION_TOTAL),
+  };
   private _metaFetch: MetaFetchModel = { isLoading: false, error: null };
   searchQueryParamsStore = new SearchQueryParamsStore();
 
@@ -32,11 +41,11 @@ class SearchRecipesStore {
     });
   }
 
-  setCurrentPage(currentPage: number) {
+  setCurrentPage(currentPage: string) {
     this._setPagination({ total: this._pagination.total, currentPage });
   }
 
-  setTotal(total: number) {
+  setTotal(total: string) {
     this._setPagination({ total, currentPage: this._pagination.currentPage });
   }
 
@@ -45,6 +54,8 @@ class SearchRecipesStore {
   }
 
   private _setPagination(pagination: PaginationModel) {
+    localStorage.setItem(L_KEY_PAGINATION_CURRENT, String(pagination.currentPage));
+    localStorage.setItem(L_KEY_PAGINATION_TOTAL, String(pagination.total));
     this._pagination = pagination;
   }
 
@@ -89,11 +100,11 @@ class SearchRecipesStore {
           addRecipeInformation: true,
           addRecipeNutrition: true,
           type: this.getTitle(),
-          offset: this._pagination.currentPage - 1,
+          offset: +this._pagination.currentPage - 1,
         },
       });
       this.setRecipesData(response?.data?.results);
-      this.setTotal(Math.ceil(response?.data?.totalResults / RECIPES_PER_PAGE));
+      this.setTotal(String(Math.ceil(response?.data?.totalResults / RECIPES_PER_PAGE)));
       this.setMetaFetch({ error: null, isLoading: false } as MetaFetchModel);
     } catch (error) {
       if (error instanceof AxiosError) {

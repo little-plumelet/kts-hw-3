@@ -1,4 +1,4 @@
 export type PaginationModel = {
-  currentPage: number;
-  total: number | null;
+  currentPage: string;
+  total: string | null;
 };

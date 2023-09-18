@@ -12,12 +12,13 @@ import { SearchInput } from '../SearchInput';
 import styles from './styles.module.scss';
 
 export const RecipeList: React.FC = observer(() => {
-  const [value, setValue] = useState('');
-  const options = Object.entries(MealMap).map(([key, value]) => ({ key, value }));
   const { meta, recipesData, pagination, setCurrentPage, searchQueryParamsStore } = searchRecipeStore;
   const { categoriesValue } = searchQueryParamsStore;
   const { currentPage, total } = pagination;
   const { isLoading, error } = meta;
+
+  const [value, setValue] = useState(searchQueryParamsStore.search);
+  const options = Object.entries(MealMap).map(([key, value]) => ({ key, value }));
 
   function handleClick() {
     searchQueryParamsStore.setSearch(value);
@@ -53,7 +54,7 @@ export const RecipeList: React.FC = observer(() => {
         />
       </div>
       <CardList cardsData={recipesData} />
-      <Pagination currentPage={currentPage} updateCurrentPage={setCurrentPage} total={total ?? 0} />
+      <Pagination currentPage={Number(currentPage)} updateCurrentPage={setCurrentPage} total={Number(total)} />
     </section>
   );
 });

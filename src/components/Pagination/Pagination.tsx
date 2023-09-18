@@ -8,21 +8,21 @@ import styles from './style.module.scss';
 export type PaginationProps = {
   currentPage: number;
   total: number;
-  updateCurrentPage: (currentPage: number) => void;
+  updateCurrentPage: (currentPage: string) => void;
 };
 
 const Pagination: React.FC<PaginationProps> = ({ currentPage, total, updateCurrentPage }) => {
   function handleClick(event: React.SyntheticEvent) {
-    updateCurrentPage(parseInt((event.target as HTMLElement).id));
+    updateCurrentPage((event.target as HTMLElement).id);
   }
 
   function handleClickArrow(event: React.SyntheticEvent) {
     if ((event.target as HTMLElement).id === 'back') {
-      updateCurrentPage(currentPage - 1);
+      updateCurrentPage(String(currentPage - 1));
     }
 
     if ((event.target as HTMLElement).id === 'forward') {
-      updateCurrentPage(currentPage + 1);
+      updateCurrentPage(String(currentPage + 1));
     }
   }
   return (
