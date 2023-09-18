@@ -1,19 +1,18 @@
 import axios, { AxiosError } from 'axios';
-import { action, computed, makeObservable, observable } from 'mobx';
+import { IReactionDisposer, action, computed, makeObservable, observable, reaction } from 'mobx';
 import { API_KEY, RECIPES_PER_PAGE, BASE_URL } from 'configs/constants';
+import SearchQueryParamsStore from 'store/SearchQueryParamsStore';
 import { MetaFetchModel } from 'store/models/MetaFetchModel';
 import { PaginationModel } from 'store/models/PaginationModel';
-import { Option } from 'types/MultiDropdownOption';
 import { RecipeData } from 'types/RecipeData';
 
-type PrivateFields = '_recipesData' | '_pagination' | '_metaFetch' | '_query' | '_categoriesValue' | '_setPagination';
+type PrivateFields = '_recipesData' | '_pagination' | '_metaFetch' | '_setPagination';
 
 class SearchRecipesStore {
   private _recipesData: RecipeData[] = [];
   private _pagination: PaginationModel = { currentPage: 1, total: null };
   private _metaFetch: MetaFetchModel = { isLoading: false, error: null };
-  private _query: string = '';
-  private _categoriesValue: Option[] = [];
+  searchQueryParamsStore = new SearchQueryParamsStore();
 
   constructor() {
     makeObservable<SearchRecipesStore, PrivateFields>(this, {
@@ -23,18 +22,13 @@ class SearchRecipesStore {
       pagination: computed,
       _metaFetch: observable,
       meta: computed,
-      _query: observable,
-      query: computed,
-      _categoriesValue: observable,
-      categoriesValue: computed,
       fetchRecipes: action,
-      setCategoriesValue: action.bound,
       setMetaFetch: action.bound,
       _setPagination: action,
       setCurrentPage: action.bound,
       setTotal: action.bound,
-      setQuery: action.bound,
       setRecipesData: action,
+      searchQueryParamsStore: observable,
     });
   }
 
@@ -58,14 +52,6 @@ class SearchRecipesStore {
     this._metaFetch = { isLoading, error };
   }
 
-  setQuery(query: string) {
-    this._query = query;
-  }
-
-  setCategoriesValue(categoriesValue: Option[]) {
-    this._categoriesValue = categoriesValue;
-  }
-
   get recipesData(): RecipeData[] {
     return this._recipesData;
   }
@@ -78,20 +64,26 @@ class SearchRecipesStore {
     return this._pagination;
   }
 
-  get query(): string {
-    return this._query;
-  }
+  private readonly _searchReactionDisposer: IReactionDisposer = reaction(
+    () => this.searchQueryParamsStore.search,
+    () => {
+      this.fetchRecipes();
+    },
+  );
 
-  get categoriesValue(): Option[] {
-    return this._categoriesValue;
-  }
+  private readonly _categoriesValueReactionDisposer: IReactionDisposer = reaction(
+    () => this.searchQueryParamsStore.categoriesValue,
+    () => {
+      this.fetchRecipes();
+    },
+  );
 
   async fetchRecipes() {
     this.setMetaFetch({ error: null, isLoading: true } as MetaFetchModel);
     try {
       const response = await axios.get(`${BASE_URL}/recipes/complexSearch`, {
         params: {
-          query: this.query,
+          query: this.searchQueryParamsStore.search,
           apiKey: API_KEY,
           number: RECIPES_PER_PAGE,
           addRecipeInformation: true,
@@ -113,13 +105,17 @@ class SearchRecipesStore {
   }
 
   getTitle() {
-    if (this._categoriesValue && this._categoriesValue.length > 0) {
-      return this._categoriesValue.map((el) => el.value).join(', ');
+    if (this.searchQueryParamsStore.categoriesValue && this.searchQueryParamsStore.categoriesValue.length > 0) {
+      return this.searchQueryParamsStore.categoriesValue.map((el) => el.value).join(', ');
     }
     return 'Choose categories';
   }
 
-  destroy() {}
+  destroy() {
+    this.searchQueryParamsStore.destroy();
+    this._searchReactionDisposer();
+    this._categoriesValueReactionDisposer();
+  }
 }
 
 const searchRecipeStore = new SearchRecipesStore();

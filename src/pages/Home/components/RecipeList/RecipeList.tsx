@@ -14,13 +14,13 @@ import styles from './styles.module.scss';
 export const RecipeList: React.FC = observer(() => {
   const [value, setValue] = useState('');
   const options = Object.entries(MealMap).map(([key, value]) => ({ key, value }));
-  const { categoriesValue, meta, recipesData, pagination, query, setCategoriesValue, setQuery, setCurrentPage } =
-    searchRecipeStore;
+  const { meta, recipesData, pagination, setCurrentPage, searchQueryParamsStore } = searchRecipeStore;
+  const { categoriesValue } = searchQueryParamsStore;
   const { currentPage, total } = pagination;
   const { isLoading, error } = meta;
 
   function handleClick() {
-    setQuery(value);
+    searchQueryParamsStore.setSearch(value);
   }
 
   function getTitle(value: Option[]) {
@@ -29,12 +29,12 @@ export const RecipeList: React.FC = observer(() => {
   }
 
   function handleChangeCategory(value: Option[]) {
-    setCategoriesValue(value);
+    searchQueryParamsStore.setCategoriesValue(value);
   }
 
   React.useEffect(() => {
     searchRecipeStore.fetchRecipes();
-  }, [query, categoriesValue, currentPage]);
+  }, [categoriesValue, currentPage]);
 
   if (error) {
     return <ErrorCp errorMessage={error} />;
