@@ -1,0 +1,14 @@
+.arrow-left {
+  rotate: 90deg;
+  cursor: pointer;
+}
+
+.arrow-right {
+  rotate: -90deg;
+  cursor: pointer;
+}
+
+.arrow-disabled {
+  cursor: none;
+  pointer-events: none;
+}

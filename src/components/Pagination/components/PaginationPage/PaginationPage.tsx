@@ -5,10 +5,15 @@ import styles from './styles.module.scss';
 type PaginationPageProps = {
   index: number;
   currentPage: number;
+  handleClick: (page: string) => void;
 };
-export const PaginationPage: React.FC<PaginationPageProps> = ({ index, currentPage }) => {
+export const PaginationPage: React.FC<PaginationPageProps> = ({ index, currentPage, handleClick }) => {
   return (
-    <div id={index.toString()} className={cn(styles.page, { [styles['page-active']]: currentPage === index })}>
+    <div
+      onClick={() => handleClick(index.toString())}
+      id={index.toString()}
+      className={cn(styles.page, { [styles['page-active']]: currentPage === index })}
+    >
       {index}
     </div>
   );
