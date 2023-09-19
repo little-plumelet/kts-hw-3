@@ -1,4 +1,4 @@
-import * as cn from 'classnames';
+import cn from 'classnames';
 import * as React from 'react';
 import ArrowDownIcon from 'components/icons/ArrowDownIcon';
 import { ColorType } from 'types/common';

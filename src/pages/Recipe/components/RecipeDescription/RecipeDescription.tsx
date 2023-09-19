@@ -1,4 +1,4 @@
-import * as DOMPurify from 'dompurify';
+import DOMPurify from 'dompurify';
 import * as React from 'react';
 import styles from './styles.module.scss';
 
@@ -7,7 +7,6 @@ type RecipeDescriptionProps = {
   className?: string;
 };
 export const RecipeDescription: React.FC<RecipeDescriptionProps> = ({ description, className }) => {
-  /* eslint-disable import/namespace*/
   const cleanDescription = DOMPurify.sanitize(description);
   return (
     <section className={className}>
