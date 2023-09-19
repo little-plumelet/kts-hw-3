@@ -18,7 +18,7 @@ export const RecipeList: React.FC = observer(() => {
   const [, setSearchParams] = useSearchParams();
 
   const { meta, recipesData, pagination, setCurrentPage, query, type } = searchRecipesStore;
-  const { currentPage, total } = pagination;
+  const { currentPage = 1, total = 10 } = pagination;
   const { isLoading, error } = meta;
 
   const types = type.split(' ');
@@ -43,6 +43,11 @@ export const RecipeList: React.FC = observer(() => {
     setSearchParams({ query: value, type: categoriesValue.map((el) => el.value).join(' ') });
   }
 
+  function handleChangePagination(page: string) {
+    setSearchParams({ query: value, type: categoriesValue.map((el) => el.value).join(' '), page });
+    setCurrentPage(page);
+  }
+
   React.useEffect(() => {
     searchRecipesStore.fetchRecipes();
   }, [categoriesValue, currentPage, searchRecipesStore]);
@@ -64,7 +69,7 @@ export const RecipeList: React.FC = observer(() => {
         />
       </div>
       <CardList cardsData={recipesData} />
-      <Pagination currentPage={Number(currentPage)} updateCurrentPage={setCurrentPage} total={Number(total)} />
+      <Pagination currentPage={Number(currentPage)} updateCurrentPage={handleChangePagination} total={Number(total)} />
     </section>
   );
 });

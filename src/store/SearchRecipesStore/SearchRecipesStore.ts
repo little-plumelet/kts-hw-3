@@ -1,30 +1,21 @@
 import axios, { AxiosError } from 'axios';
 import { IReactionDisposer, action, computed, makeObservable, observable, reaction } from 'mobx';
-import {
-  API_KEY,
-  RECIPES_PER_PAGE,
-  BASE_URL,
-  L_KEY_PAGINATION_CURRENT,
-  L_KEY_PAGINATION_TOTAL,
-} from 'configs/constants';
+import { API_KEY, RECIPES_PER_PAGE, BASE_URL } from 'configs/constants';
 import { ILocalStore } from 'store/LocalStoreInterface';
 import rootStore from 'store/RootStore/instance';
 import { MetaFetchModel } from 'store/models/MetaFetchModel';
 import { PaginationModel } from 'store/models/PaginationModel';
 import { RecipeData } from 'types/RecipeData';
 
-type PrivateFields = '_recipesData' | '_pagination' | '_metaFetch' | '_setPagination' | '_query' | '_type';
+type PrivateFields = '_recipesData' | '_pagination' | '_metaFetch' | '_setPagination';
 
 export class SearchRecipesStore implements ILocalStore {
   private _recipesData: RecipeData[] = [];
   private _pagination: PaginationModel = {
-    currentPage: localStorage.getItem(L_KEY_PAGINATION_CURRENT) ?? '1',
-    total: localStorage.getItem(L_KEY_PAGINATION_TOTAL),
+    currentPage: rootStore.query.getParam('page'),
+    total: rootStore.query.getParam('total'),
   };
   private _metaFetch: MetaFetchModel = { isLoading: false, error: null };
-
-  private _query = rootStore.query.getParam('query');
-  private _type = rootStore.query.getParam('type');
 
   constructor() {
     makeObservable<SearchRecipesStore, PrivateFields>(this, {
@@ -40,9 +31,7 @@ export class SearchRecipesStore implements ILocalStore {
       setCurrentPage: action.bound,
       setTotal: action.bound,
       setRecipesData: action,
-      _query: observable,
       query: computed,
-      _type: observable,
       type: computed,
     });
   }
@@ -60,8 +49,6 @@ export class SearchRecipesStore implements ILocalStore {
   }
 
   private _setPagination(pagination: PaginationModel) {
-    localStorage.setItem(L_KEY_PAGINATION_CURRENT, String(pagination.currentPage));
-    localStorage.setItem(L_KEY_PAGINATION_TOTAL, String(pagination.total));
     this._pagination = pagination;
   }
 
@@ -82,11 +69,11 @@ export class SearchRecipesStore implements ILocalStore {
   }
 
   get query(): string {
-    return String(this._query ?? '');
+    return String(rootStore.query.getParam('query') ?? '');
   }
 
   get type(): string {
-    return String(this._type);
+    return String(rootStore.query.getParam('type') ?? '');
   }
 
   private readonly _qpQueryReaction: IReactionDisposer = reaction(
@@ -114,7 +101,7 @@ export class SearchRecipesStore implements ILocalStore {
           addRecipeInformation: true,
           addRecipeNutrition: true,
           type: rootStore.query.getParam('type'),
-          offset: +this._pagination.currentPage - 1,
+          offset: +(this._pagination.currentPage ?? 1) - 1,
         },
       });
       this.setRecipesData(response?.data?.results);

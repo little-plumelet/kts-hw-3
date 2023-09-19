@@ -1,4 +1,6 @@
+import { QueryParamType } from 'store/QueryParamsStore';
+
 export type PaginationModel = {
-  currentPage: string;
-  total: string | null;
+  currentPage: QueryParamType;
+  total: QueryParamType;
 };
