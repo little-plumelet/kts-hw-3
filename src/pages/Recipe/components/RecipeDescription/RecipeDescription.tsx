@@ -10,7 +10,7 @@ export const RecipeDescription: React.FC<RecipeDescriptionProps> = ({ descriptio
   const cleanDescription = DOMPurify.sanitize(description);
   return (
     <section className={className}>
-      <div className={styles.description} dangerouslySetInnerHTML={{ __html: cleanDescription ?? '' }} />
+      <div className={styles.description} dangerouslySetInnerHTML={{ __html: cleanDescription }} />
     </section>
   );
 };
