@@ -1,27 +1,36 @@
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import * as React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { CardList } from 'components/CardList';
 import { ErrorCp } from 'components/ErrorCp';
 import MultiDropdown from 'components/MultiDropdown';
 import Pagination from 'components/Pagination';
-import searchRecipeStore from 'store/SearchRecipesStore';
+import { useLocalStore } from 'customHooks/useLocalStore';
+import { SearchRecipesStore } from 'store/SearchRecipesStore';
 import { MealMap } from 'types/MealMap';
 import { Option } from 'types/MultiDropdownOption';
 import { SearchInput } from '../SearchInput';
 import styles from './styles.module.scss';
 
 export const RecipeList: React.FC = observer(() => {
-  const { meta, recipesData, pagination, setCurrentPage, searchQueryParamsStore } = searchRecipeStore;
-  const { categoriesValue } = searchQueryParamsStore;
+  const searchRecipesStore = useLocalStore(() => new SearchRecipesStore());
+  const [, setSearchParams] = useSearchParams();
+
+  const { meta, recipesData, pagination, setCurrentPage, query, type } = searchRecipesStore;
   const { currentPage, total } = pagination;
   const { isLoading, error } = meta;
 
-  const [value, setValue] = useState(searchQueryParamsStore.search);
+  const types = type.split(' ');
+
+  const [value, setValue] = useState<string>(query);
   const options = Object.entries(MealMap).map(([key, value]) => ({ key, value }));
+  const [categoriesValue, setCategoriesValue] = useState<Option[]>(() =>
+    options.filter((option) => types.includes(option.value)),
+  );
 
   function handleClick() {
-    searchQueryParamsStore.setSearch(value);
+    setSearchParams({ type: categoriesValue.map((el) => el.value).join(' '), query: value });
   }
 
   function getTitle(value: Option[]) {
@@ -29,13 +38,14 @@ export const RecipeList: React.FC = observer(() => {
     return result.length ? result : 'Choose categories';
   }
 
-  function handleChangeCategory(value: Option[]) {
-    searchQueryParamsStore.setCategoriesValue(value);
+  function handleChangeCategory(categoriesValue: Option[]) {
+    setCategoriesValue(categoriesValue);
+    setSearchParams({ query: value, type: categoriesValue.map((el) => el.value).join(' ') });
   }
 
   React.useEffect(() => {
-    searchRecipeStore.fetchRecipes();
-  }, [categoriesValue, currentPage]);
+    searchRecipesStore.fetchRecipes();
+  }, [categoriesValue, currentPage, searchRecipesStore]);
 
   if (error) {
     return <ErrorCp errorMessage={error} />;

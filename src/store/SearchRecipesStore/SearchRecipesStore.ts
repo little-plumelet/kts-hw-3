@@ -7,21 +7,24 @@ import {
   L_KEY_PAGINATION_CURRENT,
   L_KEY_PAGINATION_TOTAL,
 } from 'configs/constants';
-import SearchQueryParamsStore from 'store/SearchQueryParamsStore';
+import { ILocalStore } from 'store/LocalStoreInterface';
+import rootStore from 'store/RootStore/instance';
 import { MetaFetchModel } from 'store/models/MetaFetchModel';
 import { PaginationModel } from 'store/models/PaginationModel';
 import { RecipeData } from 'types/RecipeData';
 
-type PrivateFields = '_recipesData' | '_pagination' | '_metaFetch' | '_setPagination';
+type PrivateFields = '_recipesData' | '_pagination' | '_metaFetch' | '_setPagination' | '_query' | '_type';
 
-class SearchRecipesStore {
+export class SearchRecipesStore implements ILocalStore {
   private _recipesData: RecipeData[] = [];
   private _pagination: PaginationModel = {
     currentPage: localStorage.getItem(L_KEY_PAGINATION_CURRENT) ?? '1',
     total: localStorage.getItem(L_KEY_PAGINATION_TOTAL),
   };
   private _metaFetch: MetaFetchModel = { isLoading: false, error: null };
-  searchQueryParamsStore = new SearchQueryParamsStore();
+
+  private _query = rootStore.query.getParam('query');
+  private _type = rootStore.query.getParam('type');
 
   constructor() {
     makeObservable<SearchRecipesStore, PrivateFields>(this, {
@@ -37,7 +40,10 @@ class SearchRecipesStore {
       setCurrentPage: action.bound,
       setTotal: action.bound,
       setRecipesData: action,
-      searchQueryParamsStore: observable,
+      _query: observable,
+      query: computed,
+      _type: observable,
+      type: computed,
     });
   }
 
@@ -75,15 +81,23 @@ class SearchRecipesStore {
     return this._pagination;
   }
 
-  private readonly _searchReactionDisposer: IReactionDisposer = reaction(
-    () => this.searchQueryParamsStore.search,
+  get query(): string {
+    return String(this._query ?? '');
+  }
+
+  get type(): string {
+    return String(this._type);
+  }
+
+  private readonly _qpQueryReaction: IReactionDisposer = reaction(
+    () => rootStore.query.getParam('query'),
     () => {
       this.fetchRecipes();
     },
   );
 
-  private readonly _categoriesValueReactionDisposer: IReactionDisposer = reaction(
-    () => this.searchQueryParamsStore.categoriesValue,
+  private readonly _qpTypeReaction: IReactionDisposer = reaction(
+    () => rootStore.query.getParam('type'),
     () => {
       this.fetchRecipes();
     },
@@ -94,12 +108,12 @@ class SearchRecipesStore {
     try {
       const response = await axios.get(`${BASE_URL}/recipes/complexSearch`, {
         params: {
-          query: this.searchQueryParamsStore.search,
+          query: rootStore.query.getParam('query'),
           apiKey: API_KEY,
           number: RECIPES_PER_PAGE,
           addRecipeInformation: true,
           addRecipeNutrition: true,
-          type: this.getTitle(),
+          type: rootStore.query.getParam('type'),
           offset: +this._pagination.currentPage - 1,
         },
       });
@@ -115,20 +129,8 @@ class SearchRecipesStore {
     }
   }
 
-  getTitle() {
-    if (this.searchQueryParamsStore.categoriesValue && this.searchQueryParamsStore.categoriesValue.length > 0) {
-      return this.searchQueryParamsStore.categoriesValue.map((el) => el.value).join(', ');
-    }
-    return 'Choose categories';
-  }
-
   destroy() {
-    this.searchQueryParamsStore.destroy();
-    this._searchReactionDisposer();
-    this._categoriesValueReactionDisposer();
+    this._qpQueryReaction();
+    this._qpTypeReaction();
   }
 }
-
-const searchRecipeStore = new SearchRecipesStore();
-
-export default searchRecipeStore;
