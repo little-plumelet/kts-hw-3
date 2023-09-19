@@ -1,10 +1,10 @@
 import cn from 'classnames';
-import { observer } from 'mobx-react-lite';
+import { observer, useLocalStore } from 'mobx-react-lite';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ErrorCp } from 'components/ErrorCp';
 import Loader from 'components/Loader';
-import recipeStore from 'store/RecipeStore';
+import RecipeStore from 'store/RecipeStore';
 import { SizeType } from 'types/common';
 import { RecipeBasicInfo } from '../RecipeBasicInfo';
 import { RecipeDescription } from '../RecipeDescription';
@@ -15,12 +15,13 @@ import styles from './styles.module.scss';
 
 export const RecipeCard: React.FC = observer(() => {
   const { id: recipeId } = useParams();
+  const recipeStore = useLocalStore(() => new RecipeStore());
   const { meta, recipeData: data } = recipeStore;
   const { isLoading, error } = meta;
 
   useEffect(() => {
     recipeStore.fetchRecipeData(recipeId ?? '');
-  }, [recipeId]);
+  }, [recipeId, recipeStore]);
 
   if (isLoading) {
     return (

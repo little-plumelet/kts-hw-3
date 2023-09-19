@@ -1,12 +1,13 @@
 import axios, { AxiosError } from 'axios';
 import { action, computed, makeObservable, observable } from 'mobx';
 import { API_KEY, BASE_URL } from 'configs/constants';
+import { ILocalStore } from 'store/LocalStoreInterface';
 import { MetaFetchModel } from 'store/models/MetaFetchModel';
 import { RecipeData } from 'types/RecipeData';
 
 type PrivateFields = '_recipeData' | '_metaFetch';
 
-class RecipeStore {
+export default class RecipeStore implements ILocalStore {
   private _recipeData: RecipeData | null = null;
   private _metaFetch: MetaFetchModel = { isLoading: false, error: null };
 
@@ -57,8 +58,6 @@ class RecipeStore {
       }
     }
   }
+
+  destroy() {}
 }
-
-const recipeStore = new RecipeStore();
-
-export default recipeStore;
