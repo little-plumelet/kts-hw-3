@@ -1,15 +1,16 @@
+import { runInAction } from 'mobx';
 import { observer } from 'mobx-react-lite';
-import { useState } from 'react';
 import * as React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { CardList } from 'components/CardList';
 import { ErrorCp } from 'components/ErrorCp';
+import Loader from 'components/Loader';
 import MultiDropdown from 'components/MultiDropdown';
 import Pagination from 'components/Pagination';
 import { useLocalStore } from 'customHooks/useLocalStore';
 import { SearchRecipesStore } from 'store/SearchRecipesStore';
-import { MealMap } from 'types/MealMap';
 import { Option } from 'types/MultiDropdownOption';
+import { SizeType } from 'types/common';
 import { SearchInput } from '../SearchInput';
 import styles from './styles.module.scss';
 
@@ -17,20 +18,26 @@ export const RecipeList: React.FC = observer(() => {
   const searchRecipesStore = useLocalStore(() => new SearchRecipesStore());
   const [, setSearchParams] = useSearchParams();
 
-  const { meta, recipesData, pagination, setCurrentPage, query, type } = searchRecipesStore;
+  const {
+    meta,
+    recipesData,
+    pagination,
+    setCurrentPage,
+    inputValue,
+    categoriesValue,
+    setInputValue,
+    setCategoriesValue,
+    categoriesOptions,
+  } = searchRecipesStore;
   const { currentPage = 1, total = 10 } = pagination;
   const { isLoading, error } = meta;
 
-  const types = type.split(' ');
-
-  const [value, setValue] = useState<string>(query);
-  const options = Object.entries(MealMap).map(([key, value]) => ({ key, value }));
-  const [categoriesValue, setCategoriesValue] = useState<Option[]>(() =>
-    options.filter((option) => types.includes(option.value)),
-  );
-
   function handleClick() {
-    setSearchParams({ type: categoriesValue.map((el) => el.value).join(' '), query: value });
+    setSearchParams({
+      type: categoriesValue.map((el) => el.value).join(' '),
+      query: inputValue,
+      page: String(currentPage),
+    });
   }
 
   function getTitle(value: Option[]) {
@@ -39,18 +46,26 @@ export const RecipeList: React.FC = observer(() => {
   }
 
   function handleChangeCategory(categoriesValue: Option[]) {
-    setCategoriesValue(categoriesValue);
-    setSearchParams({ query: value, type: categoriesValue.map((el) => el.value).join(' ') });
+    runInAction(() => {
+      setCategoriesValue(categoriesValue);
+      setSearchParams({
+        query: inputValue,
+        type: categoriesValue.map((el) => el.value).join(' '),
+        page: String(currentPage),
+      });
+    });
   }
 
   function handleChangePagination(page: string) {
-    setSearchParams({ query: value, type: categoriesValue.map((el) => el.value).join(' '), page });
-    setCurrentPage(page);
+    runInAction(() => {
+      setSearchParams({ query: inputValue, type: categoriesValue.map((el) => el.value).join(' '), page });
+      setCurrentPage(page);
+    });
   }
 
-  React.useEffect(() => {
-    searchRecipesStore.fetchRecipes();
-  }, [categoriesValue, currentPage, searchRecipesStore]);
+  if (isLoading) {
+    return <Loader size={SizeType.l} />;
+  }
 
   if (error) {
     return <ErrorCp errorMessage={error} />;
@@ -59,9 +74,9 @@ export const RecipeList: React.FC = observer(() => {
   return (
     <section className={styles['home-basic-section']}>
       <div className={styles['search-block']}>
-        <SearchInput value={value} onChange={setValue} onClick={handleClick} isLoading={isLoading} />
+        <SearchInput value={inputValue} onChange={setInputValue} onClick={handleClick} isLoading={isLoading} />
         <MultiDropdown
-          options={options}
+          options={categoriesOptions}
           value={categoriesValue}
           onChange={handleChangeCategory}
           getTitle={getTitle}
