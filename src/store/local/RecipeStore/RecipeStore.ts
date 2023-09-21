@@ -1,9 +1,9 @@
 import axios, { AxiosError } from 'axios';
 import { action, computed, makeObservable, observable } from 'mobx';
 import { API_KEY, BASE_URL } from 'configs/constants';
-import { ILocalStore } from 'store/LocalStoreInterface';
 import { MetaFetchModel } from 'store/models/MetaFetchModel';
 import { RecipeData } from 'types/RecipeData';
+import { ILocalStore } from '../LocalStoreInterface';
 
 type PrivateFields = '_recipeData' | '_metaFetch';
 

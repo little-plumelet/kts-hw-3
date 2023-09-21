@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ErrorCp } from 'components/ErrorCp';
 import Loader from 'components/Loader';
-import RecipeStore from 'store/RecipeStore';
+import RecipeStore from 'store/local/RecipeStore';
 import { SizeType } from 'types/common';
 import { RecipeBasicInfo } from '../RecipeBasicInfo';
 import { RecipeDescription } from '../RecipeDescription';

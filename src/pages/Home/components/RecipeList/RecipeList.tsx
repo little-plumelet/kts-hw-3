@@ -8,7 +8,7 @@ import Loader from 'components/Loader';
 import MultiDropdown from 'components/MultiDropdown';
 import Pagination from 'components/Pagination';
 import { useLocalStore } from 'customHooks/useLocalStore';
-import { SearchRecipesStore } from 'store/SearchRecipesStore';
+import { SearchRecipesStore } from 'store/local/SearchRecipesStore';
 import { Option } from 'types/MultiDropdownOption';
 import { SizeType } from 'types/common';
 import { SearchInput } from '../SearchInput';

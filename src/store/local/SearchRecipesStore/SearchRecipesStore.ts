@@ -1,8 +1,8 @@
 import axios, { AxiosError } from 'axios';
 import { IReactionDisposer, action, computed, makeObservable, observable, reaction, runInAction } from 'mobx';
 import { API_KEY, RECIPES_PER_PAGE, BASE_URL } from 'configs/constants';
-import { ILocalStore } from 'store/LocalStoreInterface';
-import rootStore from 'store/RootStore/instance';
+import rootStore from 'store/global/RootStore/instance';
+import { ILocalStore } from 'store/local/LocalStoreInterface';
 import { MetaFetchModel } from 'store/models/MetaFetchModel';
 import { PaginationModel } from 'store/models/PaginationModel';
 import { MealMap } from 'types/MealMap';
