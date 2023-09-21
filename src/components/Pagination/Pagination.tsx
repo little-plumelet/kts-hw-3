@@ -10,54 +10,55 @@ export type PaginationProps = {
 };
 
 const Pagination: React.FC<PaginationProps> = ({ currentPage, total, updateCurrentPage }) => {
-  function handleClick(page: string) {
-    updateCurrentPage(page);
-  }
-
   return (
     <div className={styles.pagination}>
-      <PaginationPageArrow id="back" handleClick={handleClick} currentPage={currentPage} total={total} />
+      <PaginationPageArrow id="back" handleClick={updateCurrentPage} currentPage={currentPage} total={total} />
       <div className={styles['pagination-block']}>
         {total <= 4 && (
           <>
             {new Array(total).map((_, index) => (
-              <PaginationPage index={index + 1} currentPage={currentPage} key={index + 1} handleClick={handleClick} />
+              <PaginationPage
+                index={index + 1}
+                currentPage={currentPage}
+                key={index + 1}
+                handleClick={updateCurrentPage}
+              />
             ))}
           </>
         )}
         {total > 4 && currentPage < 4 && (
           <>
-            <PaginationPage index={1} currentPage={currentPage} handleClick={handleClick} />
-            <PaginationPage index={2} currentPage={currentPage} handleClick={handleClick} />
-            <PaginationPage index={3} currentPage={currentPage} handleClick={handleClick} />
+            <PaginationPage index={1} currentPage={currentPage} handleClick={updateCurrentPage} />
+            <PaginationPage index={2} currentPage={currentPage} handleClick={updateCurrentPage} />
+            <PaginationPage index={3} currentPage={currentPage} handleClick={updateCurrentPage} />
             ...
-            <PaginationPage index={total} currentPage={currentPage} handleClick={handleClick} />
+            <PaginationPage index={total} currentPage={currentPage} handleClick={updateCurrentPage} />
           </>
         )}
         {total > 4 && currentPage > total - 3 && (
           <>
             <>
-              <PaginationPage index={1} currentPage={currentPage} handleClick={handleClick} />
+              <PaginationPage index={1} currentPage={currentPage} handleClick={updateCurrentPage} />
               ...
-              <PaginationPage index={total - 2} currentPage={currentPage} handleClick={handleClick} />
-              <PaginationPage index={total - 1} currentPage={currentPage} handleClick={handleClick} />
-              <PaginationPage index={total} currentPage={currentPage} handleClick={handleClick} />
+              <PaginationPage index={total - 2} currentPage={currentPage} handleClick={updateCurrentPage} />
+              <PaginationPage index={total - 1} currentPage={currentPage} handleClick={updateCurrentPage} />
+              <PaginationPage index={total} currentPage={currentPage} handleClick={updateCurrentPage} />
             </>
           </>
         )}
         {total > 4 && currentPage >= 4 && currentPage <= total - 3 && (
           <>
-            <PaginationPage index={1} currentPage={currentPage} handleClick={handleClick} />
+            <PaginationPage index={1} currentPage={currentPage} handleClick={updateCurrentPage} />
             ...
-            <PaginationPage index={currentPage - 1} currentPage={currentPage} handleClick={handleClick} />
-            <PaginationPage index={currentPage} currentPage={currentPage} handleClick={handleClick} />
-            <PaginationPage index={currentPage + 1} currentPage={currentPage} handleClick={handleClick} />
+            <PaginationPage index={currentPage - 1} currentPage={currentPage} handleClick={updateCurrentPage} />
+            <PaginationPage index={currentPage} currentPage={currentPage} handleClick={updateCurrentPage} />
+            <PaginationPage index={currentPage + 1} currentPage={currentPage} handleClick={updateCurrentPage} />
             ...
-            <PaginationPage index={total} currentPage={currentPage} handleClick={handleClick} />
+            <PaginationPage index={total} currentPage={currentPage} handleClick={updateCurrentPage} />
           </>
         )}
       </div>
-      <PaginationPageArrow id="forward" handleClick={handleClick} currentPage={currentPage} total={total} />
+      <PaginationPageArrow id="forward" handleClick={updateCurrentPage} currentPage={currentPage} total={total} />
     </div>
   );
 };
