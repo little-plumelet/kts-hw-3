@@ -3,7 +3,7 @@ import { IReactionDisposer, action, computed, makeObservable, observable, reacti
 import { API_KEY, RECIPES_PER_PAGE, BASE_URL } from 'configs/constants';
 import rootStore from 'store/global/RootStore/instance';
 import { ILocalStore } from 'store/local/LocalStoreInterface';
-import { MetaFetchModel } from 'store/models/MetaFetchModel';
+import MetaModelStore, { LoadingState } from 'store/local/MetaModelStore';
 import { PaginationModel } from 'store/models/PaginationModel';
 import { MealMap } from 'types/MealMap';
 import { Option } from 'types/MultiDropdownOption';
@@ -12,13 +12,15 @@ import { RecipeData } from 'types/RecipeData';
 type PrivateFields =
   | '_recipesData'
   | '_pagination'
-  | '_metaFetch'
+  | '_meta'
   | '_setPagination'
   | '_inputValue'
   | '_categoriesValue'
   | '_categoriesOptions'
   | '_firstRenderTrigger'
-  | '_reactionDisposers';
+  | '_reactionDisposers'
+  | '_error'
+  | '_loading';
 
 export class SearchRecipesStore implements ILocalStore {
   private _recipesData: RecipeData[] = observable.array([]);
@@ -26,7 +28,7 @@ export class SearchRecipesStore implements ILocalStore {
     currentPage: rootStore.query.getParam('page'),
     total: rootStore.query.getParam('total'),
   };
-  private _metaFetch: MetaFetchModel = { isLoading: false, error: null };
+  private _meta = new MetaModelStore();
   private _inputValue: string = String(rootStore.query.getParam('query') ?? '');
   private _categoriesOptions: Option[] = Object.entries(MealMap).map(([key, value]) => ({ key, value }));
   private _categoriesValue: Option[] = this._categoriesOptions.filter((option) =>
@@ -36,6 +38,8 @@ export class SearchRecipesStore implements ILocalStore {
   );
   private _firstRenderTrigger: boolean = true;
   private readonly _reactionDisposers: IReactionDisposer[] = [];
+  private _error: string | null = null;
+  private _loading: boolean = false;
 
   constructor() {
     makeObservable<SearchRecipesStore, PrivateFields>(this, {
@@ -44,10 +48,9 @@ export class SearchRecipesStore implements ILocalStore {
       setRecipesData: action,
       _pagination: observable,
       pagination: computed,
-      _metaFetch: observable,
+      _meta: observable,
       meta: computed,
       fetchRecipes: action,
-      setMetaFetch: action.bound,
       _setPagination: action,
       setCurrentPage: action.bound,
       setTotal: action.bound,
@@ -63,6 +66,12 @@ export class SearchRecipesStore implements ILocalStore {
       _firstRenderTrigger: observable,
       setFirstRenderTrigger: action,
       _reactionDisposers: observable,
+      _error: observable,
+      error: computed,
+      setError: action,
+      _loading: observable,
+      loading: computed,
+      setLoading: action,
     });
 
     this._reactionDisposers.push(
@@ -99,6 +108,19 @@ export class SearchRecipesStore implements ILocalStore {
         },
         { fireImmediately: true },
       ),
+
+      reaction(
+        () => {
+          return this._meta.state;
+        },
+        () => {
+          if (this._meta.state === LoadingState.loading) {
+            this.setLoading(true);
+          } else {
+            this.setLoading(false);
+          }
+        },
+      ),
     );
   }
 
@@ -118,10 +140,6 @@ export class SearchRecipesStore implements ILocalStore {
     this._pagination = pagination;
   }
 
-  setMetaFetch({ isLoading, error }: MetaFetchModel) {
-    this._metaFetch = { isLoading, error };
-  }
-
   setInputValue(value: string) {
     this._inputValue = value;
   }
@@ -134,12 +152,20 @@ export class SearchRecipesStore implements ILocalStore {
     this._firstRenderTrigger = value;
   }
 
+  setError(error: string) {
+    this._error = error;
+  }
+
+  setLoading(loading: boolean) {
+    this._loading = loading;
+  }
+
   get recipesData(): RecipeData[] {
     return this._recipesData;
   }
 
-  get meta(): MetaFetchModel {
-    return this._metaFetch;
+  get meta(): MetaModelStore {
+    return this._meta;
   }
 
   get pagination(): PaginationModel {
@@ -162,8 +188,17 @@ export class SearchRecipesStore implements ILocalStore {
     return this._categoriesOptions;
   }
 
+  get error(): string | null {
+    return this._error;
+  }
+
+  get loading(): boolean {
+    return this._loading;
+  }
+
   async fetchRecipes() {
-    this.setMetaFetch({ error: null, isLoading: true } as MetaFetchModel);
+    this._meta.setLoadingStart();
+    this.meta;
     try {
       const response = await axios.get(`${BASE_URL}/recipes/complexSearch`, {
         params: {
@@ -179,18 +214,20 @@ export class SearchRecipesStore implements ILocalStore {
       runInAction(() => {
         this.setRecipesData(response?.data?.results);
         this.setTotal(String(Math.ceil(response?.data?.totalResults / RECIPES_PER_PAGE)));
-        this.setMetaFetch({ error: null, isLoading: false } as MetaFetchModel);
+        this._meta.setLoadingSuccess();
       });
     } catch (error) {
+      this._meta.setLoadingError();
       if (error instanceof AxiosError) {
-        this.setMetaFetch({ isLoading: false, error: error.message } as MetaFetchModel);
+        this.setError(error.message);
       } else {
-        this.setMetaFetch({ isLoading: false, error: 'Unknown error occurred' } as MetaFetchModel);
+        this.setError('Unknown error occurred');
       }
     }
   }
 
   destroy() {
     this._reactionDisposers.forEach((reactionDisposer) => reactionDisposer());
+    this._meta.destroy();
   }
 }

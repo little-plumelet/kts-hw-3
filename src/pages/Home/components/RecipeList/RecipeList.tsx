@@ -19,7 +19,6 @@ export const RecipeList: React.FC = observer(() => {
   const [, setSearchParams] = useSearchParams();
 
   const {
-    meta,
     recipesData,
     pagination,
     setCurrentPage,
@@ -28,9 +27,10 @@ export const RecipeList: React.FC = observer(() => {
     setInputValue,
     setCategoriesValue,
     categoriesOptions,
+    error,
+    loading,
   } = searchRecipesStore;
   const { currentPage = 1, total = 10 } = pagination;
-  const { isLoading, error } = meta;
 
   function handleClick() {
     setSearchParams({
@@ -63,7 +63,7 @@ export const RecipeList: React.FC = observer(() => {
     });
   }
 
-  if (isLoading) {
+  if (loading) {
     return <Loader size={SizeType.l} />;
   }
 
@@ -74,7 +74,7 @@ export const RecipeList: React.FC = observer(() => {
   return (
     <section className={styles['home-basic-section']}>
       <div className={styles['search-block']}>
-        <SearchInput value={inputValue} onChange={setInputValue} onClick={handleClick} isLoading={isLoading} />
+        <SearchInput value={inputValue} onChange={setInputValue} onClick={handleClick} isLoading={loading} />
         <MultiDropdown
           options={categoriesOptions}
           value={categoriesValue}

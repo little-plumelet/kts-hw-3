@@ -1,46 +1,82 @@
 import axios, { AxiosError } from 'axios';
-import { action, computed, makeObservable, observable } from 'mobx';
+import { IReactionDisposer, action, computed, makeObservable, observable, reaction } from 'mobx';
 import { API_KEY, BASE_URL } from 'configs/constants';
-import { MetaFetchModel } from 'store/models/MetaFetchModel';
+import MetaModelStore, { LoadingState } from 'store/local/MetaModelStore';
 import { RecipeData } from 'types/RecipeData';
 import { ILocalStore } from '../LocalStoreInterface';
 
-type PrivateFields = '_recipeData' | '_metaFetch';
+type PrivateFields = '_recipeData' | '_meta' | '_error' | '_loading' | '_reactionDisposers';
 
 export default class RecipeStore implements ILocalStore {
   private _recipeData: RecipeData | null = null;
-  private _metaFetch: MetaFetchModel = { isLoading: false, error: null };
+  private _meta: MetaModelStore = new MetaModelStore();
+  private _error: string | null = null;
+  private _loading: boolean = false;
+  private readonly _reactionDisposers: IReactionDisposer[] = [];
 
   constructor() {
     makeObservable<RecipeStore, PrivateFields>(this, {
       _recipeData: observable,
       recipeData: computed,
-      _metaFetch: observable,
+      _meta: observable,
       meta: computed,
       setRecipeData: action,
-      setMetaFetch: action,
       fetchRecipeData: action,
+      _error: observable,
+      error: computed,
+      setError: action,
+      _loading: observable,
+      loading: computed,
+      setLoading: action,
+      _reactionDisposers: observable,
     });
+
+    this._reactionDisposers.push(
+      reaction(
+        () => {
+          return this._meta.state;
+        },
+        () => {
+          if (this._meta.state === LoadingState.loading) {
+            this.setLoading(true);
+          } else {
+            this.setLoading(false);
+          }
+        },
+      ),
+    );
   }
 
   setRecipeData(recipeData: RecipeData) {
     this._recipeData = recipeData;
   }
 
-  setMetaFetch({ isLoading, error }: MetaFetchModel) {
-    this._metaFetch = { isLoading, error };
+  setError(error: string | null) {
+    this._error = error;
+  }
+
+  setLoading(loading: boolean) {
+    this._loading = loading;
   }
 
   get recipeData(): RecipeData | null {
     return this._recipeData;
   }
 
-  get meta(): MetaFetchModel {
-    return this._metaFetch;
+  get meta(): MetaModelStore {
+    return this._meta;
+  }
+
+  get error(): string | null {
+    return this._error;
+  }
+
+  get loading(): boolean {
+    return this._loading;
   }
 
   async fetchRecipeData(recipeId: string) {
-    this.setMetaFetch({ error: null, isLoading: true } as MetaFetchModel);
+    this._meta.setLoadingStart();
     try {
       const response = await axios.get(`${BASE_URL}/recipes/${recipeId}/information`, {
         params: {
@@ -49,15 +85,18 @@ export default class RecipeStore implements ILocalStore {
         },
       });
       this.setRecipeData(response?.data);
-      this.setMetaFetch({ error: null, isLoading: false } as MetaFetchModel);
+      this._meta.setLoadingSuccess();
     } catch (error) {
+      this._meta.setLoadingError();
       if (error instanceof AxiosError) {
-        this.setMetaFetch({ isLoading: false, error: error.message } as MetaFetchModel);
+        this.setError(error.message);
       } else {
-        this.setMetaFetch({ isLoading: false, error: 'Unknown error occurred' } as MetaFetchModel);
+        this.setError('Unknown error occurred');
       }
     }
   }
 
-  destroy() {}
+  destroy() {
+    this._reactionDisposers.forEach((reactionDisposer) => reactionDisposer());
+  }
 }

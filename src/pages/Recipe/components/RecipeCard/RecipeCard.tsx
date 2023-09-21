@@ -16,14 +16,13 @@ import styles from './styles.module.scss';
 export const RecipeCard: React.FC = observer(() => {
   const { id: recipeId } = useParams();
   const recipeStore = useLocalStore(() => new RecipeStore());
-  const { meta, recipeData: data } = recipeStore;
-  const { isLoading, error } = meta;
+  const { loading, recipeData: data, error } = recipeStore;
 
   useEffect(() => {
     recipeStore.fetchRecipeData(recipeId ?? '');
   }, [recipeId, recipeStore]);
 
-  if (isLoading) {
+  if (loading) {
     return (
       <div className={styles['loader-container']}>
         <Loader size={SizeType.l} className={styles.loader} />
@@ -37,7 +36,7 @@ export const RecipeCard: React.FC = observer(() => {
 
   return (
     <>
-      {data && !isLoading && (
+      {data && !loading && (
         <div className={styles.wrapper}>
           <RecipeHeader title={data.title} className={styles['wrapper-item']} />
           <RecipeBasicInfo
@@ -66,7 +65,7 @@ export const RecipeCard: React.FC = observer(() => {
           <RecipeInstruction steps={data.analyzedInstructions?.[0]?.steps} className={styles['wrapper-item']} />
         </div>
       )}
-      {!data && isLoading && <>NO data</>}
+      {!data && loading && <>NO data</>}
     </>
   );
 });
