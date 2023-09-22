@@ -10,9 +10,16 @@ const buildPath = path.resolve(__dirname, 'dist');
 
 const isProd = process.env.NODE_ENV === 'production';
 
+const devServer = {
+  host: 'localhost',
+  port: 3000,
+  hot: true,
+  historyApiFallback: true,
+};
+
 const getSettingsForStyles = (withModules = false) => {
   return [
-    MiniCssExtractPlugin.loader,
+    isProd ? MiniCssExtractPlugin.loader : 'style-loader',
     !withModules
       ? 'css-loader'
       : {
@@ -38,9 +45,11 @@ const getSettingsForStyles = (withModules = false) => {
 module.exports = {
   entry: path.join(srcPath, 'main.tsx'),
   target: !isProd ? 'web' : 'browserslist',
+  devtool: isProd ? 'hidden-source-map' : 'eval-source-map',
   output: {
     path: buildPath,
     filename: 'bundle.js',
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -67,12 +76,6 @@ module.exports = {
         },
       },
     ],
-  },
-  devServer: {
-    host: 'localhost',
-    port: 3000,
-    hot: true,
-    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -103,4 +106,5 @@ module.exports = {
       '@store': path.join(srcPath, 'store'),
     },
   },
+  devServer,
 };
