@@ -1,9 +1,9 @@
 import cn from 'classnames';
 import { NavLink } from 'react-router-dom';
-import AccountIcon from 'components/icons/AccountIcon';
-import FavouriteIcon from 'components/icons/FavouriteIcon';
-import { urls } from 'configs/urls';
-import { ColorType } from 'types/common';
+import AccountIcon from '@components/icons/AccountIcon';
+import FavouriteIcon from '@components/icons/FavouriteIcon';
+import { urls } from '@configs/urls';
+import { ColorType } from '@customTypes/common';
 import { Logo } from './components/Logo';
 import styles from './styles.module.scss';
 

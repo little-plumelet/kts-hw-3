@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import * as React from 'react';
-import { SizeType } from 'types/common';
+import { SizeType } from '@customTypes/common';
 import Loader from '../Loader';
 import styles from './style.module.scss';
 

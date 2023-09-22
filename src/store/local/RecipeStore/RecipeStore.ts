@@ -1,8 +1,8 @@
 import axios, { AxiosError } from 'axios';
 import { IReactionDisposer, action, computed, makeObservable, observable, reaction } from 'mobx';
-import { API_KEY, BASE_URL } from 'configs/constants';
-import MetaModelStore, { LoadingState } from 'store/local/MetaModelStore';
-import { RecipeData } from 'types/RecipeData';
+import { API_KEY, BASE_URL } from '@configs/constants';
+import { RecipeData } from '@customTypes/RecipeData';
+import MetaModelStore, { LoadingState } from '@store/local/MetaModelStore';
 import { ILocalStore } from '../LocalStoreInterface';
 
 type PrivateFields = '_recipeData' | '_meta' | '_error' | '_loading' | '_reactionDisposers';

@@ -1,9 +1,9 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { urls } from 'configs/urls';
-import { useQueryParamsStoreInit } from 'customHooks/useQueryParamsStoreInit';
-import { Home } from 'pages/Home';
-import { Recipe } from 'pages/Recipe';
-import { Root } from 'pages/Root';
+import { urls } from '@configs/urls';
+import { useQueryParamsStoreInit } from '@customHooks/useQueryParamsStoreInit';
+import { Home } from '@pages/Home';
+import { Recipe } from '@pages/Recipe';
+import { Root } from '@pages/Root';
 
 function App() {
   useQueryParamsStoreInit();

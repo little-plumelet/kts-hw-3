@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { ILocalStore } from 'store/local/LocalStoreInterface';
+import { ILocalStore } from '@store/local/LocalStoreInterface';
 
 export const useLocalStore = <T extends ILocalStore>(creator: () => T): T => {
   const store = useRef<null | T>(null);

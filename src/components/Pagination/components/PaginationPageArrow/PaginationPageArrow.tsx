@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import * as React from 'react';
-import ArrowDownIcon from 'components/icons/ArrowDownIcon';
-import { ColorType } from 'types/common';
+import ArrowDownIcon from '@components/icons/ArrowDownIcon';
+import { ColorType } from '@customTypes/common';
 import styles from './styles.module.scss';
 
 type PaginationPageArrowProps = {

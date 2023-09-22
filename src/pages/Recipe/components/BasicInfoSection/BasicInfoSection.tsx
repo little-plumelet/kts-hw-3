@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Text from 'components/Text';
-import { ColorType } from 'types/common';
+import Text from '@components/Text';
+import { ColorType } from '@customTypes/common';
 import styles from './styles.module.scss';
 
 type BasicInfoSectionProps = {

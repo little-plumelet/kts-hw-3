@@ -1,9 +1,9 @@
 import cn from 'classnames';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import Text from 'components/Text';
-import ArrowDownIcon from 'components/icons/ArrowDownIcon';
-import { ColorType, TextViewType } from 'types/common';
+import Text from '@components/Text';
+import ArrowDownIcon from '@components/icons/ArrowDownIcon';
+import { ColorType, TextViewType } from '@customTypes/common';
 import styles from './styles.module.scss';
 
 type RecipeHeaderProps = {

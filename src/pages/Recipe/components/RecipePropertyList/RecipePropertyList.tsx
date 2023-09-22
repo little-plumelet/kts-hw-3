@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Text from 'components/Text';
-import { Ingerdient, Nutrient } from 'types/RecipeData';
-import { TextViewType } from 'types/common';
+import Text from '@components/Text';
+import { Ingerdient, Nutrient } from '@customTypes/RecipeData';
+import { TextViewType } from '@customTypes/common';
 import styles from './styles.module.scss';
 
 type RecipePropertyListProps = {
