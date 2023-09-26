@@ -30,7 +30,7 @@ export const RecipeList: React.FC = observer(() => {
     error,
     loading,
   } = searchRecipesStore;
-  const { currentPage = 1, total = 10 } = pagination;
+  const { currentPage = 1, total } = pagination;
 
   function handleClick() {
     setSearchParams({

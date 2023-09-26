@@ -198,7 +198,6 @@ export class SearchRecipesStore implements ILocalStore {
 
   async fetchRecipes() {
     this._meta.setLoadingStart();
-    this.meta;
     try {
       const response = await axios.get(`${BASE_URL}/recipes/complexSearch`, {
         params: {
