@@ -8,7 +8,8 @@
       "utils": ["utils/*"],
       "configs": ["configs/*"],
       "types": ["types/*"],
-      "customHooks": ["customHooks/*"]
+      "customHooks": ["customHooks/*"],
+      "store": ["store/*"]
     },
     "target": "ES2020",
     "useDefineForClassFields": true,
@@ -25,7 +26,8 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

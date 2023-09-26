@@ -1,31 +1,43 @@
-import axios, { AxiosError } from 'axios';
-import { useState } from 'react';
+import { runInAction } from 'mobx';
+import { observer } from 'mobx-react-lite';
 import * as React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { CardList } from 'components/CardList';
 import { ErrorCp } from 'components/ErrorCp';
+import Loader from 'components/Loader';
 import MultiDropdown from 'components/MultiDropdown';
 import Pagination from 'components/Pagination';
-import { API_KEY, BASE_URL, RECIPES_PER_PAGE } from 'configs/constants';
-import { MealMap } from 'types/MealMap';
+import { useLocalStore } from 'customHooks/useLocalStore';
+import { SearchRecipesStore } from 'store/local/SearchRecipesStore';
 import { Option } from 'types/MultiDropdownOption';
-import { RecipeData } from 'types/RecipeData';
+import { SizeType } from 'types/common';
 import { SearchInput } from '../SearchInput';
 import styles from './styles.module.scss';
 
-export const RecipeList: React.FC = () => {
-  const [recipesData, setRecipesData] = useState<RecipeData[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [value, setValue] = useState('');
-  const [query, setQuery] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [total, setTotal] = useState<number | null>(null);
-  const [error, setError] = useState<string | null>(null);
+export const RecipeList: React.FC = observer(() => {
+  const searchRecipesStore = useLocalStore(() => new SearchRecipesStore());
+  const [, setSearchParams] = useSearchParams();
 
-  const options = Object.entries(MealMap).map(([key, value]) => ({ key, value }));
-  const [categoriesValue, setCategoriesValue] = useState<Array<Option>>([]);
+  const {
+    recipesData,
+    pagination,
+    setCurrentPage,
+    inputValue,
+    categoriesValue,
+    setInputValue,
+    setCategoriesValue,
+    categoriesOptions,
+    error,
+    loading,
+  } = searchRecipesStore;
+  const { currentPage = 1, total = 10 } = pagination;
 
   function handleClick() {
-    setQuery(value);
+    setSearchParams({
+      type: categoriesValue.map((el) => el.value).join(' '),
+      query: inputValue,
+      page: String(currentPage),
+    });
   }
 
   function getTitle(value: Option[]) {
@@ -33,38 +45,27 @@ export const RecipeList: React.FC = () => {
     return result.length ? result : 'Choose categories';
   }
 
-  function handleChangeCategory(value: Option[]) {
-    setCategoriesValue(value);
+  function handleChangeCategory(categoriesValue: Option[]) {
+    runInAction(() => {
+      setCategoriesValue(categoriesValue);
+      setSearchParams({
+        query: inputValue,
+        type: categoriesValue.map((el) => el.value).join(' '),
+        page: String(currentPage),
+      });
+    });
   }
 
-  React.useEffect(() => {
-    (async function getRecipeces() {
-      try {
-        setIsLoading(true);
-        const responce = await axios.get(`${BASE_URL}/recipes/complexSearch`, {
-          params: {
-            query,
-            apiKey: API_KEY,
-            number: RECIPES_PER_PAGE,
-            addRecipeInformation: true,
-            addRecipeNutrition: true,
-            type: getTitle(categoriesValue),
-            offset: currentPage - 1,
-          },
-        });
-        setRecipesData(responce?.data?.results);
-        setTotal(Math.ceil(responce?.data?.totalResults / RECIPES_PER_PAGE));
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-        if (error instanceof AxiosError) {
-          setError(error.message);
-        } else {
-          setError('Unknown error occurred');
-        }
-      }
-    })();
-  }, [query, categoriesValue, currentPage]);
+  function handleChangePagination(page: string) {
+    runInAction(() => {
+      setSearchParams({ query: inputValue, type: categoriesValue.map((el) => el.value).join(' '), page });
+      setCurrentPage(page);
+    });
+  }
+
+  if (loading) {
+    return <Loader size={SizeType.l} />;
+  }
 
   if (error) {
     return <ErrorCp errorMessage={error} />;
@@ -73,9 +74,9 @@ export const RecipeList: React.FC = () => {
   return (
     <section className={styles['home-basic-section']}>
       <div className={styles['search-block']}>
-        <SearchInput value={value} onChange={setValue} onClick={handleClick} isLoading={isLoading} />
+        <SearchInput value={inputValue} onChange={setInputValue} onClick={handleClick} isLoading={loading} />
         <MultiDropdown
-          options={options}
+          options={categoriesOptions}
           value={categoriesValue}
           onChange={handleChangeCategory}
           getTitle={getTitle}
@@ -83,7 +84,7 @@ export const RecipeList: React.FC = () => {
         />
       </div>
       <CardList cardsData={recipesData} />
-      <Pagination currentPage={currentPage} updateCurrentPage={setCurrentPage} total={total ?? 0} />
+      <Pagination currentPage={Number(currentPage)} updateCurrentPage={handleChangePagination} total={Number(total)} />
     </section>
   );
-};
+});

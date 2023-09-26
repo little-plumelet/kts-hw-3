@@ -6,9 +6,9 @@ type OptionProps = Option & {
   onClick: (key: string, value: string) => void;
   className?: string;
 };
-export const OptionCp: React.FC<OptionProps> = ({ key, onClick, value, id, className }) => {
+export const OptionCp: React.FC<OptionProps> = ({ onClick, value, id, className }) => {
   return (
-    <li key={key} onClick={() => onClick(id, value)} id={id} className={className}>
+    <li onClick={() => onClick(id, value)} id={id} className={className}>
       {value}
     </li>
   );

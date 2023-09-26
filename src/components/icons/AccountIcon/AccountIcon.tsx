@@ -1,4 +1,4 @@
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import * as React from 'react';
 import Icon, { IconProps } from 'components/icons/Icon';
 import { ColorType } from 'types/common';

@@ -1,4 +1,4 @@
-import * as cn from 'classnames';
+import cn from 'classnames';
 import * as React from 'react';
 import { SizeType } from 'types/common';
 import Loader from '../Loader';

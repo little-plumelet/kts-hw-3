@@ -1,20 +1,20 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { urls } from 'configs/urls';
+import { useQueryParamsStoreInit } from 'customHooks/useQueryParamsStoreInit';
 import { Home } from 'pages/Home';
 import { Recipe } from 'pages/Recipe';
 import { Root } from 'pages/Root';
 
 function App() {
+  useQueryParamsStoreInit();
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={urls.root} element={<Root />}>
-          <Route path={urls.recipe.mask} element={<Recipe />} />
-          <Route index element={<Home />} />
-        </Route>
-        <Route path={'*'} element={<Navigate to={urls.root} replace />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path={urls.root} element={<Root />}>
+        <Route path={urls.recipe.mask} element={<Recipe />} />
+        <Route index element={<Home />} />
+      </Route>
+      <Route path={'*'} element={<Navigate to={urls.root} replace />} />
+    </Routes>
   );
 }
 

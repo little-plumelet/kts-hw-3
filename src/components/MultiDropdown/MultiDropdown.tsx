@@ -1,4 +1,4 @@
-import * as cn from 'classnames';
+import cn from 'classnames';
 import * as React from 'react';
 import { useOpen } from 'customHooks/useOpen';
 import { Option } from 'types/MultiDropdownOption';

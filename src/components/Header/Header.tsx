@@ -1,4 +1,4 @@
-import * as cn from 'classnames';
+import cn from 'classnames';
 import { NavLink } from 'react-router-dom';
 import AccountIcon from 'components/icons/AccountIcon';
 import FavouriteIcon from 'components/icons/FavouriteIcon';

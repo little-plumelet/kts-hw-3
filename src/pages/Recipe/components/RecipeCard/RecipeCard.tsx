@@ -1,11 +1,10 @@
-import axios, { AxiosError } from 'axios';
-import * as cn from 'classnames';
-import { useEffect, useState } from 'react';
+import cn from 'classnames';
+import { observer, useLocalStore } from 'mobx-react-lite';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ErrorCp } from 'components/ErrorCp';
 import Loader from 'components/Loader';
-import { BASE_URL, API_KEY } from 'configs/constants';
-import { RecipeData } from 'types/RecipeData';
+import RecipeStore from 'store/local/RecipeStore';
 import { SizeType } from 'types/common';
 import { RecipeBasicInfo } from '../RecipeBasicInfo';
 import { RecipeDescription } from '../RecipeDescription';
@@ -14,36 +13,14 @@ import { RecipeInstruction } from '../RecipeInstruction';
 import { RecipePropertyList } from '../RecipePropertyList';
 import styles from './styles.module.scss';
 
-export const RecipeCard: React.FC = () => {
+export const RecipeCard: React.FC = observer(() => {
   const { id: recipeId } = useParams();
-
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<RecipeData | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const recipeStore = useLocalStore(() => new RecipeStore());
+  const { loading, recipeData: data, error } = recipeStore;
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(`${BASE_URL}/recipes/${recipeId}/information`, {
-          params: {
-            apiKey: API_KEY,
-            includeNutrition: true,
-          },
-        });
-        setData(response?.data);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        if (error instanceof AxiosError) {
-          setError(error.message);
-        } else {
-          setError('Unknown error occurred');
-        }
-      }
-    };
-    fetchData();
-  }, [recipeId]);
+    recipeStore.fetchRecipeData(recipeId ?? '');
+  }, [recipeId, recipeStore]);
 
   if (loading) {
     return (
@@ -88,7 +65,7 @@ export const RecipeCard: React.FC = () => {
           <RecipeInstruction steps={data.analyzedInstructions?.[0]?.steps} className={styles['wrapper-item']} />
         </div>
       )}
-      {!data && !loading && <>NO data</>}
+      {!data && loading && <>NO data</>}
     </>
   );
-};
+});
