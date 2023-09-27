@@ -8,11 +8,13 @@
 
   &-list {
     @include common-section;
+    flex-wrap: wrap;
     list-style-type: none;
     padding: 0;
     
     &-point {
-      padding-right: $space-m;
+      margin-right: $space-m;
+      margin-bottom: $space-m;
     }
   }
 }
@@ -21,5 +23,4 @@
   font-style: italic;
   font-size: $font-size-m;
   line-height: $font-size-l;
-  // font-family: 'Cookie';
 }

@@ -1,0 +1,41 @@
+@import '@styles/colors';
+@import '@styles/sizes';
+@import '@styles/mixins';
+
+.modal {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: $wine-modal-bg;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $side-padding;
+
+  &-button {
+    align-self: flex-end;
+  }
+}
+
+.wine-list {
+  @include flex-column-center;
+}
+
+.card {
+  width: 40%;
+  margin-bottom: $space-l;
+  header {
+    max-height: fit-content;
+  }
+
+  img {
+    width: 55%;
+    height: fit-content;
+    margin: 0 auto;
+  }
+}
+
+.star {
+  margin-right: $space-xxs;
+}
