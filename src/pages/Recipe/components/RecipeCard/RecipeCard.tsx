@@ -11,6 +11,7 @@ import { RecipeDescription } from '../RecipeDescription';
 import { RecipeHeader } from '../RecipeHeader';
 import { RecipeInstruction } from '../RecipeInstruction';
 import { RecipePropertyList } from '../RecipePropertyList';
+import { WinePairing } from '../WinePairing';
 import styles from './styles.module.scss';
 
 export const RecipeCard: React.FC = observer(() => {
@@ -63,6 +64,7 @@ export const RecipeCard: React.FC = observer(() => {
             />
           </section>
           <RecipeInstruction steps={data.analyzedInstructions?.[0]?.steps} className={styles['wrapper-item']} />
+          <WinePairing pairedWines={data.winePairing.pairedWines} className={styles['wrapper-item']} />
         </div>
       )}
       {!data && loading && <>NO data</>}

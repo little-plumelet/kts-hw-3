@@ -13,6 +13,9 @@ export type RecipeData = {
   };
   summary: string;
   analyzedInstructions: Instruction[];
+  winePairing: {
+    pairedWines: string[];
+  };
 };
 
 export type Instruction = {

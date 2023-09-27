@@ -1,0 +1,25 @@
+@import '@styles/mixins';
+@import '@styles/sizes';
+@import '@styles/fonts';
+
+.wine-section {
+  @include common-section;
+  flex-direction: column;
+
+  &-list {
+    @include common-section;
+    list-style-type: none;
+    padding: 0;
+    
+    &-point {
+      padding-right: $space-m;
+    }
+  }
+}
+
+.wine {
+  font-style: italic;
+  font-size: $font-size-m;
+  line-height: $font-size-l;
+  // font-family: 'Cookie';
+}
