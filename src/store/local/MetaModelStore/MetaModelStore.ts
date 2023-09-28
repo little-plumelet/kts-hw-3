@@ -20,7 +20,12 @@ export default class MetaModelStore implements ILocalStore {
       setLoadingSuccess: action,
       setLoadingError: action,
       setLoadingStart: action,
+      setNotStarted: action,
     });
+  }
+
+  setNotStarted() {
+    this._state = LoadingState.notStarted;
   }
 
   setLoadingSuccess() {

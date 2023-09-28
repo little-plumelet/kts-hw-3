@@ -23,7 +23,7 @@ type PrivateFields =
   | '_loading';
 
 export class SearchRecipesStore implements ILocalStore {
-  private _recipesData: RecipeData[] = observable.array([]);
+  private _recipesData: RecipeData[] = [];
   private _pagination: PaginationModel = {
     currentPage: rootStore.query.getParam('page'),
     total: rootStore.query.getParam('total'),
@@ -133,7 +133,7 @@ export class SearchRecipesStore implements ILocalStore {
   }
 
   setRecipesData(recipesData: RecipeData[]) {
-    this._recipesData = recipesData;
+    this._recipesData = [...recipesData];
   }
 
   private _setPagination(pagination: PaginationModel) {

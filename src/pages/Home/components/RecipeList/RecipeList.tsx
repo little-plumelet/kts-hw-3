@@ -19,7 +19,6 @@ export const RecipeList: React.FC = observer(() => {
   const [, setSearchParams] = useSearchParams();
 
   const {
-    recipesData,
     pagination,
     setCurrentPage,
     inputValue,
@@ -29,8 +28,13 @@ export const RecipeList: React.FC = observer(() => {
     categoriesOptions,
     error,
     loading,
+    query,
   } = searchRecipesStore;
   const { currentPage = 1, total } = pagination;
+
+  React.useEffect(() => {
+    searchRecipesStore.fetchRecipes();
+  }, [searchRecipesStore, query, currentPage, categoriesValue]);
 
   function handleClick() {
     setSearchParams({
@@ -83,7 +87,7 @@ export const RecipeList: React.FC = observer(() => {
           className={styles.multidropdown}
         />
       </div>
-      <CardList cardsData={recipesData} />
+      <CardList cardsData={searchRecipesStore.recipesData} />
       <Pagination currentPage={Number(currentPage)} updateCurrentPage={handleChangePagination} total={Number(total)} />
     </section>
   );

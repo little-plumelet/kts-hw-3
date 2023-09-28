@@ -2,14 +2,18 @@ import * as React from 'react';
 import Button from '@components/Button';
 import Card from '@components/Card';
 import { Star } from '@components/icons/Star';
-import data from './mockData.json';
+
+import { RecommendedWineData } from '@customTypes/RecommendedWineData';
 import styles from './styles.module.scss';
 
 type RecommendedWineModalProps = {
   onClose: () => void;
+  recommendedWines: RecommendedWineData[];
 };
-export const RecommendedWineModal: React.FC<RecommendedWineModalProps> = ({ onClose }) => {
-  const recommendedWines = data.recommendedWines;
+export const RecommendedWineModal: React.FC<RecommendedWineModalProps> = ({ onClose, recommendedWines = [] }) => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className={styles.modal}>
@@ -23,12 +27,14 @@ export const RecommendedWineModal: React.FC<RecommendedWineModalProps> = ({ onCl
             title={wine.title}
             image={wine.imageUrl}
             subtitle={wine.description}
-            contentSlot={wine.price}
+            contentSlot={wine.price.substring(0, wine.price.indexOf('.') + 3)}
             actionSlot={
               <div>
-                {new Array(Math.round(wine.ratingCount)).fill(1).map((_, index) => (
-                  <Star key={index} className={styles.star} />
-                ))}
+                {new Array(Math.round(wine.ratingCount) > 5 ? 5 : Math.round(wine.ratingCount))
+                  .fill(1)
+                  .map((_, index) => (
+                    <Star key={index} className={styles.star} />
+                  ))}
               </div>
             }
             className={styles.card}
