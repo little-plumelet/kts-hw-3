@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { ErrorCp } from '@components/ErrorCp';
 import Loader from '@components/Loader';
 import { Lid } from '@components/icons/Lid';
+import { SoupLaddle } from '@components/icons/SoupLaddle';
 import { SizeType } from '@customTypes/common';
 import RecipeStore from '@store/local/RecipeStore';
 import { RecipeBasicInfo } from '../RecipeBasicInfo';
@@ -64,7 +65,9 @@ export const RecipeCard: React.FC = observer(() => {
               title="Nutrients"
               properties={data.nutrition?.nutrients}
               className={styles['composition-section-part']}
-            />
+            >
+              <SoupLaddle className={styles.icon} />
+            </RecipePropertyList>
           </section>
           <RecipeInstruction steps={data.analyzedInstructions?.[0]?.steps} className={styles['wrapper-item']} />
           <WinePairing pairedWines={data.winePairing.pairedWines} className={styles['wrapper-item']} />
