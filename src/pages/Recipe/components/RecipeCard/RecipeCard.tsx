@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ErrorCp } from '@components/ErrorCp';
 import Loader from '@components/Loader';
+import { Lid } from '@components/icons/Lid';
 import { SizeType } from '@customTypes/common';
 import RecipeStore from '@store/local/RecipeStore';
 import { RecipeBasicInfo } from '../RecipeBasicInfo';
@@ -56,7 +57,9 @@ export const RecipeCard: React.FC = observer(() => {
               title="Ingredients"
               properties={data.nutrition?.ingredients}
               className={styles['composition-section-part']}
-            />
+            >
+              <Lid className={styles.icon} />
+            </RecipePropertyList>
             <RecipePropertyList
               title="Nutrients"
               properties={data.nutrition?.nutrients}
