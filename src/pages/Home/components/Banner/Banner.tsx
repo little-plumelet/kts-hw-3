@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import * as React from 'react';
-import bg from '../../../../assets/home-food-bg.jpg';
+import bg from '@assets/home-food-bg.jpg';
 import styles from './styles.module.scss';
 
 type BannerProps = {

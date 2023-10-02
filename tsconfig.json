@@ -9,7 +9,8 @@
       "@configs/*": ["src/configs/*"],
       "@customTypes/*": ["src/types/*"],
       "@customHooks/*": ["src/customHooks/*"],
-      "@store/*": ["src/store/*"]
+      "@store/*": ["src/store/*"],
+      "@assets/*": ["src/assets/*"]
     },
     "target": "ES2020",
     "useDefineForClassFields": true,
