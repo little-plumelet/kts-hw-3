@@ -16,7 +16,7 @@ export const RecipeInstruction: React.FC<RecipeInstructionProps> = ({ steps, cla
         Instructions
       </Text>
       <ul className={styles.instructions}>
-        {steps.map((step) => (
+        {steps?.map((step) => (
           <li key={step.number} className={styles['instructions-point']}>
             <Text view={TextViewType.p16} color={ColorType.primary}>
               Step {step.number}

@@ -1,0 +1,16 @@
+@import '@styles/mixins';
+@import '@styles/colors';
+@import '@styles/sizes';
+
+.title {
+  margin-bottom: $space-l;
+}
+
+.similar-section {
+  @include common-section;
+  flex-direction: column;
+}
+
+.card-list {
+  @include flex-horizontal-spacebetween-center
+}
