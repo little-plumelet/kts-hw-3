@@ -2,15 +2,15 @@ import { runInAction } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { CardList } from 'components/CardList';
-import { ErrorCp } from 'components/ErrorCp';
-import Loader from 'components/Loader';
-import MultiDropdown from 'components/MultiDropdown';
-import Pagination from 'components/Pagination';
-import { useLocalStore } from 'customHooks/useLocalStore';
-import { SearchRecipesStore } from 'store/local/SearchRecipesStore';
-import { Option } from 'types/MultiDropdownOption';
-import { SizeType } from 'types/common';
+import { CardList } from '@components/CardList';
+import { ErrorCp } from '@components/ErrorCp';
+import Loader from '@components/Loader';
+import MultiDropdown from '@components/MultiDropdown';
+import Pagination from '@components/Pagination';
+import { useLocalStore } from '@customHooks/useLocalStore';
+import { Option } from '@customTypes/MultiDropdownOption';
+import { SizeType } from '@customTypes/common';
+import { SearchRecipesStore } from '@store/local/SearchRecipesStore';
 import { SearchInput } from '../SearchInput';
 import styles from './styles.module.scss';
 
@@ -30,7 +30,7 @@ export const RecipeList: React.FC = observer(() => {
     error,
     loading,
   } = searchRecipesStore;
-  const { currentPage = 1, total = 10 } = pagination;
+  const { currentPage = 1, total } = pagination;
 
   function handleClick() {
     setSearchParams({

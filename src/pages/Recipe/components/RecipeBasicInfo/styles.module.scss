@@ -1,5 +1,5 @@
-@import 'styles/sizes';
-@import 'styles/mixins';
+@import '@styles/sizes';
+@import '@styles/mixins';
 
 .basic-info-wrapper {
   @include flex-horizontal-center;

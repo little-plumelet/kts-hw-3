@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import * as React from 'react';
-import { ColorType, TextTagType, TextViewType, TextWeightType } from 'types/common';
+import { ColorType, TextTagType, TextViewType, TextWeightType } from '@customTypes/common';
 import styles from './styles.module.scss';
 
 export type TextProps = {

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import Button from 'components/Button';
-import Card from 'components/Card';
-import Text from 'components/Text';
-import { urls } from 'configs/urls';
-import { RecipeData } from 'types/RecipeData';
-import { ColorType } from 'types/common';
+import Button from '@components/Button';
+import Card from '@components/Card';
+import Text from '@components/Text';
+import { urls } from '@configs/urls';
+import { RecipeData } from '@customTypes/RecipeData';
+import { ColorType } from '@customTypes/common';
 import styles from './styles.module.scss';
 
 type CardListProps = {

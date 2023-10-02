@@ -1,8 +1,8 @@
 import cn from 'classnames';
 import * as React from 'react';
-import Text from 'components/Text';
-import { InstructionStep } from 'types/RecipeData';
-import { ColorType, TextViewType } from 'types/common';
+import Text from '@components/Text';
+import { InstructionStep } from '@customTypes/RecipeData';
+import { ColorType, TextViewType } from '@customTypes/common';
 import styles from './styles.module.scss';
 
 type RecipeInstructionProps = {

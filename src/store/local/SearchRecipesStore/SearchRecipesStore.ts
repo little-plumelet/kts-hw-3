@@ -1,13 +1,13 @@
 import axios, { AxiosError } from 'axios';
 import { IReactionDisposer, action, computed, makeObservable, observable, reaction, runInAction } from 'mobx';
-import { API_KEY, RECIPES_PER_PAGE, BASE_URL } from 'configs/constants';
-import rootStore from 'store/global/RootStore/instance';
-import { ILocalStore } from 'store/local/LocalStoreInterface';
-import MetaModelStore, { LoadingState } from 'store/local/MetaModelStore';
-import { PaginationModel } from 'store/models/PaginationModel';
-import { MealMap } from 'types/MealMap';
-import { Option } from 'types/MultiDropdownOption';
-import { RecipeData } from 'types/RecipeData';
+import { API_KEY, RECIPES_PER_PAGE, BASE_URL } from '@configs/constants';
+import { MealMap } from '@customTypes/MealMap';
+import { Option } from '@customTypes/MultiDropdownOption';
+import { RecipeData } from '@customTypes/RecipeData';
+import rootStore from '@store/global/RootStore/instance';
+import { ILocalStore } from '@store/local/LocalStoreInterface';
+import MetaModelStore, { LoadingState } from '@store/local/MetaModelStore';
+import { PaginationModel } from '@store/models/PaginationModel';
 
 type PrivateFields =
   | '_recipesData'
@@ -198,7 +198,6 @@ export class SearchRecipesStore implements ILocalStore {
 
   async fetchRecipes() {
     this._meta.setLoadingStart();
-    this.meta;
     try {
       const response = await axios.get(`${BASE_URL}/recipes/complexSearch`, {
         params: {

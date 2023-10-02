@@ -1,15 +1,16 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
-      "components": ["components/*"],
-      "pages": ["pages/*"],
-      "styles": ["styles/*"],
-      "utils": ["utils/*"],
-      "configs": ["configs/*"],
-      "types": ["types/*"],
-      "customHooks": ["customHooks/*"],
-      "store": ["store/*"]
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"],
+      "@styles/*": ["src/styles/*"],
+      "@utils/*": ["src/utils/*"],
+      "@configs/*": ["src/configs/*"],
+      "@customTypes/*": ["src/types/*"],
+      "@customHooks/*": ["src/customHooks/*"],
+      "@store/*": ["src/store/*"],
+      "@assets/*": ["src/assets/*"]
     },
     "target": "ES2020",
     "useDefineForClassFields": true,
@@ -27,8 +28,13 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
   },
-  "include": ["src"],
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import Icon, { IconProps } from 'components/icons/Icon';
-import { ColorType } from 'types/common';
+import Icon, { IconProps } from '@components/icons/Icon';
+import { ColorType } from '@customTypes/common';
 import styles from './styles.module.scss';
 
 const AccountIcon: React.FC<IconProps> = ({ color = ColorType.primary, className, ...props }) => {

@@ -1,7 +1,7 @@
-@import 'styles/colors';
-@import 'styles/sizes';
-@import 'styles/mixins';
-@import 'styles/fonts';
+@import '@styles/colors';
+@import '@styles/sizes';
+@import '@styles/mixins';
+@import '@styles/fonts';
 
 .wrapper {
   @include flex-horizontal-spacebetween-center;

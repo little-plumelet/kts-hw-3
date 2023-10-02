@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Button from 'components/Button';
-import Input from 'components/Input';
-import SearchIcon from 'components/icons/SearchIcon';
-import { ColorType } from 'types/common';
+import Button from '@components/Button';
+import Input from '@components/Input';
+import SearchIcon from '@components/icons/SearchIcon';
+import { ColorType } from '@customTypes/common';
 import styles from './styles.module.scss';
 
 type SearchInputProps = {

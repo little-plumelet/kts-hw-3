@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Option } from 'types/MultiDropdownOption';
+import { Option } from '@customTypes/MultiDropdownOption';
 
 type OptionProps = Option & {
   id: string;

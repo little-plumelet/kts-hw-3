@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import * as React from 'react';
-import { ColorType, TextViewType } from 'types/common';
+import { ColorType, TextViewType } from '@customTypes/common';
 import Text from '../Text';
 import styles from './styles.module.scss';
 

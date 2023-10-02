@@ -1,6 +1,6 @@
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import * as React from 'react';
-import { ColorType } from 'types/common';
+import { ColorType } from '@customTypes/common';
 import Icon, { IconProps } from '../Icon';
 import styles from '../styles.module.scss';
 

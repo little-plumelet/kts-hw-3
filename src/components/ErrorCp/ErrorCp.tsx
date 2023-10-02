@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Link, useMatch } from 'react-router-dom';
-import Button from 'components/Button';
-import Text from 'components/Text';
-import { urls } from 'configs/urls';
-import { ColorType, TextTagType } from 'types/common';
+import Button from '@components/Button';
+import Text from '@components/Text';
+import { urls } from '@configs/urls';
+import { ColorType, TextTagType } from '@customTypes/common';
 import styles from './styles.module.scss';
 
 export type ErrorCpProps = {

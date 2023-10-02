@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ColorType } from 'types/common';
+import { ColorType } from '@customTypes/common';
 
 export type IconProps = React.SVGAttributes<SVGElement> & {
   className?: string;

@@ -2,16 +2,16 @@
   "name": "kts-hw-3",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "dev": "NODE_ENV=development npx webpack serve --mode=development",
+    "build": "NODE_ENV=production npx webpack --mode=production",
     "lint": "eslint \"./src/**/*.{js,jsx,ts,tsx}\"",
-    "lint:fix": "eslint \"./src/**/*.{js,jsx,ts,tsx}\" --fix",
-    "preview": "vite preview"
+    "lint:fix": "eslint \"./src/**/*.{js,jsx,ts,tsx}\" --fix"
   },
   "dependencies": {
     "axios": "^1.5.0",
+    "babel-loader": "^9.1.3",
     "classnames": "^2.3.2",
     "dompurify": "^3.0.5",
     "mobx": "^6.10.2",
@@ -19,17 +19,30 @@
     "qs": "^6.11.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.15.0"
+    "react-router-dom": "^6.15.0",
+    "regenerator-runtime": "^0.14.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.22.15",
+    "@babel/core": "^7.22.20",
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
+    "@babel/preset-env": "^7.22.20",
+    "@babel/preset-react": "^7.22.15",
+    "@babel/preset-typescript": "^7.22.15",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
     "@types/dompurify": "^3.0.2",
     "@types/node": "^20.5.9",
     "@types/qs": "^6.9.8",
-    "@types/react": "^18.2.15",
+    "@types/react": "^18.2.22",
     "@types/react-dom": "^18.2.7",
+    "@types/webpack-env": "^1.18.1",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
+    "autoprefixer": "^10.4.16",
+    "babel-preset-mobx": "^2.0.0",
+    "css-loader": "^6.8.1",
+    "dotenv-webpack": "^8.0.1",
     "eslint": "^8.45.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.0",
@@ -38,10 +51,23 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "fork-ts-checker-webpack-plugin": "^8.0.0",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
+    "postcss-loader": "^7.3.3",
     "prettier": "^3.0.3",
-    "sass": "^1.66.1",
+    "react-refresh": "^0.14.0",
+    "sass": "^1.68.0",
+    "sass-autoprefixer": "^1.0.1",
+    "sass-loader": "^13.3.2",
+    "style-loader": "^3.3.3",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.2",
-    "vite": "^4.4.5"
-  }
+    "typescript": "^5.2.2",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "browserslist": [
+    "ie 11"
+  ]
 }

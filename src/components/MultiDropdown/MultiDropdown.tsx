@@ -1,8 +1,8 @@
 import cn from 'classnames';
 import * as React from 'react';
-import { useOpen } from 'customHooks/useOpen';
-import { Option } from 'types/MultiDropdownOption';
-import { ColorType } from 'types/common';
+import { useOpen } from '@customHooks/useOpen';
+import { Option } from '@customTypes/MultiDropdownOption';
+import { ColorType } from '@customTypes/common';
 import Input from '../Input';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 import { OptionCp } from './components/OptionCp';
