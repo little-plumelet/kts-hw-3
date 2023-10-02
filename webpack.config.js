@@ -104,6 +104,7 @@ module.exports = {
       '@pages': path.join(srcPath, 'pages'),
       '@customHooks': path.join(srcPath, 'customHooks'),
       '@store': path.join(srcPath, 'store'),
+      '@assets': path.join(srcPath, 'assets'),
     },
   },
   devServer,
