@@ -8,9 +8,10 @@ type RecipePropertyListProps = {
   title: string;
   properties: Nutrient[] | Ingerdient[];
   className?: string;
+  children?: React.ReactNode;
 };
 
-export const RecipePropertyList: React.FC<RecipePropertyListProps> = ({ title, properties, className }) => {
+export const RecipePropertyList: React.FC<RecipePropertyListProps> = ({ title, properties, className, children }) => {
   return (
     <div className={className}>
       <Text view={TextViewType.p20} className={styles.title}>
@@ -18,10 +19,9 @@ export const RecipePropertyList: React.FC<RecipePropertyListProps> = ({ title, p
       </Text>
       <ul className={styles.properties}>
         {properties.map((property) => (
-          <li
-            key={'id' in property ? property?.id : property?.name}
-            className={styles['properties-point']}
-          >{`${property?.name} - ${property?.amount} ${property?.unit}`}</li>
+          <li key={'id' in property ? property?.id : property?.name} className={styles['properties-point']}>
+            {children} {` ${property?.name} - ${property?.amount} ${property?.unit}`}
+          </li>
         ))}
       </ul>
     </div>

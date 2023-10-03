@@ -4,23 +4,31 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ErrorCp } from '@components/ErrorCp';
 import Loader from '@components/Loader';
+import { Lid } from '@components/icons/Lid';
+import { SoupLaddle } from '@components/icons/SoupLaddle';
 import { SizeType } from '@customTypes/common';
 import RecipeStore from '@store/local/RecipeStore';
+import SimilarRecipesStore from '@store/local/SimilarRecipesStore';
 import { RecipeBasicInfo } from '../RecipeBasicInfo';
 import { RecipeDescription } from '../RecipeDescription';
 import { RecipeHeader } from '../RecipeHeader';
 import { RecipeInstruction } from '../RecipeInstruction';
 import { RecipePropertyList } from '../RecipePropertyList';
+import { SimilarRecipes } from '../SimilarRecipes';
+import { WinePairing } from '../WinePairing';
 import styles from './styles.module.scss';
 
 export const RecipeCard: React.FC = observer(() => {
   const { id: recipeId } = useParams();
   const recipeStore = useLocalStore(() => new RecipeStore());
+  const similarRecipeStore = useLocalStore(() => new SimilarRecipesStore());
   const { loading, recipeData: data, error } = recipeStore;
+  const { similarRecipesData, error: similarError } = similarRecipeStore;
 
   useEffect(() => {
     recipeStore.fetchRecipeData(recipeId ?? '');
-  }, [recipeId, recipeStore]);
+    similarRecipeStore.fetchRecipes(recipeId ?? '');
+  }, [recipeId, recipeStore, similarRecipeStore]);
 
   if (loading) {
     return (
@@ -55,14 +63,21 @@ export const RecipeCard: React.FC = observer(() => {
               title="Ingredients"
               properties={data.nutrition?.ingredients}
               className={styles['composition-section-part']}
-            />
+            >
+              <Lid className={styles.icon} />
+            </RecipePropertyList>
             <RecipePropertyList
               title="Nutrients"
               properties={data.nutrition?.nutrients}
               className={styles['composition-section-part']}
-            />
+            >
+              <SoupLaddle className={styles.icon} />
+            </RecipePropertyList>
           </section>
           <RecipeInstruction steps={data.analyzedInstructions?.[0]?.steps} className={styles['wrapper-item']} />
+          <WinePairing pairedWines={data.winePairing.pairedWines} className={styles['wrapper-item']} />
+          {!!similarError && <ErrorCp errorMessage={similarError}></ErrorCp>}
+          <SimilarRecipes recipes={similarRecipesData} className={styles['section']} />
         </div>
       )}
       {!data && loading && <>NO data</>}

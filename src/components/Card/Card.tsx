@@ -14,7 +14,7 @@ export type CardProps = {
   /** Заголовок карточки */
   title: React.ReactNode;
   /** Описание карточки */
-  subtitle: React.ReactNode;
+  subtitle?: React.ReactNode;
   /** Содержимое карточки (футер/боковая часть), может быть пустым */
   contentSlot?: React.ReactNode;
   /** Клик на карточку */

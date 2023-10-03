@@ -1,0 +1,1 @@
+export { SimilarRecipes } from './SimilarRecipes';

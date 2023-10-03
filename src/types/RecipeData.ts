@@ -5,6 +5,7 @@ export type RecipeData = {
   preparationMinutes: number;
   cookingMinutes: number;
   image: string;
+  sourceUrl: string;
   servings: number;
   aggregateLikes: number;
   nutrition: {
@@ -13,6 +14,9 @@ export type RecipeData = {
   };
   summary: string;
   analyzedInstructions: Instruction[];
+  winePairing: {
+    pairedWines: string[];
+  };
 };
 
 export type Instruction = {

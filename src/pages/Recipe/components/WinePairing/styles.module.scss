@@ -1,0 +1,26 @@
+@import '@styles/mixins';
+@import '@styles/sizes';
+@import '@styles/fonts';
+
+.wine-section {
+  @include common-section;
+  flex-direction: column;
+
+  &-list {
+    @include common-section;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+    
+    &-point {
+      margin-right: $space-m;
+      margin-bottom: $space-m;
+    }
+  }
+}
+
+.wine {
+  font-style: italic;
+  font-size: $font-size-m;
+  line-height: $font-size-l;
+}

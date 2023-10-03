@@ -15,7 +15,7 @@ type CardListProps = {
 export const CardList: React.FC<CardListProps> = ({ cardsData }) => {
   return (
     <>
-      {cardsData.map((card) => (
+      {cardsData?.map((card) => (
         <Card
           title={card.title}
           image={card.image}

@@ -1,0 +1,1 @@
+export { WinePairing } from './WinePairing';
